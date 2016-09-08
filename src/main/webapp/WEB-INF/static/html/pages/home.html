@@ -1,0 +1,226 @@
+<div class="container form_style" ng-app="mainApp" ng-controller="homeController">
+            <form class="form-horizontal" role="form">
+                <h2 class="form_style_h2">Create New Data Layer</h2>
+                <div class="form-group">
+                    <label for="country" class="col-sm-3 control-label">Country Code</label>
+                    <div class="col-sm-9">
+                        <select id="country" class="form-control" autofocus ng-model="pageInfo.country" >
+                        <!-- 	<option value="Please Select One">Please Select One</option> -->
+		                	<option value="USA">USA</option>
+		                	<option value="UK">UK</option>
+		                	<option value="AU">AU</option>
+                			<option value=IN"">IN</option>
+                        </select>
+                    </div>
+                </div> <!-- /.form-group -->
+                
+                 <div class="form-group">
+                    <label for="country" class="col-sm-3 control-label">Business Unit</label>
+                    <div class="col-sm-9">
+                        <select id="country" class="form-control" ng-model="pageInfo.business_unit" >
+                        	<!-- <option value="Please Select One">Please Select One</option> -->
+							<option>Acquisition</option>
+							<option>Merchant</option>
+							<option>Travel</option>
+							<option>OPENForum</option>
+							<option>MR</option>
+                        </select>
+                    </div>
+                </div> <!-- /.form-group -->
+                
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">Application Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="firstName" placeholder="Application Name" class="form-control" 
+                        ng-model="pageInfo.application_name" >
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">L4 Hierarchy</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="firstName" placeholder="L4 Hierarchy" class="form-control"
+                        ng-model="pageInfo.l4_Hierarchy" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">L5 Hierarchy</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="firstName" placeholder="L5 Hierarchy" class="form-control"
+                        ng-model="pageInfo.l5_Hierarchy" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">L6 Hierarchy</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="firstName" placeholder="L6 Hierarchy" class="form-control"
+                        ng-model="pageInfo.l6_Hierarchy">
+                    </div>
+                </div>
+<!--                 <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" id="email" placeholder="Email" class="form-control">
+                    </div>
+                </div> -->
+<!--                 <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="password" placeholder="Password" class="form-control">
+                    </div>
+                </div> -->
+<!--                 <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="birthDate" class="form-control">
+                    </div>
+                </div> -->
+
+<!-- 						<div class="col-sm-2 col-sm-offset-3">
+					<a href="#/reviewInfo"><button type="submit"
+						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Go Next</button></a>
+						<input type="submit" value="andNew" ng-submit="addnew()">
+			</div> -->
+			
+
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                       <!--  <button type="submit" class="btn btn-primary btn-block" ng-link="#/reviewInfo">Next</button> -->
+                       <a href="#/reviewInfo"><button type="submit"
+						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Go Next</button></a>
+					
+                    </div>
+                </div>
+            </form> <!-- /form -->
+        </div> <!-- ./container -->
+        
+        
+
+
+<!-- <div class="container" ng-app="mainApp" ng-controller="homeController">
+	<form class="form-horizontal" novalidate>
+	<form novalidate class="simple-form"> 
+		<h2 class="vertical-center">CREATE NEW DATA LAYER</h2>
+		<div class="form-group">
+			<label for="firstName" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 control-label">Country Code</label>
+			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                <select class="form-control" ng-model="pageInfo.country" ng-options="countryName.country as countryName.country for countryName in data" ></select>
+                <select id="country" class="form-control" ng-model="pageInfo.country"  >
+                	<option value="USA">USA</option>
+                	<option value="UK">UK</option>
+                	<option value="AU">AU</option>
+                	<option value=IN"">IN</option>
+                </select>  
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="businee unit" class="col-sm-3 control-label">Business Unit</label>
+			<div class="col-sm-3">
+				<select id="business_unit" class="form-control disabled" ng-model="pageInfo.business_unit"> 
+					<option>Acquisition</option>
+					<option>Merchant</option>
+					<option>Travel</option>
+					<option>OPENForum</option>
+					<option>MR</option>
+				</select> 
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="application name" class="col-sm-3 control-label">Application Name</label>
+			<div class="col-sm-3">
+			  <input type="text" class="form-control" id="" ng-model="pageInfo.application_name">
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="L4 Hierarchy" class="col-sm-3 control-label">L4 Hierarchy</label>
+			<div class="col-sm-3">
+			  <input type="text" class="form-control" id="" ng-model="pageInfo.l4_Hierarchy"> 
+
+			</div>
+		</div>
+		
+				<div class="form-group">
+			<label for="L5 Hierarchy" class="col-sm-3 control-label">L5 Hierarchy</label>
+			<div class="col-sm-3">
+			  <input type="text" class="form-control" id="" ng-model="pageInfo.l5_Hierarchy">
+
+			</div>
+		</div>
+		
+				<div class="form-group">
+			<label for="L6 Hierarchy" class="col-sm-3 control-label">L6 Hierarchy</label>
+			<div class="col-sm-3">
+			  <input type="text" class="form-control" id="" ng-model="pageInfo.l6_Hierarchy">
+
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="password" class="col-sm-3 control-label">Page Id</label>
+			<div class="col-sm-3">
+				<select id="country" class="form-control" ng-disabled="!pageInfo.language" ng-model="pageInfo.pageId">
+					<option>A1001</option>
+					<option>A1002</option>
+					<option>A1003</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pageName" class="col-sm-3 control-label">Page
+				Name</label>
+			<div class="col-sm-3">
+				<select id="country" class="form-control" ng-disabled="!pageInfo.pageId"	ng-model="pageInfo.pageName">
+					<option>Home</option>
+					<option>Details</option>
+					<option>Cart</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="businessUnit" class="col-sm-3 control-label">Business
+				Unit</label>
+			<div class="col-sm-3">
+				<select id="country" class="form-control" ng-disabled="!pageInfo.pageName" ng-model="pageInfo.businessUnit">
+					<option>Amex1</option>
+					<option>Amex2</option>
+					<option>Amex3</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="businessCat" class="col-sm-3 control-label">Business
+				Category</label>
+			<div class="col-sm-3">
+				<select id="country" class="form-control" ng-disabled="!pageInfo.businessUnit" ng-model="pageInfo.businessCategory">
+					<option>IT</option>
+					<option>Development</option>
+					<option>Managment</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-3">
+				<a href="#/dashboard"><button type="submit"
+						class="btn btn-primary btn-block">Dashboard</button></a>
+			</div>
+			<div class="col-sm-2">
+				<a href="#/userInfo"><button type="submit"
+						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Next</button></a>
+						<input type="submit" value="andNew" ng-submit="addnew()">
+			</div>
+			
+						<div class="col-sm-2 col-sm-offset-3">
+					<a href="#/reviewInfo"><button type="submit"
+						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Go Next</button></a>
+						<input type="submit" value="andNew" ng-submit="addnew()">
+			</div>
+
+		</div>
+	</form>
+</div> -->
+
+

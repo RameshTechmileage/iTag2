@@ -1,0 +1,82 @@
+<div class="container" ng-app="mainApp"
+	ng-controller="dashboardController">
+	<div class="row">
+		<!--  -->
+		<div class="form-group">
+			<div class="btn-container-right">
+				<a href="#/home"><button type="submit"
+						class="btn btn-primary pull-right" ng-click="">Create New</button></a>
+			</div>
+
+		</div>
+		<!--  -->
+		<div class="col-lg-12">
+			<div class="card-box">
+				<h4 class="text-dark  header-title m-t-0">Saved Projects</h4>
+				<p class="text-muted m-b-25 font-13">It looks like you had to
+					leave before you were able to finish your request.No worries! You
+					can complete your request now.</p>
+
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Created Date</th>
+								<th>Status</th>
+								<th>Created By</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td>1</td>
+								<td>01/01/2016</td>
+								<td><span class="label label-warning">Saved</span></td>
+								<td>ABC</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>01/01/2016</td>
+								<td><span class="label label-warning">Saved</span></td>
+								<td>BBC</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card-box">
+					<h4 class="text-dark  header-title m-t-0">All Requests</h4>
+					<p class="text-muted m-b-25 font-13">Here are the all projects
+						which you requested. You can see them and edit by clicking on that
+						request if you want.</p>
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Created Date</th>
+									<th>Status</th>
+									<th>Created By</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="completedData in dashboardData">
+									<td>{{$index + 1}}</td>
+									<td>{{ completedData.language }}</td>
+									<td><span class="label label-info">Completed</span></td>
+									<td>{{ completedData.country }}</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
