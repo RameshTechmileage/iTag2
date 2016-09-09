@@ -54,8 +54,10 @@ public class ITagUserServiceImpl implements ITagUserService{
 		/*if (updatedUser == null)
 			throw new ShopNotFound();*/
 		
-		updatedUser.setCreatedBy(iTagUser.getCreatedBy());
-		updatedUser.setUserInfoJson(iTagUser.getUserInfoJson());
+		/*updatedUser.setCreatedBy(iTagUser.getCreatedBy());
+		updatedUser.setUserInfoJson(iTagUser.getUserInfoJson());*/
+		updatedUser.setDataLayer(iTagUser.getDataLayer());
+		updatedUser.setReqParamKey1(iTagUser.getReqParamKey1());
 		return updatedUser;
 	}
 }

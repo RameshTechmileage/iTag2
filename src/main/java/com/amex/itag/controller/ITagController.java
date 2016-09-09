@@ -19,9 +19,15 @@ public class ITagController {
 	private ITagUserService iTagUserService;
 	@RequestMapping(value = "/saveITagData", method = RequestMethod.POST)
 	public @ResponseBody void saveITagData(@RequestBody ITagUser iTagUser) {
+		/*try {*/
 		iTagUserService.create(iTagUser);
+		/*}catch(Exception e) {
+            //logger.error(e.getMessage());
+            return e.getMessage();
+        }
+		return "creation successful: ";*/
 	}
-	@RequestMapping(value = "/iTagData", method = RequestMethod.GET)
+	@RequestMapping(value = "/iTagData", method = RequestMethod.GET, produces="application/json")
 	public List<ITagUser> getITagData() {
 		return iTagUserService.findAll();
 	}

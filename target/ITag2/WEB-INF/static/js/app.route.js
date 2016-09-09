@@ -21,6 +21,9 @@ mainApp.config(function($routeProvider) {
 		}).when('/thankyou', {
 			templateUrl: 'static/html/pages/thankyou.html',
 			controller: 'thankyouController'
+		}).when('/retrieve',{
+			templateUrl : 'static/html/pages/retrieve.html',
+				controller:'retrieveDLController'
 		})
 		.otherwise({
 			redirectTo: '/home'

@@ -48,7 +48,7 @@ public class ITagUserController {
 			return new ModelAndView("index");
 		
 		ModelAndView mav = new ModelAndView();
-		String message = "New User Data "+iTagUser.getCreatedBy()+" was successfully created.";
+		String message = "New User Data "+iTagUser.getReqParamKey1()+" was successfully created.";
 		
 		iTagUserService.create(iTagUser);
 		mav.setViewName("redirect:/index");
@@ -98,7 +98,7 @@ public class ITagUserController {
 		ModelAndView mav = new ModelAndView("redirect:/index.html");		
 		
 		ITagUser iTagUser = iTagUserService.delete(id);
-		String message = "The shop "+iTagUser.getCreatedBy()+" was successfully deleted.";
+		String message = "The User Data "+iTagUser.getReqParamKey1()+" was successfully deleted.";
 		
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
