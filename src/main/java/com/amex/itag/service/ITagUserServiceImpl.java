@@ -29,12 +29,9 @@ public class ITagUserServiceImpl implements ITagUserService{
 	}
 
 	@Override
-	@Transactional//(rollbackFor=ShopNotFound.class)
+	@Transactional
 	public ITagUser delete(int id){
 		ITagUser deletedUser= iTagRepository.findOne(id);
-		
-		/*if (deletedUser == null)
-			throw new ShopNotFound();*/
 		
 		iTagRepository.delete(deletedUser);
 		return deletedUser;
@@ -47,17 +44,50 @@ public class ITagUserServiceImpl implements ITagUserService{
 	}
 
 	@Override
-	@Transactional//(rollbackFor=ShopNotFound.class)
-	public ITagUser update(ITagUser iTagUser){// throws ShopNotFound {
+	@Transactional
+	public ITagUser update(ITagUser iTagUser){
 		ITagUser updatedUser = iTagRepository.findOne(iTagUser.getId());
 		
-		/*if (updatedUser == null)
-			throw new ShopNotFound();*/
-		
-		/*updatedUser.setCreatedBy(iTagUser.getCreatedBy());
-		updatedUser.setUserInfoJson(iTagUser.getUserInfoJson());*/
 		updatedUser.setDataLayer(iTagUser.getDataLayer());
 		updatedUser.setReqParamKey1(iTagUser.getReqParamKey1());
 		return updatedUser;
 	}
+
+	@Override
+	public List<ITagUser> findByReqParamKey1(String reqParamKey1) {
+		List<ITagUser> iTagUser = iTagRepository.findByReqParamKey1(reqParamKey1);
+		return iTagUser;
+	}
+
+	@Override
+	public ITagUser findByReqParamKey1AndReqParamVal1(String reqParamKey1, String reqParamVal1) {
+		ITagUser iTagUser = iTagRepository.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1);
+		return iTagUser;
+	}
+
+	@Override
+	public ITagUser findByReqParamKey2AndReqParamVal2(String reqParamKey2, String reqParamVal2) {
+		ITagUser iTagUser = iTagRepository.findByReqParamKey2AndReqParamVal2(reqParamKey2, reqParamVal2);
+		return iTagUser;
+	}
+
+	@Override
+	public ITagUser findByReqParamKey3AndReqParamVal3(String reqParamKey3, String reqParamVal3) {
+		ITagUser iTagUser = iTagRepository.findByReqParamKey3AndReqParamVal3(reqParamKey3, reqParamVal3);
+		return iTagUser;
+	}
+
+	@Override
+	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2) {
+		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2);
+		return iTagUser;
+	}
+
+	@Override
+	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
+			String reqParamKey3, String reqParamVal3) {
+		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
+		return iTagUser;
+	}
+
 }

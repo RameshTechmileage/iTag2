@@ -1,199 +1,327 @@
-mainApp.controller('dashboardController', function($scope, $http, PageInfoService) {
-	$http.get("http://localhost:8080/AmexITag2/dashboardInfo")
-    .then(function(response) {
-      $scope.dashboardData = response.data;
-    });
+mainApp.controller('dashboardController', function($scope, $http,
+		PageInfoService, $localStorage, $templateCache) {
+	// $http.jsonp("https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero")
+	// $http.jsonp("http://192.168.0.50:8080/ITag2/iTagData?callback=JSON_CALLBACK&name=Super%20Hero")
+	// $http.jsonp("http://192.168.0.50:8080/ITag2/iTagData?callback=JSON_CALLBACK")
+	//	
+	// // callback=JSON_CALLBACK&name=Super%20Hero
+	// .then(function(response) {
+	// console.log("res" + response);
+	// $scope.dashboardData = response.data;
+	// // $localStorage.pageInfo = response.data.id[0];
+	// console.log("response.data = " + JSON.stringify($scope.dashboardData));
+	// });
+
+	// $http.get("/iTag2/src/main/webapp/WEB-INF/static/js/test.json")
+	// .success(function(response) {
+	// $scope.usersData = response;
+	// console.log("$scope.usersData = " + $scope.usersData );
+	// });
+	//	
+	// $http.get('static/js/test.json').success(function(data) {
+	// $scope.phones = data;
+	// });
+
+	// $http.json('http://192.168.0.50:8080/ITag2/iTagData.json')
+	// .success(function(data, status, headers, config) {
+	// console.log("response ");
+	// $scope.zipCodes = data;
+	// console.log(" $scope.zipCodes = " + $scope.zipCodes );
+	// });
+	// // .error(function(error, status, headers, config) {
+	// //// console.log(status);
+	// // console.log("Error occured " + status);
+	// // });
+	// console.log("some test");
+	// $http({method: 'JSONP', url:
+	// 'http://192.168.0.50:8080/ITag2/iTagData?format=jsonp&callback=JSON_CALLBACK',
+	// cache: $templateCache}).
+	// then(function(response) {
+	// console.log("test");
+	// $scope.status = response.status;
+	// $scope.data = response.data;
+	// alert("$scope.status = " + $scope.status + " $scope.data = " +
+	// $scope.data );
+	// }, function(response) {
+	// $scope.data = response.data || 'Request failed';
+	// $scope.status = response.status;
+	// alert("$scope.status = " + $scope.status + " $scope.data = " +
+	// $scope.data );
+	// });
+
 });
-mainApp.controller('homeController', function($scope, $http, PageInfoService,$localStorage) {
-	/*$rootscope.message = "Click on the hyper link to view the students list.";
-	$rootscope.pageInfo = angular.copy($scope.master);
-	$scope.master = {country:"country", lastName:""};*/
-	//$http.get("https://whispering-woodland-9020.herokuapp.com/getAllBooks")
-//	$http.get("http://localhost:8080/AmexITag2/pageInfo")
-//    .then(function(response) {
-//      $scope.data = response.data;
-////      alert("$scope.data = " + JSON.stringify($scope.data));
-//    //	$scope.data = response.data.country;
-//    });
-	/*$http.get("http://192.168.0.50:8080/ITag2/iTagData").then(function(response) {
-   $scope.data = response.data;
-   alert("$scope.data = " + JSON.stringify($scope.data));
-	$scope.data = response.data.country;
- });*/
-	
-	if(!$localStorage.pageInfo){
+mainApp.controller('homeController', function($scope, $http, PageInfoService,
+		$localStorage) {
+	$scope.ds = ""
+	/*
+	 * $rootscope.message = "Click on the hyper link to view the students
+	 * list."; $rootscope.pageInfo = angular.copy($scope.master); $scope.master =
+	 * {country:"country", lastName:""};
+	 */
+	// $http.get("https://whispering-woodland-9020.herokuapp.com/getAllBooks")
+	// $http.get("http://localhost:8080/AmexITag2/pageInfo")
+	// .then(function(response) {
+	// $scope.data = response.data;
+	// // alert("$scope.data = " + JSON.stringify($scope.data));
+	// // $scope.data = response.data.country;
+	// });
+	$http.get("http://192.168.0.50:8080/ITag2/iTagData").then(
+			function(response) {
+				$scope.data = response.data;
+				alert("$scope.data = " + JSON.stringify($scope.data));
+				$scope.data = response.data.country;
+			});
+
+	if (!$localStorage.pageInfo) {
 		$scope.pageInfo = {
-				country : "",
-				business_unit : "",
-				application_name : "",
-				l4_Hierarchy : "",
-				l5_Hierarchy:"",
-				l6_Hierarchy:""
+			country : "",
+			business_unit : "",
+			application_name : "",
+			l4_Hierarchy : "",
+			l5_Hierarchy : "",
+			l6_Hierarchy : ""
 		};
-	}else{
+	} else {
 		$scope.pageInfo = {
-		country : $localStorage.pageInfo.country,
-		business_unit : $localStorage.pageInfo.business_unit,
-		application_name : $localStorage.pageInfo.application_name,
-		l4_Hierarchy : $localStorage.pageInfo.l4_Hierarchy,
-		l5_Hierarchy:$localStorage.pageInfo.l5_Hierarchy,
-		l6_Hierarchy:$localStorage.pageInfo.l6_Hierarchy
+			country : $localStorage.pageInfo.country,
+			business_unit : $localStorage.pageInfo.business_unit,
+			application_name : $localStorage.pageInfo.application_name,
+			l4_Hierarchy : $localStorage.pageInfo.l4_Hierarchy,
+			l5_Hierarchy : $localStorage.pageInfo.l5_Hierarchy,
+			l6_Hierarchy : $localStorage.pageInfo.l6_Hierarchy
 		}
 	}
 	
-	$scope.savePageInfo = function () {
+	if(!$localStorage.dataJSon){
+//		alert("inside if block");
+//		$scope.digitalData = "";
+	}else{
+//		alert("in else block and ");
+		$scope.digitalData = $localStorage.dataJSon;
+	}
+
+	$scope.savePageInfo = function() {
 		PageInfoService.save($scope.pageInfo);
-		console.log("PageInfoService = " + JSON.stringify($scope.pageInfo));
-		 $localStorage.pageInfo = $scope.pageInfo;
-       // $scope.newcontact = {};
-    }
+		// console.log("PageInfoService = " + JSON.stringify($scope.pageInfo));
+		$localStorage.pageInfo = $scope.pageInfo;
+		$localStorage.page = $scope.page;
+		$localStorage.dataJSon = $scope.digitalData;
+//		console.log("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
+//		if($scope.page.pageInofrmation.pageName){
+//			alert("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
+//		}else{
+//			alert("come inside else block");
+//			$scope.page.pageInofrmation.pageName = "";
+//			alert("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName );
+//		}
+
+//		var digitData = '{' +
+//							'page:' + '{' +
+//										'pageInfo:' + '{'
+//													+ 'pageName:' + $scope.page.pageInofrmation.pageName +','
+//													+ 'country:' + $scope.page.pageInofrmation.country   + ','
+//													+ 'language:' + $scope.page.pageInofmation.language + ','
+//													+ 'currency:' + $scope.page.pageInofrmation.currency + 
+//													'}' +','
+//										+'category:' + '{'
+//												+ 'businessUnit:' + $scope.page.category.businessUnit + ','
+//												+ 'primaryCategory:' + $scope.page.category.primaryCategory + ','
+//												+ 'subCategory1:' + $scope.page.category.subCategory1 + ','
+//												+ 'subCategory2:' + $scope.page.category.subCategory2 + ','
+//												+ 'subCategory3:' + $scope.page.category.subCategory3 
+//											+'}' +',' 
+//										+ 'attributes:' + '{'
+//												+ 'autotrack:' + $scope.page.attributes.autotrack
+//											+ '}'
+//									+ '}' +
+//						'}';
+//		console.log("digitData = " + digitData);
+//		$localStorage.digitData = digitData;
+
+		// $scope.newcontact = {};
+		//		 
+		// $http.get('static/js/test.json').success(function(data) {
+		// $scope.phones = data;
+		// console.log(" $scope.phones = " + JSON.stringify($scope.phones));
+		// });
+		//		 
+		// $http.jsonp('static/js/test.json').success(function(data) {
+		// $scope.phones = data;
+		// console.log(" $scope.phones = " + JSON.stringify($scope.phones));
+		// });
+
+		// $http.jsonp("http://192.168.0.50:8080/ITag2/iTagData?callback=JSON_CALLBACK")
+		// .then(function(response) {
+		// console.log("res" + response);
+		// $scope.dashboardData = response.data;
+		// console.log("response.data = " +
+		// JSON.stringify($scope.dashboardData));
+		// });
+
+		// $http.jsonp('https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')
+		// .success(function(data){
+		// $scope.datas = data;
+		// console.log(" $scope.phones222 = " + JSON.stringify($scope.datas));
+		// console.log(data.status);
+		// });
+		//	        
+		// $http.jsonp('http://192.168.0.50:8080/ITag2/iTagData')
+		// .success(function(data){
+		// $scope.ds = data;
+		// console.log(" json from ramesh url= " + JSON.stringify($scope.ds));
+		// console.log(data.status);
+		// });
+
+		// $http({method: 'JSONP', url: 'static/js/test.json', cache:
+		// $templateCache}).
+		// then(function(response) {
+		// console.log("test");
+		// $scope.status = response.status;
+		// $scope.data = response.data;
+		// alert("$scope.status = " + $scope.status + " $scope.data = " +
+		// $scope.data );
+		// }, function(response) {
+		// $scope.data = response.data || 'Request failed';
+		// $scope.status = response.status;
+		// alert("$scope.status = " + $scope.status + " $scope.data = " +
+		// $scope.data );
+		// });
+
+	}
 });
-//mainApp.controller('pageInfoController', function($scope) {
-//mainApp.controller('userInfoController', ['$scope', '$http', DataService function($scope, $http) {
-mainApp.controller('userInfoController', function ($scope, PageInfoService,$localStorage){
-	if(!$localStorage.userInfo){
+// mainApp.controller('pageInfoController', function($scope) {
+// mainApp.controller('userInfoController', ['$scope', '$http', DataService
+// function($scope, $http) {
+mainApp.controller('userInfoController', function($scope, PageInfoService,
+		$localStorage) {
+	if (!$localStorage.userInfo) {
 		$scope.userInfo = {
-				accessLevel : false,
-				accountStatus : false,
-				accountTenure : false,
-				industryCode : false,
-				seNumber:false,
-				mealPreference:false
+			accessLevel : false,
+			accountStatus : false,
+			accountTenure : false,
+			industryCode : false,
+			seNumber : false,
+			mealPreference : false
 		};
-	}else{
+	} else {
 		$scope.userInfo = {
-		accessLevel : $localStorage.userInfo.accessLevel,
-		accountStatus : $localStorage.userInfo.accountStatus,
-		accountTenure : $localStorage.userInfo.accountTenure,
-		industryCode : $localStorage.userInfo.industryCode,
-		seNumber:$localStorage.userInfo.seNumber,
-		mealPreference:$localStorage.userInfo.mealPreference
+			accessLevel : $localStorage.userInfo.accessLevel,
+			accountStatus : $localStorage.userInfo.accountStatus,
+			accountTenure : $localStorage.userInfo.accountTenure,
+			industryCode : $localStorage.userInfo.industryCode,
+			seNumber : $localStorage.userInfo.seNumber,
+			mealPreference : $localStorage.userInfo.mealPreference
 		}
 	}
-	$scope.saveUserInfo = function () {
+	$scope.saveUserInfo = function() {
 		PageInfoService.saveUser($scope.userInfo);
-		 $localStorage.userInfo = $scope.userInfo;
-    }
+		$localStorage.userInfo = $scope.userInfo;
+	}
 });
 
-mainApp.controller('eventInfoController', function ($scope ,PageInfoService, $localStorage){
-//	alert("eventInfo =  " + JSON.stringify($scope.eventInfo) );
-//	var accountType = localStorageService.set("cdvSwitchType", 167798989);
-//	alert("$scope.data = $localStorage.message =  " + JSON.stringify($localStorage.message.eventAction));
-//	console.log("$scope.data = $localStorage.message =  " + JSON.stringify($localStorage.message));
-	
-	if(!$localStorage.message){
+mainApp.controller('eventInfoController', function($scope, PageInfoService,
+		$localStorage) {
+	// alert("eventInfo = " + JSON.stringify($scope.eventInfo) );
+	// var accountType = localStorageService.set("cdvSwitchType", 167798989);
+	// alert("$scope.data = $localStorage.message = " +
+	// JSON.stringify($localStorage.message.eventAction));
+	// console.log("$scope.data = $localStorage.message = " +
+	// JSON.stringify($localStorage.message));
+
+	if (!$localStorage.message) {
 		$scope.eventInfo = {
-				eventAction : false,
-				description : false,
-				eventName : false,
-				eventType : false
-				
+			eventAction : false,
+			description : false,
+			eventName : false,
+			eventType : false
+
 		};
-	}else{
+	} else {
 		$scope.eventInfo = {
-				eventAction : $localStorage.message.eventAction,
-				description : $localStorage.message.description,
-				eventName : $localStorage.message.eventName,
-				eventType : $localStorage.message.eventType	
-		};	
+			eventAction : $localStorage.message.eventAction,
+			description : $localStorage.message.description,
+			eventName : $localStorage.message.eventName,
+			eventType : $localStorage.message.eventType
+		};
 	}
-	
-	$scope.saveEventInfo = function () {
+
+	$scope.saveEventInfo = function() {
 		PageInfoService.saveEventInfo($scope.eventInfo);
-            $localStorage.message = $scope.eventInfo;
-//		alert("PageInfoService = " + JSON.stringify(PageInfoService));
-		
-//		 $scope.$storage = $localStorage.$default({
-//			 eventInfo : $scope.eventInfo
-//	       });
-    }
-});
+		$localStorage.message = $scope.eventInfo;
 
-//function closeIt()
-//{
-//  return "Any string value here forces a dialog box to \n" + 
-//         "appear before closing the window.";
-//}
-//window.onbeforeunload = closeIt;
+		// alert("PageInfoService = " + JSON.stringify(PageInfoService));
 
-window.onload = function(){
-	 localStorage.clear();
-}
-
-mainApp.controller('thankyouController', function($scope, $http, PageInfoService,$localStorage) {
-
-});
-
-mainApp.controller('retrieveDLController', function($scope, $http, PageInfoService,$localStorage) {
-	$scope.retrieve = function(){
-		
-//		
-		$scope.reqParamKey1 = $scope.requestedDataRP.Request_Parameter1.key;//"AABC";
-		$scope.reqParamKey2 = $scope.requestedDataRP.Request_Parameter2.key;//"BBBC";
-		$scope.reqParamKey3 = $scope.requestedDataRP.Request_Parameter3.key;//"CCBC";
-		$scope.reqParamVal1 = $scope.requestedDataRP.Request_Parameter1.value;//"TTest1";
-		$scope.reqParamVal2 = $scope.requestedDataRP.Request_Parameter2.value;//"TTest2";
-		$scope.reqParamVal3 = $scope.requestedDataRP.Request_Parameter3.value;//"TTest3";
-//		alert($scope.reqParamKey1 + $scope.reqParamKey2  + $scope.reqParamKey3 );
-//		alert($scope.reqParamVal1 + $scope.reqParamVal2  + $scope.reqParamVal3 );
-		
-		$http.get("http://localhost:8080/ITag2/iTagData").then(function(response) {
-			   $scope.data = response.data;
-			   console.log("$scope.data = " + JSON.stringify($scope.data));
-			   var data;
-			   for(var i =0; i< $scope.data.length ; i++){			   
-				   if( ($scope.reqParamKey1 == response.data[i].reqParamKey1) && ($scope.reqParamKey2 == response.data[i].reqParamKey2) && ($scope.reqParamKey3 == response.data[i].reqParamKey3) && ($scope.reqParamVal1 == response.data[i].reqParamVal1) && ($scope.reqParamVal2 == response.data[i].reqParamVal2) && ($scope.reqParamVal3 == response.data[i].reqParamVal3)){
-					   data = (response.data[i].dataLayer);	
-					   data = (response.data[i].dataLayer).replace(/(^"|"$)/g, '');
-					   $scope.jsonData = data;
-					   
-					   } 
-			   }
-			   
-			 });
-//		var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
-//		//$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
-//		$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
-//		.success(function(data, status, headers) {
-//			   alert("Data added");
-//		    }).error(function(data, status) {
-//		    	alert("There is an error while adding data");
-//		    });
+		// $scope.$storage = $localStorage.$default({
+		// eventInfo : $scope.eventInfo
+		// });
 	}
-	
 });
 
-mainApp.controller('reviewInfoController', function ($scope, $http, PageInfoService,$localStorage){
-	console.log("eventInfoController on reviewInfoController  =  " + JSON.stringify($localStorage.message));
-//	$scope.selectedData = PageInfoService.getSelectedDetails();
-	$scope.selectedData =  $localStorage.pageInfo;
-	$scope.jsonData = $localStorage.pageInfo;
-	console.log("$scope.selectedData on Review Controller = " + JSON.stringify($scope.selectedData));
-	$http.get("http://192.168.0.50:8080/ITag2/iTagData").then(function(response) {
-		   $scope.data = response.data;
-		   alert("$scope.data = " + JSON.stringify($scope.data));
-			$scope.data = response.data.country;
-		 });
-//	$scope.selectedData = $localStorage.message;
-//	$scope.selectedDataUserInfo = $localStorage.userInfo;
-	$scope.saveDetails = function(){
-//		$scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
-		$scope.dataLayer ='"' +JSON.stringify($localStorage.pageInfo) + '"';
-		//$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
-		$scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;//"AABC";
-		$scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;//"BBBC";
-		$scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;//"CCBC";
-		$scope.reqParamVal1 = $scope.selectedDataRP.Request_Parameter1.value;//"TTest1";
-		$scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;//"TTest2";
-		$scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;//"TTest3";
-		var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
-		//$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
-		$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
-		.success(function(data, status, headers) {
-			   alert("Data added");
-		    }).error(function(data, status) {
-		    	alert("There is an error while adding data");
-		    });
+// function closeIt()
+// {
+// return "Any string value here forces a dialog box to \n" +
+// "appear before closing the window.";
+// }
+// window.onbeforeunload = closeIt;
+
+//window.onload = function() {
+//	localStorage.clear();
+//}
+
+mainApp.controller('thankyouController', function($scope, $http,
+		PageInfoService, $localStorage) {
+
+});
+
+mainApp.controller('reviewInfoController', function($scope, $http,
+		PageInfoService, $localStorage,$location) {
+	// console.log("eventInfoController on reviewInfoController = " +
+	// JSON.stringify($localStorage.message));
+	// $scope.selectedData = PageInfoService.getSelectedDetails();
+
+	$scope.selectedData = $localStorage.dataJSon;
+	$scope.jsonData = $localStorage.dataJSon;
+	
+	// console.log("$scope.selectedData on Review Controller = " +
+	// JSON.stringify($scope.selectedData));
+	// $scope.selectedData = $localStorage.message;
+	// $scope.selectedDataUserInfo = $localStorage.userInfo;
+	$scope.saveDetails = function() {
+		$location.path('/thankyou');
+//		// var selectedDataa = new Array();
+//		// var userInfoJson = "userInfoJson"//$scope.jsonData;
+//		$scope.createdBy = "Test";
+//		$scope.userInfoJson = "TestPassed";
+//		// $scope.button2 = true;
+//		$localStorage.RP = $scope.selectedDataRP;
+//		$scope.reqParaKey1 = $scope.selectedDataRP.Request_Parameter1.key;
+//		$scope.reqParaKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+//		$scope.reqParaKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+//		$scope.reqParaVal1 = $scope.selectedDataRP.Request_Parameter1.value;
+//		$scope.reqParaVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+//		$scope.reqParaVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+//		alert($scope.selectedDataRP.Request_Parameter1.key
+//				+ $scope.selectedDataRP.Request_Parameter2.key
+//				+ $scope.selectedDataRP.Request_Parameter3.key);
+//		alert($scope.selectedDataRP.Request_Parameter1.value
+//				+ $scope.selectedDataRP.Request_Parameter2.value
+//				+ $scope.selectedDataRP.Request_Parameter3.value);
+//		var selectedDataa = PageInfoService.getSelectedDetails();// totalJson:$scope.
+//		$http.post("http://localhost:8080/ITag2/saveITagData", {
+//			'createdBy' : $scope.createdBy,
+//			'userInfoJson' : $scope.userInfoJson
+//		}).success(function(data, status, headers) {
+//			alert("Data added");
+//		});
+	}
+
+	$scope.addRP2 = function() {
+		$scope.request_parameter2 = true;
+		$scope.button2 = true;
+	}
+
+	$scope.addRP3 = function() {
+		$scope.request_parameter3 = true;
+		$scope.button3 = true;
 	}
 });
