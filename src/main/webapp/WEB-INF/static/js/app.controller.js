@@ -335,33 +335,56 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	// JSON.stringify($scope.selectedData));
 	// $scope.selectedData = $localStorage.message;
 	// $scope.selectedDataUserInfo = $localStorage.userInfo;
+//	$scope.saveDetails = function() {
+//		$location.path('/thankyou');
+////		// var selectedDataa = new Array();
+////		// var userInfoJson = "userInfoJson"//$scope.jsonData;
+////		$scope.createdBy = "Test";
+////		$scope.userInfoJson = "TestPassed";
+////		// $scope.button2 = true;
+////		$localStorage.RP = $scope.selectedDataRP;
+////		$scope.reqParaKey1 = $scope.selectedDataRP.Request_Parameter1.key;
+////		$scope.reqParaKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+////		$scope.reqParaKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+////		$scope.reqParaVal1 = $scope.selectedDataRP.Request_Parameter1.value;
+////		$scope.reqParaVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+////		$scope.reqParaVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+////		alert($scope.selectedDataRP.Request_Parameter1.key
+////				+ $scope.selectedDataRP.Request_Parameter2.key
+////				+ $scope.selectedDataRP.Request_Parameter3.key);
+////		alert($scope.selectedDataRP.Request_Parameter1.value
+////				+ $scope.selectedDataRP.Request_Parameter2.value
+////				+ $scope.selectedDataRP.Request_Parameter3.value);
+////		var selectedDataa = PageInfoService.getSelectedDetails();// totalJson:$scope.
+////		$http.post("http://localhost:8080/ITag2/saveITagData", {
+////			'createdBy' : $scope.createdBy,
+////			'userInfoJson' : $scope.userInfoJson
+////		}).success(function(data, status, headers) {
+////			alert("Data added");
+////		});
+//	}
+	
 	$scope.saveDetails = function() {
-		$location.path('/thankyou');
-//		// var selectedDataa = new Array();
-//		// var userInfoJson = "userInfoJson"//$scope.jsonData;
-//		$scope.createdBy = "Test";
-//		$scope.userInfoJson = "TestPassed";
-//		// $scope.button2 = true;
-//		$localStorage.RP = $scope.selectedDataRP;
-//		$scope.reqParaKey1 = $scope.selectedDataRP.Request_Parameter1.key;
-//		$scope.reqParaKey2 = $scope.selectedDataRP.Request_Parameter2.key;
-//		$scope.reqParaKey3 = $scope.selectedDataRP.Request_Parameter3.key;
-//		$scope.reqParaVal1 = $scope.selectedDataRP.Request_Parameter1.value;
-//		$scope.reqParaVal2 = $scope.selectedDataRP.Request_Parameter2.value;
-//		$scope.reqParaVal3 = $scope.selectedDataRP.Request_Parameter3.value;
-//		alert($scope.selectedDataRP.Request_Parameter1.key
-//				+ $scope.selectedDataRP.Request_Parameter2.key
-//				+ $scope.selectedDataRP.Request_Parameter3.key);
-//		alert($scope.selectedDataRP.Request_Parameter1.value
-//				+ $scope.selectedDataRP.Request_Parameter2.value
-//				+ $scope.selectedDataRP.Request_Parameter3.value);
-//		var selectedDataa = PageInfoService.getSelectedDetails();// totalJson:$scope.
-//		$http.post("http://localhost:8080/ITag2/saveITagData", {
-//			'createdBy' : $scope.createdBy,
-//			'userInfoJson' : $scope.userInfoJson
-//		}).success(function(data, status, headers) {
-//			alert("Data added");
-//		});
+		  $scope.saveDetails = function(){
+			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
+		//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
+		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
+		   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
+		   $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
+		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+		   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+		   $scope.reqParamVal1 = $scope.selectedDataRP.Request_Parameter1.value;
+		   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+		   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+		   var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
+		   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
+		   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
+		   .success(function(data, status, headers) {
+		       alert("Data added");
+		       }).error(function(data, status) {
+		        alert("There is an error while adding data");
+		       });
+		  }
 	}
 
 	$scope.addRP2 = function() {
