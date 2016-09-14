@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.ws.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +20,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.amex.itag.model.ITagUser;
 import com.amex.itag.service.ITagUserService;
+import com.amex.itag.util.DuplicateParameters;
 
 @RestController
 public class ITagController {
@@ -27,7 +30,12 @@ public class ITagController {
 
 	@RequestMapping(value = "/saveITagData", method = RequestMethod.POST)
 	public @ResponseBody void saveITagData(@RequestBody ITagUser iTagUser) {
-		iTagUserService.create(iTagUser);
+		if(!(isDataExist(iTagUser))){
+			iTagUserService.create(iTagUser);
+		}else{
+			throw new DuplicateParameters();
+		}
+		
 	}
 
 	@RequestMapping(value = "/iTagData", method = RequestMethod.GET, produces = "application/json")
@@ -45,7 +53,6 @@ public class ITagController {
 		String reqParamKey3;
 		String[] reqParamVal3;
 		LinkedHashMap<String, String[]> params=(LinkedHashMap<String, String[]>) wr.getParameterMap();
-		Map<String, String> map = new HashMap<String, String>();
 		if(params.size() == 1){
 			for(Map.Entry<String, String[]> param: params.entrySet()){
 				reqParamKey1 = param.getKey();
@@ -69,11 +76,35 @@ public class ITagController {
 			reqParamVal3 = (String[]) params.values().toArray()[2];
 			itagUser = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0], reqParamKey3, reqParamVal3[0]);
 			return itagUser;
-		}
+	}
+			//reqParamKey1 = params.get(key);
+		
 		return null;
 	}
-	
-	
+
+	public boolean isDataExist(ITagUser iTagUser){
+		String reqParamKey1 = iTagUser.getReqParamKey1();
+		String reqParamVal1 = iTagUser.getReqParamVal1();
+		String reqParamKey2 = iTagUser.getReqParamKey2();
+		String reqParamVal2 = iTagUser.getReqParamVal2();
+		String reqParamKey3 = iTagUser.getReqParamKey3();
+		String reqParamVal3 = iTagUser.getReqParamVal3();
+		
+		if(null != reqParamKey1 && null != reqParamVal1){
+			if(null != iTagUserService.findByReqParamKey2AndReqParamVal2(reqParamKey1, reqParamVal1)){
+			return true;
+			}
+		}if(null != reqParamKey2 && null != reqParamVal2){
+			if(null != iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey2, reqParamVal2)){
+				return true;
+			}
+		}if(null != reqParamKey3 && null != reqParamVal3){
+			if(null != iTagUserService.findByReqParamKey3AndReqParamVal3(reqParamKey3, reqParamVal3)){
+				return true;
+			}
+		}
+		return false;
+	}
 	/*
 	@RequestMapping(value = "/iTagData/getData", method = RequestMethod.GET, produces = "application/json")
 	public ITagUser getITagFirstKeyValData(@RequestParam(value = "reqParamKey1") String reqParamKey1,
