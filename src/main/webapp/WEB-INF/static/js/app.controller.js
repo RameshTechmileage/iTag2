@@ -52,7 +52,7 @@ mainApp.controller('dashboardController', function($scope, $http,
 });
 mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$localStorage) {
-	$scope.ds = ""
+	$scope.ds = "";
 	/*
 	 * $rootscope.message = "Click on the hyper link to view the students
 	 * list."; $rootscope.pageInfo = angular.copy($scope.master); $scope.master =
@@ -65,13 +65,17 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	// // alert("$scope.data = " + JSON.stringify($scope.data));
 	// // $scope.data = response.data.country;
 	// });
-	$http.get("http://192.168.0.50:8080/ITag2/iTagData").then(
-			function(response) {
-				$scope.data = response.data;
-				alert("$scope.data = " + JSON.stringify($scope.data));
-				$scope.data = response.data.country;
-			});
+//	$http.get("http://192.168.0.50:8080/ITag2/iTagData").then(
+//			function(response) {
+//				$scope.data = response.data;
+//				alert("$scope.data = " + JSON.stringify($scope.data));
+//				$scope.data = response.data.country;
+//			});
 
+    $scope.show = {
+    		Intlinkimp : false,
+    	     };
+//	alert("$scope.show.Intlinkimp = " + $scope.show.Intlinkimp );
 	if (!$localStorage.pageInfo) {
 		$scope.pageInfo = {
 			country : "",
@@ -93,12 +97,47 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	}
 	
 	if(!$localStorage.dataJSon){
-//		alert("inside if block");
-//		$scope.digitalData = "";
 	}else{
-//		alert("in else block and ");
 		$scope.digitalData = $localStorage.dataJSon;
 	}
+	
+	if(!$localStorage.Intlinkimp){
+//		console.log("$localStorage.Intlinkimp false");
+	}else{
+		$scope.show = {
+			 Intlinkimp : true
+		}
+	}
+	
+	if(!$localStorage.radioButtonShow){
+//		console.log("$localStorage.Intlinkimp false");
+	}else{
+		$scope.radioButtonShow = $localStorage.radioButtonShow;
+	}
+	 
+	$scope.validate = function() {
+		   if ($scope.show.Intlinkimp == false) {
+			   delete $scope.digitalData.page.attributes;
+		   }
+	}
+	
+	$scope.validateradioButton = function(){
+		 if($scope.radioButtonShow == 'CA_Submit'){
+			   delete $scope.digitalData.page.CA_Start;
+			   delete $scope.digitalData.page.CA_Financial;
+		   }
+		 
+		   if($scope.radioButtonShow == 'CA_Start'){
+			   delete $scope.digitalData.page.CA_Submit;
+			   delete $scope.digitalData.page.CA_Financial;
+		   }
+		   
+		   if($scope.radioButtonShow == 'CA_Financial'){
+			   delete $scope.digitalData.page.CA_Start;
+			   delete $scope.digitalData.page.CA_Submit;
+		   }
+	}
+	 
 
 	$scope.savePageInfo = function() {
 		PageInfoService.save($scope.pageInfo);
@@ -106,6 +145,13 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$localStorage.pageInfo = $scope.pageInfo;
 		$localStorage.page = $scope.page;
 		$localStorage.dataJSon = $scope.digitalData;
+		
+//		if($scope.show.Intlinkimp){alert("value is there");}else{alert("no value");}
+		$localStorage.radioButtonShow = $scope.radioButtonShow;
+		$localStorage.Intlinkimp = $scope.show.Intlinkimp;
+		
+		console.log("$scope.radioButtonShow = " + $scope.radioButtonShow);
+		console.log("$sceop.show.Intlinkimp = "+ $scope.show.Intlinkimp);
 //		console.log("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
 //		if($scope.page.pageInofrmation.pageName){
 //			alert("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
@@ -278,9 +324,12 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	// console.log("eventInfoController on reviewInfoController = " +
 	// JSON.stringify($localStorage.message));
 	// $scope.selectedData = PageInfoService.getSelectedDetails();
-
 	$scope.selectedData = $localStorage.dataJSon;
 	$scope.jsonData = $localStorage.dataJSon;
+	$scope.Intlinkimp = $localStorage.Intlinkimp;
+	console.log("$localStorage.Intlinkimp = " + $localStorage.Intlinkimp);
+	$scope.radioButtonShow = $localStorage.radioButtonShow;
+	console.log("$scope.selected.radioButtonShow = $localStorage.radioButtonShow; = " + $localStorage.radioButtonShow);
 	
 	// console.log("$scope.selectedData on Review Controller = " +
 	// JSON.stringify($scope.selectedData));
