@@ -371,21 +371,74 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
 		   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
 		   $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
-		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
-		   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+//		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+//		   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
 		   $scope.reqParamVal1 = $scope.selectedDataRP.Request_Parameter1.value;
-		   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
-		   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+//		   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+//		   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+//		   if($scope.selectedDataRP.Request_Parameter2.key){
+//			   alert("inside if");
+//		   }else{
+//			   alert("inside else");
+//		   }
+//		   
+		   if ($scope.button2) {
+//			   alert("inside if");
+			   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+			   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+	        }else{
+//	        	alert("inside else");
+	        }
+		   
+		   if ($scope.button3) {
+//			   alert("inside if");
+			   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+			   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+	        }else{
+//	        	alert("inside else");
+	        }
+		 
+		   
+		   
 		   var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
+//		   alert("$scope.reqParamKey1 = " + $scope.reqParamKey1 + " $scope.reqParamVal1 = " + $scope.reqParamVal1);
+//		   alert("$scope.reqParamKey2 = " + $scope.reqParamKey2 + " $scope.reqParamVal1 = " + $scope.reqParamVal2);
+//		   alert("$scope.reqParamKey3 = " + $scope.reqParamKey3 + " $scope.reqParamVal1 = " + $scope.reqParamVal3);
 		   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
-		   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
-		   .success(function(data, status, headers) {
-		       alert("Data added");
-		       }).error(function(data, status) {
-		        alert("There is an error while adding data");
-		       });
+//		   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
+//		   .success(function(data, status, headers) {
+//		       alert("Data added");
+//		       }).error(function(data, status) {
+//		        alert("There is an error while adding data");
+//		       });
+		   
+		   if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
+			   //totalJson:$scope.
+			   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
+			   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
+			   .success(function(data, status, headers) {
+			       alert("Data added");
+			       }).error(function(data, status) {
+			        alert("There is an error while adding data with duplicate parameters");
+			       });
+			   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null){
+			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2})
+			    .success(function(data, status, headers) {
+			        alert("Data added");
+			        }).error(function(data, status) {
+			         alert("There is an error while adding data with duplicate parameters");
+			        });
+			   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null){
+			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamVal1':$scope.reqParamVal1})
+			    .success(function(data, status, headers) {
+			        alert("Data added");
+			        }).error(function(data, status) {
+			         alert("There is an error while adding data with duplicate parameters");
+			        });
+			   }
+			  }
 		  }
-	}
+	
 
 	$scope.addRP2 = function() {
 		$scope.request_parameter2 = true;
