@@ -366,7 +366,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	
 	$scope.saveDetails = function() {
 		  $scope.saveDetails = function(){
-			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
+//			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
 		//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
 		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
 		   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
