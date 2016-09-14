@@ -316,8 +316,12 @@ mainApp.controller('eventInfoController', function($scope, PageInfoService,
 
 mainApp.controller('thankyouController', function($scope, $http,
 		PageInfoService, $localStorage) {
-
 });
+
+mainApp.controller('retrieveDLController', function($scope, $http,
+		PageInfoService, $localStorage) {
+});
+
 
 mainApp.controller('reviewInfoController', function($scope, $http,
 		PageInfoService, $localStorage,$location) {
