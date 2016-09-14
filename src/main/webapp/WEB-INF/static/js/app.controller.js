@@ -364,7 +364,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 ////		});
 //	}
 	
-	$scope.saveDetails = function() {
+
 		  $scope.saveDetails = function(){
 //			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
 		//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
@@ -429,15 +429,16 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			         alert("There is an error while adding data with duplicate parameters");
 			        });
 			   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null){
-			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamVal1':$scope.reqParamVal1})
+			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer,'reqParamKey1':$scope.reqParamKey1, 'reqParamVal1':$scope.reqParamVal1})
 			    .success(function(data, status, headers) {
 			        alert("Data added");
 			        }).error(function(data, status) {
 			         alert("There is an error while adding data with duplicate parameters");
 			        });
 			   }
+		   		$location.path('/thankyou');
 			  }
-		  }
+		  
 	
 
 	$scope.addRP2 = function() {
