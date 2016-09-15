@@ -190,7 +190,7 @@
 		                	<option value="US">US</option>
 		                	<option value="UK">UK</option>
 		                	<option value="AU">AU</option>
-                			<option value=IN"">IN</option>
+                			<option value="IN">IN</option>
                         </select>
                     </div>
                 </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
@@ -198,8 +198,14 @@
                <div class="form-group">
                     <label for="language" class="col-sm-4 control-label">Language</label>
                     <div class="col-sm-8">
-                        <input type="text" id="language"  class="form-control"
-                        ng-model="selectedData.page.pageInfo.language" ng-disabled="true" >
+                        <!-- <input type="text" id="language"  class="form-control"
+                        ng-model="selectedData.page.pageInfo.language" ng-disabled="true" > -->
+                 	<select id="language" class="form-control" ng-model="selectedData.page.pageInfo.language" ng-disabled="true">
+                        <!-- 	<option value="Please Select One">Please Select One</option> -->
+		                	<option value="en">en</option>
+		                	<option value="fr">fr</option>
+		                	<option value="es">es</option>
+                   </select>
                     </div>
                 </div> <!-- {{page.pageInofmation.language}} -->
                 
