@@ -121,22 +121,22 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		   }
 	}
 	
-	$scope.validateradioButton = function(){
-		 if($scope.radioButtonShow == 'CA_Submit'){
-			   delete $scope.digitalData.page.CA_Start;
-			   delete $scope.digitalData.page.CA_Financial;
-		   }
-		 
-		   if($scope.radioButtonShow == 'CA_Start'){
-			   delete $scope.digitalData.page.CA_Submit;
-			   delete $scope.digitalData.page.CA_Financial;
-		   }
-		   
-		   if($scope.radioButtonShow == 'CA_Financial'){
-			   delete $scope.digitalData.page.CA_Start;
-			   delete $scope.digitalData.page.CA_Submit;
-		   }
-	}
+//	$scope.validateradioButton = function(){
+//		 if($scope.radioButtonShow == 'CA_Submit'){
+//			   delete $scope.digitalData.event.CA_Start;
+//			   delete $scope.digitalData.event.CA_Financial;
+//		   }
+//		 
+//		   if($scope.radioButtonShow == 'CA_Start'){
+//			   delete $scope.digitalData.event.CA_Submit;
+//			   delete $scope.digitalData.event.CA_Financial;
+//		   }
+//		   
+//		   if($scope.radioButtonShow == 'CA_Financial'){
+//			   delete $scope.digitalData.event.CA_Start;
+//			   delete $scope.digitalData.event.CA_Submit;
+//		   }
+//	}
 	 
 
 	$scope.savePageInfo = function() {
@@ -144,6 +144,29 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		// console.log("PageInfoService = " + JSON.stringify($scope.pageInfo));
 		$localStorage.pageInfo = $scope.pageInfo;
 		$localStorage.page = $scope.page;
+	 	if($scope.radioButtonShow == 'CA_Submit'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+			   $scope.digitalData.event.eventInfo = { 
+					   eventType : "cardApplication",
+					   eventAction : "submit"
+			   };
+		   }
+		   if($scope.radioButtonShow == 'CA_Start'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+			   $scope.digitalData.event.eventInfo = { 
+					   eventType : "cardApplication",
+					   eventAction : "start"
+			   };
+		   }
+		   if($scope.radioButtonShow == 'CA_Financial'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+			   $scope.digitalData.event.eventInfo = { 
+					   eventType : "cardApplication",
+					   eventAction : "financialInfo"
+			   };
+		   }
+		   
+		   
 		$localStorage.dataJSon = $scope.digitalData;
 		
 //		if($scope.show.Intlinkimp){alert("value is there");}else{alert("no value");}
@@ -152,6 +175,16 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		
 		console.log("$scope.radioButtonShow = " + $scope.radioButtonShow);
 		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
+		
+//		 	if($scope.radioButtonShow == 'CA_Submit'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+//		   }
+//		   if($scope.radioButtonShow == 'CA_Start'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+//		   }
+//		   if($scope.radioButtonShow == 'CA_Financial'){
+//			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
+//		   }
 //		console.log("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
 //		if($scope.page.pageInofrmation.pageName){
 //			alert("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
