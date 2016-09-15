@@ -45,11 +45,12 @@ public class ITagController {
 	}*/
 
 	@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
-	public ITagUser getITagFirstKeyValData( WebRequest wr) {
+	public String getITagDataLayer( WebRequest wr) {
 		if(logger.isDebugEnabled()){
 			logger.debug("getITagFirstKeyValData is started!");
 		}
-		ITagUser itagUser = new ITagUser();
+		//ITagUser itagUser = new ITagUser();
+		String dataLayer;
 		String reqParamKey1;
 		String[] reqParamVal1;
 		String reqParamKey2;
@@ -63,17 +64,17 @@ public class ITagController {
 				reqParamVal1 = param.getValue();
 				//itagUser = iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1[0]);
 				//if(null != itagUser){
-				itagUser = iTagUserService.find(reqParamKey1, reqParamVal1[0]);
+				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0]);
 				//}
-				return itagUser;
+				return dataLayer;
 			}
 		}else if(params.size() == 2){
 				reqParamKey1 =  (String) params.keySet().toArray()[0];
 				reqParamVal1 = (String[]) params.values().toArray()[0];
 				reqParamKey2 = (String) params.keySet().toArray()[1];
 				reqParamVal2 = (String[]) params.values().toArray()[1];
-				itagUser = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0]);
-				return itagUser;
+				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0]);
+				return dataLayer;//itagUser;
 		}else if(params.size() == 3){
 			reqParamKey1 =  (String) params.keySet().toArray()[0];
 			reqParamVal1 = (String[]) params.values().toArray()[0];
@@ -81,8 +82,8 @@ public class ITagController {
 			reqParamVal2 = (String[]) params.values().toArray()[1];
 			reqParamKey3 = (String) params.keySet().toArray()[2];
 			reqParamVal3 = (String[]) params.values().toArray()[2];
-			itagUser = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0], reqParamKey3, reqParamVal3[0]);
-			return itagUser;
+			dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0], reqParamKey3, reqParamVal3[0]);
+			return dataLayer;//itagUser;
 	}
 			//reqParamKey1 = params.get(key);
 		

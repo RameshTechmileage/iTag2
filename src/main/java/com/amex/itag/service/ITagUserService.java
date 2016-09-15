@@ -24,11 +24,11 @@ public interface ITagUserService {
 
 	public ITagUser findByReqParamKey3AndReqParamVal3(String reqParamKey3, String reqParamVal3);
 
-	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2);
+	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2);
 
-	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
+	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
 			String reqParamKey3, String reqParamVal3);
 	
-	public ITagUser find(String reqParamKey1, String reqParamVal1);
+	public String find(String reqParamKey1, String reqParamVal1);
 
 }

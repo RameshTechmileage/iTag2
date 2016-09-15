@@ -18,6 +18,8 @@ public class ITagUserServiceImpl implements ITagUserService{
 	
 	@Resource
 	private ITagRepository iTagRepository;
+	
+	String dataLayer;
 
 	@Override
 	@Transactional
@@ -85,22 +87,22 @@ public class ITagUserServiceImpl implements ITagUserService{
 	}
 
 	@Override
-	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2) {
-		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2);
-		return iTagUser;
+	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2) {
+		dataLayer = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2);
+		return dataLayer;
 	}
 
 	@Override
-	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
+	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
 			String reqParamKey3, String reqParamVal3) {
-		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
-		return iTagUser;
+		dataLayer = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
+		return dataLayer;
 	}
 	
 	@Override
-	public ITagUser find(String reqParamKey1, String reqParamVal1) {
-		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1);
-		return iTagUser;
+	public String find(String reqParamKey1, String reqParamVal1) {
+		dataLayer = iTagRepository.find(reqParamKey1, reqParamVal1);
+		return dataLayer;
 	}
 
 }
