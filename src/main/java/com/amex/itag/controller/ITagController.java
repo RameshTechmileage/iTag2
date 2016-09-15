@@ -39,10 +39,10 @@ public class ITagController {
 		
 	}
 
-	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getAllDataLayer", method = RequestMethod.GET, produces = "application/json")
 	public List<ITagUser> getITagData() {
 		return iTagUserService.findAll();
-	}*/
+	}
 
 	@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
 	public String getITagDataLayer( WebRequest wr) {
