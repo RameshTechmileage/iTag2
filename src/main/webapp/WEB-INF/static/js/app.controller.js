@@ -384,7 +384,7 @@ mainApp.controller('retrieveDLController', function($scope, $http,
 		   .success(function(data, status, headers) {
 //			   alert("got the data");
 			   if(data){
-				   alert("got the data");
+//				   alert("got the data");
 				   $scope.DataJson = data;
 				   console.log(" $scope.DataJson = " + JSON.stringify($scope.DataJson));
 				}else{
@@ -403,7 +403,7 @@ mainApp.controller('retrieveDLController', function($scope, $http,
 			$http.get("http://localhost:8080/ITag2/getDataLayer?" + $scope.reqParamKey1 + "=" + $scope.reqParamVal1 + '&' + $scope.reqParamKey2 + "=" + $scope.reqParamVal2)
 		    .success(function(data, status, headers) {
 		    	if(data){
-					   alert("got the data");
+//					   alert("got the data");
 					   $scope.DataJson = data;
 					   console.log(" $scope.DataJson = " + JSON.stringify($scope.DataJson));
 					}else{
@@ -422,7 +422,7 @@ mainApp.controller('retrieveDLController', function($scope, $http,
 		    $http.get("http://localhost:8080/ITag2/getDataLayer?" + $scope.reqParamKey1 + "=" + $scope.reqParamVal1)
 		    .success(function(data, status, headers) {
 		    	if(data){
-					   alert("got the data");
+//					   alert("got the data");
 					   $scope.DataJson = data;
 					   console.log(" $scope.DataJson = " + JSON.stringify($scope.DataJson));
 					}else{
