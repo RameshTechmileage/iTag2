@@ -1,35 +1,36 @@
 package com.amex.itag.controller;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.ws.Response;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.amex.itag.model.ITagUser;
 import com.amex.itag.service.ITagUserService;
+import com.amex.itag.service.ITagUserServiceImpl;
 import com.amex.itag.util.DuplicateParameters;
 
 @RestController
 public class ITagController {
+	
+	final static Logger logger = Logger.getLogger(ITagController.class);
 
 	@Autowired
 	private ITagUserService iTagUserService;
 
 	@RequestMapping(value = "/saveITagData", method = RequestMethod.POST)
 	public @ResponseBody void saveITagData(@RequestBody ITagUser iTagUser) {
+		if(logger.isDebugEnabled()){
+			logger.debug("saveITagData is executed!");
+		}
 		if(!(isDataExist(iTagUser))){
 			iTagUserService.create(iTagUser);
 		}else{
@@ -38,13 +39,16 @@ public class ITagController {
 		
 	}
 
-	@RequestMapping(value = "/iTagData", method = RequestMethod.GET, produces = "application/json")
+	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
 	public List<ITagUser> getITagData() {
 		return iTagUserService.findAll();
-	}
+	}*/
 
-	@RequestMapping(value = "/iTagData/getData", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
 	public ITagUser getITagFirstKeyValData( WebRequest wr) {
+		if(logger.isDebugEnabled()){
+			logger.debug("getITagFirstKeyValData is started!");
+		}
 		ITagUser itagUser = new ITagUser();
 		String reqParamKey1;
 		String[] reqParamVal1;
@@ -57,7 +61,10 @@ public class ITagController {
 			for(Map.Entry<String, String[]> param: params.entrySet()){
 				reqParamKey1 = param.getKey();
 				reqParamVal1 = param.getValue();
-				itagUser = iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1[0]);
+				//itagUser = iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1[0]);
+				//if(null != itagUser){
+				itagUser = iTagUserService.find(reqParamKey1, reqParamVal1[0]);
+				//}
 				return itagUser;
 			}
 		}else if(params.size() == 2){
@@ -91,11 +98,11 @@ public class ITagController {
 		String reqParamVal3 = iTagUser.getReqParamVal3();
 		
 		if(null != reqParamKey1 && null != reqParamVal1){
-			if(null != iTagUserService.findByReqParamKey2AndReqParamVal2(reqParamKey1, reqParamVal1)){
+			if(null != iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1)){
 			return true;
 			}
 		}if(null != reqParamKey2 && null != reqParamVal2){
-			if(null != iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey2, reqParamVal2)){
+			if(null != iTagUserService.findByReqParamKey2AndReqParamVal2(reqParamKey2, reqParamVal2)){
 				return true;
 			}
 		}if(null != reqParamKey3 && null != reqParamVal3){

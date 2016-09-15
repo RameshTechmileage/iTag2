@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,12 +13,18 @@ import com.amex.itag.repository.ITagRepository;
 
 @Service
 public class ITagUserServiceImpl implements ITagUserService{
+	
+	final static Logger logger = Logger.getLogger(ITagUserServiceImpl.class);
+	
 	@Resource
 	private ITagRepository iTagRepository;
 
 	@Override
 	@Transactional
 	public ITagUser create(ITagUser iTagUser) {
+		if(logger.isDebugEnabled()){
+			logger.debug("create is executed!");
+		}
 		ITagUser iTagCreateUser = iTagUser;
 		return iTagRepository.save(iTagCreateUser);
 	}
@@ -87,6 +94,12 @@ public class ITagUserServiceImpl implements ITagUserService{
 	public ITagUser find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
 			String reqParamKey3, String reqParamVal3) {
 		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
+		return iTagUser;
+	}
+	
+	@Override
+	public ITagUser find(String reqParamKey1, String reqParamVal1) {
+		ITagUser iTagUser = iTagRepository.find(reqParamKey1, reqParamVal1);
 		return iTagUser;
 	}
 
