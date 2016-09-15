@@ -18,14 +18,14 @@ public interface ITagRepository extends JpaRepository<ITagUser, Integer> {
 
 	public ITagUser findByReqParamKey3AndReqParamVal3(String reqParamKey1, String reqParamVal1);
 
-	@Query("select i.dataLayer from ITagUser i where i.reqParamKey1 = ?1 AND i.reqParamVal1 = ?2 AND i.reqParamKey2=?3 AND i.reqParamVal2=?4 AND i.reqParamKey3 = null AND i.reqParamVal3 = null")
+	@Query("select i.dataLayer from ITagUser i where lower(i.reqParamKey1) = ?1 AND lower(i.reqParamVal1) = ?2 AND lower(i.reqParamKey2) = ?3 AND lower(i.reqParamVal2) = ?4 AND i.reqParamKey3 = null AND i.reqParamVal3 = null")
 	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2);
 
-	@Query("select i.dataLayer from ITagUser i where i.reqParamKey1 = ?1 AND i.reqParamVal1 = ?2 AND i.reqParamKey2=?3 AND i.reqParamVal2=?4 AND i.reqParamKey3=?5 AND i.reqParamVal3=?6")
+	@Query("select i.dataLayer from ITagUser i where lower(i.reqParamKey1) = ?1 AND lower(i.reqParamVal1) = ?2 AND lower(i.reqParamKey2) = ?3 AND lower(i.reqParamVal2) = ?4 AND lower(i.reqParamKey3) = ?5 AND lower(i.reqParamVal3) = ?6")
 	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
 			String reqParamKey3, String reqParamVal3);
 	
-	@Query("select i.dataLayer from ITagUser i where i.reqParamKey1 = ?1 AND i.reqParamVal1 = ?2 AND i.reqParamKey2 = null AND i.reqParamVal2 = null AND i.reqParamKey3 = null AND i.reqParamVal3 = null")
+	@Query("select i.dataLayer from ITagUser i where lower(i.reqParamKey1) = ?1 AND lower(i.reqParamVal1) = ?2 AND i.reqParamKey2 = null AND i.reqParamVal2 = null AND i.reqParamKey3 = null AND i.reqParamVal3 = null")
 	public String find(String reqParamKey1, String reqParamVal1);
 
 	}

@@ -52,37 +52,38 @@ public class ITagController {
 		//ITagUser itagUser = new ITagUser();
 		String dataLayer;
 		String reqParamKey1;
-		String[] reqParamVal1;
+		String reqParamVal1;
 		String reqParamKey2;
-		String[] reqParamVal2;
+		String reqParamVal2;
 		String reqParamKey3;
-		String[] reqParamVal3;
+		String reqParamVal3;
 		LinkedHashMap<String, String[]> params=(LinkedHashMap<String, String[]>) wr.getParameterMap();
 		if(params.size() == 1){
 			for(Map.Entry<String, String[]> param: params.entrySet()){
-				reqParamKey1 = param.getKey();
-				reqParamVal1 = param.getValue();
+				reqParamKey1 = param.getKey().toLowerCase();
+				reqParamVal1 = param.getValue()[0].toLowerCase();
 				//itagUser = iTagUserService.findByReqParamKey1AndReqParamVal1(reqParamKey1, reqParamVal1[0]);
 				//if(null != itagUser){
-				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0]);
+				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1);
 				//}
 				return dataLayer;
 			}
 		}else if(params.size() == 2){
-				reqParamKey1 =  (String) params.keySet().toArray()[0];
-				reqParamVal1 = (String[]) params.values().toArray()[0];
-				reqParamKey2 = (String) params.keySet().toArray()[1];
-				reqParamVal2 = (String[]) params.values().toArray()[1];
-				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0]);
+				reqParamKey1 =  ((String) params.keySet().toArray()[0]).toLowerCase();
+				//reqParamVal1 = ((String[]) params.values().toArray()[0]).toLowerCase();
+				reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
+				reqParamKey2 = ((String) params.keySet().toArray()[1]).toLowerCase();
+				reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
+				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2);
 				return dataLayer;//itagUser;
 		}else if(params.size() == 3){
 			reqParamKey1 =  (String) params.keySet().toArray()[0];
-			reqParamVal1 = (String[]) params.values().toArray()[0];
+			reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
 			reqParamKey2 = (String) params.keySet().toArray()[1];
-			reqParamVal2 = (String[]) params.values().toArray()[1];
+			reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
 			reqParamKey3 = (String) params.keySet().toArray()[2];
-			reqParamVal3 = (String[]) params.values().toArray()[2];
-			dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1[0], reqParamKey2, reqParamVal2[0], reqParamKey3, reqParamVal3[0]);
+			reqParamVal3 = ((String[]) params.values().toArray()[2])[0].toLowerCase();
+			dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
 			return dataLayer;//itagUser;
 	}
 			//reqParamKey1 = params.get(key);
