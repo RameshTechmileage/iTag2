@@ -162,7 +162,7 @@
                <!--  <h3 class="form_style_h3">Page Information</h2> -->
                	<div style="text-align:center;">
                	<!-- 	<div style="text-align:center;"> -->
-	                <input type="checkbox" id="Intlinkimp" name="Intlinkimp" ng-model="Intlinkimp" ng-disabled="true"/>&nbsp;&nbsp;&nbsp;Intlinkimp&nbsp;&nbsp;&nbsp;
+	                <input type="checkbox" id="intlinkimp" name="intlinkimp" ng-model="intlinkimp" ng-disabled="true"/>&nbsp;&nbsp;&nbsp;Intlinkimp&nbsp;&nbsp;&nbsp;
 	              <!--   </div> -->
 	                <br/><br/>
 	                
@@ -178,16 +178,16 @@
                     <label for="pageName" class="col-sm-4 control-label">PageName</label>
                     <div class="col-sm-8">
                         <input type="text" id="page_name" class="form-control"
-                        ng-model="selectedData.page.pageInformation.pageName" ng-disabled="true" >
+                        ng-model="selectedData.page.pageInfo.pageName" ng-disabled="true" >
                     </div>
                 </div> <!-- {{page.pageInofrmation.pageName}} -->
                 
                <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">Country</label>
                     <div class="col-sm-8">
-                        <select id="country" class="form-control" autofocus ng-model="selectedData.page.pageInformation.country" ng-disabled="true">
+                        <select id="country" class="form-control" autofocus ng-model="selectedData.page.pageInfo.country" ng-disabled="true">
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
-		                	<option value="USA">USA</option>
+		                	<option value="US">US</option>
 		                	<option value="UK">UK</option>
 		                	<option value="AU">AU</option>
                 			<option value=IN"">IN</option>
@@ -199,7 +199,7 @@
                     <label for="language" class="col-sm-4 control-label">Language</label>
                     <div class="col-sm-8">
                         <input type="text" id="language"  class="form-control"
-                        ng-model="selectedData.page.pageInformation.language" ng-disabled="true" >
+                        ng-model="selectedData.page.pageInfo.language" ng-disabled="true" >
                     </div>
                 </div> <!-- {{page.pageInofmation.language}} -->
                 
@@ -220,7 +220,7 @@
                     </div> -->
                     <div class="col-sm-8">
                         <select id="country" class="form-control" ng-model="selectedData.page.category.businessUnit" ng-disabled="true" >
-                        	<option value="Please Select One">Please Select One</option>
+                        	<!-- <option value="Please Select One">Please Select One</option> -->
 							<option>Acquisition</option>
 							<option>Merchant</option>
 							<option>Travel</option>
@@ -271,11 +271,11 @@
                     </div>
                 </div>{{page.attributes.autotrack}} -->
                 
-                <div class="form-group" ng-show="Intlinkimp">
+                <div class="form-group" ng-show="intlinkimp">
                     <label for="autoTrack" class="col-sm-4 control-label">Intlinkimp</label>
                     <div class="col-sm-8">
-                        <input type="text" id="Intlinkimp"  class="form-control"
-                        ng-model="selectedData.page.attributes.Intlinkimp" ng-disabled="true" ><!-- {{data.Intlinkimp}} -->
+                        <input type="text" id="intlinkimp"  class="form-control"
+                        ng-model="selectedData.page.attributes.intlinkimp" ng-disabled="true" ><!-- {{data.Intlinkimp}} -->
                     </div>
                 </div><!-- {{page.attributes.autotrack}} -->
                 
@@ -402,12 +402,12 @@
                     <label for="firstName" class="col-sm-3 control-label">Request Parameter 3</label>
                     <div class="col-sm-4">
                         <input type="text" id="Request_Parameter3_key"  class="form-control"
-                        ng-model="selectedDataRP.Request_Parameter3.key" placeholder="Key"
+                        ng-model="selectedDataRP.Request_Parameter3.key" placeholder="Key" ng-required="true" name="Request_Parameterkey3" 
                          >
                     </div>
                     <div class="col-sm-4">
                         <input type="text" id="Request_Parameter3_value"  class="form-control"
-                        ng-model="selectedDataRP.Request_Parameter3.value" placeholder="Value"
+                        ng-model="selectedDataRP.Request_Parameter3.value" placeholder="Value" ng-required="true" name="Request_Parametervalue3"
                           >
                     </div>
                 </div>
@@ -434,8 +434,15 @@
 						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Back</button></a>
 					</div>
 					 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
-						  <!-- <a href="#/thankyou"> --><button type="submit"
-						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid &&saveDetails(selectedDataRP)">Submit</button><!-- </a> -->
+						  <!-- <a href="#/thankyou"> -->
+						 <button type="submit" ng-show="!button2"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && saveDetails(selectedDataRP)">Submit</button><!-- </a> -->
+						<button type="submit" ng-show="button2 && !button3"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parametervalue2.$valid && myform.Request_Parameterkey1.$valid && myform.Request_Parameterkey2.$valid && saveDetails(selectedDataRP)">Submit</button>
+						<button type="submit" ng-show="button2 && button3"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parametervalue2.$valid && myform.Request_Parametervalue3.$valid && myform.Request_Parameterkey1.$valid && myform.Request_Parameterkey2.$valid && myform.Request_Parameterkey3.$valid && saveDetails(selectedDataRP)">Submit</button>
+						
+						
 					</div>
 					
                     </div>

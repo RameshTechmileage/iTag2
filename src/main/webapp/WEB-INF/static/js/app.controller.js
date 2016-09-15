@@ -73,7 +73,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 //			});
 
     $scope.show = {
-    		Intlinkimp : false,
+    		intlinkimp : false,
     	     };
 //	alert("$scope.show.Intlinkimp = " + $scope.show.Intlinkimp );
 	if (!$localStorage.pageInfo) {
@@ -101,11 +101,11 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$scope.digitalData = $localStorage.dataJSon;
 	}
 	
-	if(!$localStorage.Intlinkimp){
+	if(!$localStorage.intlinkimp){
 //		console.log("$localStorage.Intlinkimp false");
 	}else{
 		$scope.show = {
-			 Intlinkimp : true
+			 intlinkimp : true
 		}
 	}
 	
@@ -116,7 +116,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	}
 	 
 	$scope.validate = function() {
-		   if ($scope.show.Intlinkimp == false) {
+		   if ($scope.show.intlinkimp == false) {
 			   delete $scope.digitalData.page.attributes;
 		   }
 	}
@@ -148,10 +148,10 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		
 //		if($scope.show.Intlinkimp){alert("value is there");}else{alert("no value");}
 		$localStorage.radioButtonShow = $scope.radioButtonShow;
-		$localStorage.Intlinkimp = $scope.show.Intlinkimp;
+		$localStorage.intlinkimp = $scope.show.intlinkimp;
 		
 		console.log("$scope.radioButtonShow = " + $scope.radioButtonShow);
-		console.log("$sceop.show.Intlinkimp = "+ $scope.show.Intlinkimp);
+		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
 //		console.log("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
 //		if($scope.page.pageInofrmation.pageName){
 //			alert("$scope.page.pageInofrmation.pageName = " + $scope.page.pageInofrmation.pageName);
@@ -310,9 +310,9 @@ mainApp.controller('eventInfoController', function($scope, PageInfoService,
 // }
 // window.onbeforeunload = closeIt;
 
-//window.onload = function() {
-//	localStorage.clear();
-//}
+window.onload = function() {
+	localStorage.clear();
+}
 
 mainApp.controller('thankyouController', function($scope, $http,
 		PageInfoService, $localStorage) {
@@ -320,6 +320,90 @@ mainApp.controller('thankyouController', function($scope, $http,
 
 mainApp.controller('retrieveDLController', function($scope, $http,
 		PageInfoService, $localStorage) {
+	
+	$scope.addRP2 = function() {
+		$scope.request_parameter2 = true;
+		$scope.button2 = true;
+	}
+
+	$scope.addRP3 = function() {
+		$scope.request_parameter3 = true;
+		$scope.button3 = true;
+	}
+	
+	  $scope.retrieveDataLayer = function(){
+//		  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
+	//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
+	   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
+	   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
+	   $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
+//	   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+//	   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+	   $scope.reqParamVal1 = $scope.selectedDataRP.Request_Parameter1.value;
+//	   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+//	   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+//	   alert("$scope.reqParamKey1 = " + $scope.reqParamKey1 + " $scope.reqParamVal1= " + $scope.reqParamVal1);
+//	   
+	   if ($scope.button2) {
+//		   alert("inside if");
+		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
+		   $scope.reqParamVal2 = $scope.selectedDataRP.Request_Parameter2.value;
+//		   alert("$scope.reqParamKey2 = " + $scope.reqParamKey2 + " $scope.reqParamVal2= " + $scope.reqParamVal2);
+        }else{
+//        	alert("inside else");
+        }
+	   
+	   if ($scope.button3) {
+//		   alert("inside if");
+		   $scope.reqParamKey3 = $scope.selectedDataRP.Request_Parameter3.key;
+		   $scope.reqParamVal3 = $scope.selectedDataRP.Request_Parameter3.value;
+//		   alert("$scope.reqParamKey3 = " + $scope.reqParamKey3 + " $scope.reqParamVal3= " + $scope.reqParamVal3);
+        }else{
+//        	alert("inside else");
+        }
+	 
+	   
+	   
+	   var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
+//	   alert("$scope.reqParamKey1 = " + $scope.reqParamKey1 + " $scope.reqParamVal1 = " + $scope.reqParamVal1);
+//	   alert("$scope.reqParamKey2 = " + $scope.reqParamKey2 + " $scope.reqParamVal1 = " + $scope.reqParamVal2);
+//	   alert("$scope.reqParamKey3 = " + $scope.reqParamKey3 + " $scope.reqParamVal1 = " + $scope.reqParamVal3);
+	   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
+//	   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
+//	   .success(function(data, status, headers) {
+//	       alert("Data added");
+//	       }).error(function(data, status) {
+//	        alert("There is an error while adding data");
+//	       });
+	   
+//	   if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
+//		   //totalJson:$scope.
+//		   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
+//		   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
+//		   .success(function(data, status, headers) {
+//		       alert("Data added");
+//		       $location.path('/thankyou');
+//		       }).error(function(data, status) {
+//		        alert("There is an error while adding data with duplicate parameters");
+//		       });
+//		   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null){
+//		    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2})
+//		    .success(function(data, status, headers) {
+//		        alert("Data added");
+//		        $location.path('/thankyou');
+//		        }).error(function(data, status) {
+//		         alert("There is an error while adding data with duplicate parameters");
+//		        });
+//		   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null){
+//		    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer,'reqParamKey1':$scope.reqParamKey1, 'reqParamVal1':$scope.reqParamVal1})
+//		    .success(function(data, status, headers) {
+//		        alert("Data added");
+//		        $location.path('/thankyou');
+//		        }).error(function(data, status) {
+//		         alert("There is an error while adding data with duplicate parameters");
+//		        });
+//		   }
+		  }
 });
 
 
@@ -330,8 +414,8 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	// $scope.selectedData = PageInfoService.getSelectedDetails();
 	$scope.selectedData = $localStorage.dataJSon;
 	$scope.jsonData = $localStorage.dataJSon;
-	$scope.Intlinkimp = $localStorage.Intlinkimp;
-	console.log("$localStorage.Intlinkimp = " + $localStorage.Intlinkimp);
+	$scope.intlinkimp = $localStorage.intlinkimp;
+	console.log("$localStorage.Intlinkimp = " + $localStorage.intlinkimp);
 	$scope.radioButtonShow = $localStorage.radioButtonShow;
 	console.log("$scope.selected.radioButtonShow = $localStorage.radioButtonShow; = " + $localStorage.radioButtonShow);
 	
@@ -422,6 +506,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
 			   .success(function(data, status, headers) {
 			       alert("Data added");
+			       $location.path('/thankyou');
 			       }).error(function(data, status) {
 			        alert("There is an error while adding data with duplicate parameters");
 			       });
@@ -429,6 +514,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2})
 			    .success(function(data, status, headers) {
 			        alert("Data added");
+			        $location.path('/thankyou');
 			        }).error(function(data, status) {
 			         alert("There is an error while adding data with duplicate parameters");
 			        });
@@ -436,11 +522,11 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			    $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer,'reqParamKey1':$scope.reqParamKey1, 'reqParamVal1':$scope.reqParamVal1})
 			    .success(function(data, status, headers) {
 			        alert("Data added");
+			        $location.path('/thankyou');
 			        }).error(function(data, status) {
 			         alert("There is an error while adding data with duplicate parameters");
 			        });
 			   }
-		   		$location.path('/thankyou');
 			  }
 		  
 	
