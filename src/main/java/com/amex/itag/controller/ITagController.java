@@ -77,11 +77,11 @@ public class ITagController {
 				dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2);
 				return dataLayer;//itagUser;
 		}else if(params.size() == 3){
-			reqParamKey1 =  (String) params.keySet().toArray()[0];
+			reqParamKey1 =  ((String) params.keySet().toArray()[0]).toLowerCase();
 			reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
-			reqParamKey2 = (String) params.keySet().toArray()[1];
+			reqParamKey2 = ((String) params.keySet().toArray()[1]).toLowerCase();
 			reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
-			reqParamKey3 = (String) params.keySet().toArray()[2];
+			reqParamKey3 = ((String) params.keySet().toArray()[2]).toLowerCase();
 			reqParamVal3 = ((String[]) params.values().toArray()[2])[0].toLowerCase();
 			dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
 			return dataLayer;//itagUser;
