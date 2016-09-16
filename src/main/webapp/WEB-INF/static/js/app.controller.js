@@ -494,6 +494,27 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	$scope.radioButtonShow = $localStorage.radioButtonShow;
 	console.log("$scope.selected.radioButtonShow = $localStorage.radioButtonShow; = " + $localStorage.radioButtonShow);
 	
+	$scope.edit = function(){
+//		alert("clicked on edit");
+		$scope.show = true;  
+		$scope.hide = true;  
+	    document.getElementById('content').disabled = false;
+	    document.getElementById("content").focus();
+	}
+	
+	$scope.save = function(){
+//		alert("clicked on edit");
+		$scope.show = false; 
+		$scope.hide = false;
+		
+	    document.getElementById('content').disabled = true;
+	    $scope.updatedJson = (document.getElementById('content').value);
+	    var finalJson =$scope.updatedJson.replace(/\\/g, "");
+//	    alert(a);
+	    $scope.jsonData = JSON.parse(finalJson);
+	    $localStorage.finalJson = $scope.jsonData;
+	}
+	
 	// console.log("$scope.selectedData on Review Controller = " +
 	// JSON.stringify($scope.selectedData));
 	// $scope.selectedData = $localStorage.message;
@@ -531,7 +552,8 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 		  $scope.saveDetails = function(){
 //			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
 		//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
-		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
+//		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
+		   $scope.dataLayer = JSON.stringify($localStorage.finalJson); 
 		   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
 		   $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
 //		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;

@@ -358,9 +358,21 @@
 
             </form> 
             </div>
-            <div class="col-lg-6" style="word-wrap: break-word;">
+<!--             <div class="col-lg-6" style="word-wrap: break-word;">
             	  <h2 class="form_style_h2 ">Data Layer</h2>
             	<pre>  {{jsonData | json}} </pre>
+            </div> -->
+            
+            <div class="col-lg-6" style="word-wrap: break-word;">
+            	  <h2 class="form_style_h2 ">Data Layer</h2>
+            	   <button type="submit" ng-show="!hide"
+						class="btn btn-primary btn-block" ng-click="edit()" id="edit" value="edit">edit</button> 
+						
+					<button type="submit" ng-show="show" 
+						class="btn btn-primary btn-block" ng-click="save()" id="edit" value="save">Save</button> 
+						<br>
+            	<pre ng-show="!show" >  {{jsonData | json}} </pre>
+            	<textarea id="content" value="sample text" disabled="true" ng-show="show" autofocus/>{{jsonData}}</textarea>
             </div>
             </div>
             <div class="row">
