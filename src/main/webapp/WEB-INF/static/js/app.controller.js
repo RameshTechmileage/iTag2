@@ -101,6 +101,18 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$scope.digitalData = $localStorage.dataJSon;
 	}
 	
+	
+	
+	if(!$localStorage.dataJSons){
+	}else{
+		$scope.digitalDatas = $localStorage.dataJSons;
+	}
+	
+//	if(!$localStorage.dataJSons){
+//	}else{
+//		$scope.digitalDatas = $localStorage.dataJSons;
+//	}
+	
 	if(!$localStorage.intlinkimp){
 //		console.log("$localStorage.Intlinkimp false");
 	}else{
@@ -146,28 +158,76 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$localStorage.page = $scope.page;
 	 	if($scope.radioButtonShow == 'CA_Submit'){
 //			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
-			   $scope.digitalData.event.eventInfo = { 
-					   eventType : "cardApplication",
-					   eventAction : "submit"
-			   };
+//			   $scope.digitalData.event.eventInfo = { 
+//					   eventType : "cardApplication",
+//					   eventAction : "submit"
+//			   };
+//			   
+			   $scope.digitalData.event = [{
+				   eventInfo : {
+					   eventType: "cardApplication",
+						eventAction: "submit"
+				   },
+					productInfo: [{
+						productName: $scope.digitalDatas.event.productInfo.productName,
+						pmc: $scope.digitalDatas.event.productInfo.pmc
+					}]  
+			   }];
+			   
+			   
+//			   $scope.digitalData.event.productInfoTest = [{
+//					productName: $scope.digitalData.event.productInfo.productName,
+//					pmc: $scope.digitalData.event.productInfo.pmc
+//				}] 
 		   }
 		   if($scope.radioButtonShow == 'CA_Start'){
 //			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
-			   $scope.digitalData.event.eventInfo = { 
-					   eventType : "cardApplication",
-					   eventAction : "start"
-			   };
+//			   $scope.digitalData.event.eventInfo = { 
+//					   eventType : "cardApplication",
+//					   eventAction : "start"
+//			   };
+//			   $scope.digitalData.event.productInfoTest = [{
+//					productName: $scope.digitalData.event.productInfo.productName,
+//					pmc: $scope.digitalData.event.productInfo.pmc
+//				}] 
+			   
+			   $scope.digitalData.event = [{
+				   eventInfo : {
+					   eventType: "cardApplication",
+						eventAction: "start"
+				   },
+					productInfo: [{
+						productName: $scope.digitalDatas.event.productInfo.productName,
+						pmc: $scope.digitalDatas.event.productInfo.pmc
+					}]  
+			   }];			   
 		   }
 		   if($scope.radioButtonShow == 'CA_Financial'){
 //			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
-			   $scope.digitalData.event.eventInfo = { 
-					   eventType : "cardApplication",
-					   eventAction : "financialInfo"
-			   };
+//			   $scope.digitalData.event.eventInfo = { 
+//					   eventType : "cardApplication",
+//					   eventAction : "financialInfo"
+//			   };
+			   
+			   $scope.digitalData.event = [{
+				   eventInfo : {
+					   eventType: "cardApplication",
+						eventAction: "financialInfo"
+				   },
+					productInfo: [{
+						productName: $scope.digitalDatas.event.productInfo.productName,
+						pmc: $scope.digitalDatas.event.productInfo.pmc
+					}]  
+			   }];
+//			   $scope.digitalData.event.productInfoTest = [{
+//					productName: $scope.digitalData.event.productInfo.productName,
+//					pmc: $scope.digitalData.event.productInfo.pmc
+//				}] 
 		   }
 		   
 		   
 		$localStorage.dataJSon = $scope.digitalData;
+		$localStorage.dataJSons = $scope.digitalDatas;
 		
 //		if($scope.show.Intlinkimp){alert("value is there");}else{alert("no value");}
 		$localStorage.radioButtonShow = $scope.radioButtonShow;
@@ -488,6 +548,8 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	// JSON.stringify($localStorage.message));
 	// $scope.selectedData = PageInfoService.getSelectedDetails();
 	$scope.selectedData = $localStorage.dataJSon;
+	$scope.selectedDatas = $localStorage.dataJSons;
+	
 	$scope.jsonData = $localStorage.dataJSon;
 	$scope.intlinkimp = $localStorage.intlinkimp;
 	console.log("$localStorage.Intlinkimp = " + $localStorage.intlinkimp);
