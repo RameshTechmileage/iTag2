@@ -553,7 +553,12 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 //			  alert("$localStorage.jsonData = " + $localStorage.dataJSon);
 		//   $scope.dataLayer =$localStorage.pageInfo;// "{'id': 1,'country': 'usa', 'test': 'jdshs'}"; //"{'id': 1,'country': 'usa', 'test': 'jdshs'}";
 //		   $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
-		   $scope.dataLayer = JSON.stringify($localStorage.finalJson); 
+			if($localStorage.finalJson){
+				$scope.dataLayer = JSON.stringify($localStorage.finalJson);
+			}else{
+				 $scope.dataLayer = JSON.stringify($localStorage.dataJSon);
+			}
+		    
 		   //$scope.requestParameter = "{'id': 1,'createdBy': 'Ram', 'userInfoJson': 'jdshs'}";
 		   $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
 //		   $scope.reqParamKey2 = $scope.selectedDataRP.Request_Parameter2.key;
