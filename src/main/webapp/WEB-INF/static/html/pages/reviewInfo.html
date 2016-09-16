@@ -382,7 +382,13 @@
                    	<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2" style="padding-left: 0px;padding-right: 0px;" >
 						 <button type="submit"
 						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && addRP2()" ng-show="!button2">+</button>
+						 <button type="submit"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && deleteRP2()" ng-show="buttonMinus">-</button>
 					</div>
+					<!-- <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2" style="padding-left: 0px;padding-right: 0px;" >
+						 <button type="submit"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && addRP2()" ng-show="!button2">-</button>
+					</div> -->
                 </div>
                 
                 <div class="form-group" ng-show="request_parameter2">
@@ -401,6 +407,8 @@
                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2" style="padding-left: 0px;padding-right: 0px;" >
 						 <button type="submit"
 						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue2.$valid && myform.Request_Parameterkey2.$valid && addRP3()" ng-show="!button3">+</button>
+						<button type="submit"
+						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue2.$valid && myform.Request_Parameterkey2.$valid && deleteRP3()" ng-show="buttonMinus2">-</button>
 					</div>
                 </div>
                 

@@ -609,10 +609,34 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	$scope.addRP2 = function() {
 		$scope.request_parameter2 = true;
 		$scope.button2 = true;
+		$scope.buttonMinus = true;
 	}
 
 	$scope.addRP3 = function() {
 		$scope.request_parameter3 = true;
 		$scope.button3 = true;
+		$scope.buttonMinus2 = true;
+	}
+	$scope.deleteRP2 = function(){
+		$scope.request_parameter3 = false;
+		$scope.button3 = false;
+		$scope.request_parameter2 = false;
+		$scope.button2 = false;
+		$scope.buttonMinus = false;
+		$scope.buttonMinus2 = false;
+		$scope.selectedDataRP.Request_Parameter2.key = "";
+		$scope.selectedDataRP.Request_Parameter2.value = "";
+		$scope.selectedDataRP.Request_Parameter3.key = "";
+		$scope.selectedDataRP.Request_Parameter3.value = "";
+	}
+	
+	$scope.deleteRP3 = function(){
+		$scope.request_parameter3 = false;
+		$scope.button3 = false;
+		//$scope.request_parameter2 = false;
+		//$scope.button2 = false;
+		$scope.buttonMinus2 = false;
+		$scope.selectedDataRP.Request_Parameter3.key = "";
+		$scope.selectedDataRP.Request_Parameter3.value = "";
 	}
 });
