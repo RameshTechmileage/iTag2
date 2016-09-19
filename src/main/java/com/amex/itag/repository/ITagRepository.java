@@ -28,4 +28,6 @@ public interface ITagRepository extends JpaRepository<ITagUser, Integer> {
 	@Query("select i.dataLayer from ITagUser i where lower(i.reqParamKey1) = ?1 AND lower(i.reqParamVal1) = ?2 AND i.reqParamKey2 = null AND i.reqParamVal2 = null AND i.reqParamKey3 = null AND i.reqParamVal3 = null")
 	public String find(String reqParamKey1, String reqParamVal1);
 
+	@Query("select i.dataLayer from ITagUser i where lower(i.reqParamKeyVal) = ?1")
+	public String find(String reqParamKeyVal);
 	}

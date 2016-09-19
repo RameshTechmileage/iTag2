@@ -30,5 +30,7 @@ public interface ITagUserService {
 			String reqParamKey3, String reqParamVal3);
 	
 	public String find(String reqParamKey1, String reqParamVal1);
+	
+	public String find(String reqParamKeyVal);
 
 }

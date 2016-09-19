@@ -660,6 +660,26 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 		   
 		   
 		   var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
+		  
+		   
+		   if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
+
+			   $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1+"&"+$scope.reqParamKey2+"="+$scope.reqParamVal2+"&"+$scope.reqParamKey3+"="+$scope.reqParamVal3;
+			   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null){
+				   $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1+"&"+$scope.reqParamKey2+"="+$scope.reqParamVal2;
+			   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null){
+				   $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1;
+			   }
+		   
+		   if($scope.reqParam != null){
+			    $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", { 'dataLayer':$scope.dataLayer,'reqParamKeyVal':$scope.reqParam})
+			    .success(function(data, status, headers) {
+			        alert("Data added"+data);
+			        $location.path('/thankyou');
+			        }).error(function(data, status) {
+			         alert("There is an error while adding data with duplicate parameters");
+			        });
+			   }
 //		   alert("$scope.reqParamKey1 = " + $scope.reqParamKey1 + " $scope.reqParamVal1 = " + $scope.reqParamVal1);
 //		   alert("$scope.reqParamKey2 = " + $scope.reqParamKey2 + " $scope.reqParamVal1 = " + $scope.reqParamVal2);
 //		   alert("$scope.reqParamKey3 = " + $scope.reqParamKey3 + " $scope.reqParamVal1 = " + $scope.reqParamVal3);
@@ -671,7 +691,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 //		        alert("There is an error while adding data");
 //		       });
 		   
-		   if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
+		  /* if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
 			   //totalJson:$scope.
 			   //$http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'requestParameter': $scope.requestParameter})
 //			   $http.post("http://localhost:8080/ITag2/saveITagData", { 'dataLayer':$scope.dataLayer, 'reqParamKey1':$scope.reqParamKey1, 'reqParamKey2':$scope.reqParamKey2, 'reqParamKey3':$scope.reqParamKey3,'reqParamVal1':$scope.reqParamVal1, 'reqParamVal2':$scope.reqParamVal2, 'reqParamVal3':$scope.reqParamVal3})
@@ -703,7 +723,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			        }).error(function(data, status) {
 			         alert("There is an error while adding data with duplicate parameters");
 			        });
-			   }
+			   }*/
 			  }
 		  
 	

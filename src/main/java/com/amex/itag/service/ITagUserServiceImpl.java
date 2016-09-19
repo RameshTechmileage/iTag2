@@ -105,4 +105,10 @@ public class ITagUserServiceImpl implements ITagUserService{
 		return dataLayer;
 	}
 
+	@Override
+	public String find(String reqParamKeyVal) {
+		dataLayer = iTagRepository.find(reqParamKeyVal);
+		return dataLayer;
+	}
+
 }

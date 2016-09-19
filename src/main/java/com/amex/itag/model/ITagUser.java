@@ -34,6 +34,9 @@ public class ITagUser {
 	
 	@Column(name = "req_param_val3")
 	private String reqParamVal3;
+	
+	@Column(name = "req_param_key_val")
+	private String reqParamKeyVal;
 
 	public Integer getId() {
 		return id;
@@ -97,5 +100,13 @@ public class ITagUser {
 
 	public void setReqParamVal3(String reqParamVal3) {
 		this.reqParamVal3 = reqParamVal3;
+	}
+
+	public String getReqParamKeyVal() {
+		return reqParamKeyVal;
+	}
+
+	public void setReqParamKeyVal(String reqParamKeyVal) {
+		this.reqParamKeyVal = reqParamKeyVal;
 	}
 }
