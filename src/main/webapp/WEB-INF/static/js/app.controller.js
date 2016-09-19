@@ -104,6 +104,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	
 	
 	if(!$localStorage.dataJSons){
+		$scope.digitalData = {};
 	}else{
 		$scope.digitalDatas = $localStorage.dataJSons;
 	}
