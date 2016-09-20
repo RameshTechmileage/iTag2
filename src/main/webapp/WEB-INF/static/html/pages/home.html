@@ -216,9 +216,12 @@
                 
                 <div class="form-group" ng-show="show.intlinkimp">
                     <label for="autoTrack" class="col-sm-4 control-label">Intlinkimp</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <input type="text" id="intlinkimp" placeholder="intlinkimp" class="form-control"
-                        ng-model="digitalData.page.attributes.intlinkimp" ><!-- {{data.Intlinkimp}} -->
+                        ng-model="digitalData.page.attributes.intlinkimp" ng-disabled="disable_Intlinkimp" ><!-- {{data.Intlinkimp}} -->
+                    </div>
+                     <div class="col-sm-1">
+                        <input type="checkbox" id="Intlinkimp_disable" name="Intlinkimp_disable" ng-model="disable_Intlinkimp" ng-click="Intlinkimp_disable(Intlinkimp_disable)"/>
                     </div>
                 </div><!-- {{page.attributes.autotrack}} -->
                 

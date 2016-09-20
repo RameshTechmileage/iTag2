@@ -76,6 +76,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
     	     };
     
     $scope.disable = false; 
+    $scope.disable_Intlinkimp = false;
     
 //	alert("$scope.show.Intlinkimp = " + $scope.show.Intlinkimp );
 	if (!$localStorage.pageInfo) {
@@ -135,7 +136,15 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	}else{
 
 		$scope.disable = $localStorage.disable;
-		
+	}
+	
+	
+	
+	if(!$localStorage.disable_Intlinkimp){
+//		console.log("$localStorage.Intlinkimp false");
+	}else{
+
+		$scope.disable_Intlinkimp = $localStorage.disable_Intlinkimp;
 	}
 	 
 	
@@ -152,6 +161,12 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 //			}
 		$scope.digitalData.page.pageInfo.pageName = "";
 	}
+	
+	$scope.Intlinkimp_disable = function(){
+		$scope.digitalData.page.attributes.intlinkimp = "";
+	}
+	
+	
 //	$scope.validateradioButton = function(){
 //		 if($scope.radioButtonShow == 'CA_Submit'){
 //			   delete $scope.digitalData.event.CA_Start;
@@ -266,6 +281,8 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$localStorage.radioButtonShow = $scope.radioButtonShow;
 		$localStorage.intlinkimp = $scope.show.intlinkimp;
 		$localStorage.disable = $scope.disable;
+		$localStorage.disable_Intlinkimp = $scope.disable_Intlinkimp;
+		
 		
 		console.log("$scope.radioButtonShow = " + $scope.radioButtonShow);
 		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
