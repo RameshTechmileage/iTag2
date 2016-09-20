@@ -226,6 +226,20 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 //				}] 
 		   }
 		   
+		   if($scope.radioButtonShow == 'CA_LearnMore'){
+			   
+			   $scope.digitalData.event = [{
+				   eventInfo : {
+					   eventType: "cardApplication",
+						eventAction: "LearnMore"
+				   },
+					productInfo: [{
+						productName: $scope.digitalDatas.event.productInfo.productName,
+						pmc: $scope.digitalDatas.event.productInfo.pmc
+					}]  
+			   }];
+		   }
+		   
 		   
 		$localStorage.dataJSon = $scope.digitalData;
 		$localStorage.dataJSons = $scope.digitalDatas;

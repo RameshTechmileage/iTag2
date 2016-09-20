@@ -99,7 +99,8 @@
 	                
 	                <input id="CA_Start" type="radio" name="content" ng-model="radioButtonShow" value="CA_Start" ng-click="validateradioButton()">&nbsp;&nbsp;&nbsp;CA-Start&nbsp;&nbsp;&nbsp;
 	      			<input id="CA_Financial" type="radio" name="content" ng-model="radioButtonShow" value="CA_Financial" ng-click="validateradioButton()">&nbsp;&nbsp;&nbsp;CA-Financial&nbsp;&nbsp;&nbsp; 
-	       			<input id="CA-Submit" type="radio" name="content" ng-model="radioButtonShow" value="CA_Submit" ng-click="validateradioButton()">&nbsp;&nbsp;&nbsp;CA-Submit&nbsp;&nbsp;&nbsp; 
+	       			<input id="CA-Submit" type="radio" name="content" ng-model="radioButtonShow" value="CA_Submit" ng-click="validateradioButton()">&nbsp;&nbsp;&nbsp;CA-Submit&nbsp;&nbsp;&nbsp;
+	       			<input id="CA-learnMore" type="radio" name="content" ng-model="radioButtonShow" value="CA_LearnMore" ng-click="validateradioButton()">&nbsp;&nbsp;&nbsp;CA-Learn More&nbsp;&nbsp;&nbsp; 
        			<br/>
                 </div>
               
@@ -265,6 +266,29 @@
                 
                 <div ng-show="radioButtonShow == 'CA_Submit'">
            		<h3 class="form_style_h3">CA Submit</h3> 
+                <div class="form-group" >
+                    <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
+                        ng-model="digitalDatas.event.productInfo.productName" >
+                    </div>
+                </div><!-- {{page.attributes.autotrack}} -->
+                
+                  <div class="form-group">
+                    <label for="country code" class="col-sm-4 control-label">pmc</label>
+                    <div class="col-sm-8">
+                        <select id="country" class="form-control" ng-model="digitalDatas.event.productInfo.pmc" >
+                        <!-- 	<option value="Please Select One">Please Select One</option> -->
+		                	<option value="999">999</option>
+		                	<option value="888">888</option>
+		                	<option value="777">777</option>
+                        </select>
+                    </div>
+                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div>
+                
+               <div ng-show="radioButtonShow == 'CA_LearnMore'">
+           		<h3 class="form_style_h3">CA Learn More</h3> 
                 <div class="form-group" >
                     <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
                     <div class="col-sm-8">
