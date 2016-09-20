@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,10 @@ import com.amex.itag.util.DuplicateParameters;
 public class ITagController {
 	
 	final static Logger logger = Logger.getLogger(ITagController.class);
+	
+	public final static String EQUALS = new String("=");
+	
+	public final static String AMP = new String("&");
 
 	@Autowired
 	private ITagUserService iTagUserService;
@@ -91,7 +97,7 @@ public class ITagController {
 				reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
 				reqParamKey2 = ((String) params.keySet().toArray()[1]).toLowerCase();
 				reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
-				reqParamKeyVal=sortKeyVal(reqParamKey1+"="+reqParamVal1+"&"+reqParamKey2+"="+reqParamVal2);
+				reqParamKeyVal=sortKeyVal(reqParamKey1+EQUALS+reqParamVal1+AMP+reqParamKey2+EQUALS+reqParamVal2);
 				dataLayer = iTagUserService.find(reqParamKeyVal);
 				return dataLayer;//itagUser;
 		}else if(params.size() == 3){
@@ -101,12 +107,66 @@ public class ITagController {
 			reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
 			reqParamKey3 = ((String) params.keySet().toArray()[2]).toLowerCase();
 			reqParamVal3 = ((String[]) params.values().toArray()[2])[0].toLowerCase();
-			reqParamKeyVal=sortKeyVal(reqParamKey1+"="+reqParamVal1+"&"+reqParamKey2+"="+reqParamVal2+"&"+reqParamKey3+"="+reqParamVal3);
+			reqParamKeyVal=sortKeyVal(reqParamKey1+EQUALS+reqParamVal1+AMP+reqParamKey2+EQUALS+reqParamVal2+AMP+reqParamKey3+EQUALS+reqParamVal3);
 			dataLayer = iTagUserService.find(reqParamKeyVal);
 			//dataLayer = iTagUserService.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
 			return dataLayer;//itagUser;
 		}
 		return null;
+	}
+	
+	//Update the Data Layer
+	
+	@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
+	public @ResponseBody void updateDataLayer(WebRequest wr,@RequestBody String reqBody) {
+		if(logger.isDebugEnabled()){
+			logger.debug("getITagFirstKeyValData is started!");
+		}
+		String dataLayer;
+		String reqParamKey1;
+		String reqParamVal1;
+		String reqParamKey2;
+		String reqParamVal2;
+		String reqParamKey3;
+		String reqParamVal3;
+		String reqParamKeyVal;
+		LinkedHashMap<String, String[]> params=(LinkedHashMap<String, String[]>) wr.getParameterMap();
+		if (params.size() == 1) {
+			for (Map.Entry<String, String[]> param : params.entrySet()) {
+				reqParamKey1 = param.getKey().toLowerCase();
+				reqParamVal1 = param.getValue()[0].toLowerCase();
+				reqParamKeyVal = reqParamKey1 + EQUALS + reqParamVal1;
+				dataLayer = iTagUserService.find(reqParamKeyVal);
+				if (null != dataLayer) {
+					iTagUserService.update(reqBody.toString(), reqParamKeyVal);
+				}
+			}
+		} else if (params.size() == 2) {
+			reqParamKey1 = ((String) params.keySet().toArray()[0]).toLowerCase();
+			// reqParamVal1 = ((String[])
+			// params.values().toArray()[0]).toLowerCase();
+			reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
+			reqParamKey2 = ((String) params.keySet().toArray()[1]).toLowerCase();
+			reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
+			reqParamKeyVal = sortKeyVal(reqParamKey1 + EQUALS + reqParamVal1 + AMP + reqParamKey2 + EQUALS + reqParamVal2);
+			dataLayer = iTagUserService.find(reqParamKeyVal);
+			if (null != dataLayer) {
+				iTagUserService.update(reqBody, reqParamKeyVal);
+			}
+		} else if (params.size() == 3) {
+			reqParamKey1 = ((String) params.keySet().toArray()[0]).toLowerCase();
+			reqParamVal1 = ((String[]) params.values().toArray()[0])[0].toLowerCase();
+			reqParamKey2 = ((String) params.keySet().toArray()[1]).toLowerCase();
+			reqParamVal2 = ((String[]) params.values().toArray()[1])[0].toLowerCase();
+			reqParamKey3 = ((String) params.keySet().toArray()[2]).toLowerCase();
+			reqParamVal3 = ((String[]) params.values().toArray()[2])[0].toLowerCase();
+			reqParamKeyVal = sortKeyVal(reqParamKey1 + EQUALS + reqParamVal1 + AMP + reqParamKey2 + EQUALS + reqParamVal2
+					+ AMP + reqParamKey3 + EQUALS + reqParamVal3);
+			dataLayer = iTagUserService.find(reqParamKeyVal);
+			if (null != dataLayer) {
+				iTagUserService.update(reqBody, reqParamKeyVal);
+			}
+		}
 	}
 
 	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
@@ -210,7 +270,7 @@ public class ITagController {
 	}
 	
 	public String sortKeyVal(String ketValParam){
-		String[] parts = ketValParam.split("&");
+		String[] parts = ketValParam.split(AMP);
 		Arrays.sort(parts);
 		String sortKeyVal = "";
 	//	for(String part:parts){
@@ -218,7 +278,7 @@ public class ITagController {
 				if(i==0){
 					sortKeyVal =sortKeyVal+parts[i];
 				}else{
-					sortKeyVal =sortKeyVal+"&"+parts[i];
+					sortKeyVal =sortKeyVal+AMP+parts[i];
 				}
 			}
 			return sortKeyVal;

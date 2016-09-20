@@ -54,15 +54,12 @@ public class ITagUserServiceImpl implements ITagUserService{
 
 	@Override
 	@Transactional
-	public ITagUser update(ITagUser iTagUser){
-		ITagUser updatedUser = iTagRepository.findOne(iTagUser.getId());
-		
-		updatedUser.setDataLayer(iTagUser.getDataLayer());
-		updatedUser.setReqParamKey1(iTagUser.getReqParamKey1());
-		return updatedUser;
+	public void update(String dataLayer, String reqParamKeyVal){
+		ITagUser updatedUser = iTagRepository.findOne(reqParamKeyVal);
+		updatedUser.setDataLayer(dataLayer);
 	}
 
-	@Override
+	/*@Override
 	public List<ITagUser> findByReqParamKey1(String reqParamKey1) {
 		List<ITagUser> iTagUser = iTagRepository.findByReqParamKey1(reqParamKey1);
 		return iTagUser;
@@ -97,18 +94,19 @@ public class ITagUserServiceImpl implements ITagUserService{
 			String reqParamKey3, String reqParamVal3) {
 		dataLayer = iTagRepository.find(reqParamKey1, reqParamVal1, reqParamKey2, reqParamVal2, reqParamKey3, reqParamVal3);
 		return dataLayer;
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public String find(String reqParamKey1, String reqParamVal1) {
 		dataLayer = iTagRepository.find(reqParamKey1, reqParamVal1);
 		return dataLayer;
-	}
+	}*/
 
 	@Override
 	public String find(String reqParamKeyVal) {
 		dataLayer = iTagRepository.find(reqParamKeyVal);
 		return dataLayer;
 	}
+
 
 }

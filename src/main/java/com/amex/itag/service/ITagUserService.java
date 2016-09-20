@@ -12,11 +12,11 @@ public interface ITagUserService {
 
 	public List<ITagUser> findAll();
 
-	public ITagUser update(ITagUser iTagUser);
+	//public ITagUser update(ITagUser iTagUser);
 
 	public ITagUser findById(int id);
 
-	public List<ITagUser> findByReqParamKey1(String reqParamKey1);
+	/*public List<ITagUser> findByReqParamKey1(String reqParamKey1);
 
 	public ITagUser findByReqParamKey1AndReqParamVal1(String reqParamKey1, String reqParamVal1);
 
@@ -29,8 +29,11 @@ public interface ITagUserService {
 	public String find(String reqParamKey1, String reqParamVal1, String reqParamKey2, String reqParamVal2,
 			String reqParamKey3, String reqParamVal3);
 	
-	public String find(String reqParamKey1, String reqParamVal1);
+	public String find(String reqParamKey1, String reqParamVal1);*/
 	
 	public String find(String reqParamKeyVal);
+	
+	public void update(String dataLayer, String reqParamKeyVal);
+	
 
 }

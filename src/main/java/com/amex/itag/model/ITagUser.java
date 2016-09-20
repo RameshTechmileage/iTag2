@@ -14,10 +14,10 @@ public class ITagUser {
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(name = "data_layer")
+	@Column(name = "data_layer", length = 1024)
 	private String dataLayer;
 
-	@Column(name = "req_param_key1")
+	/*@Column(name = "req_param_key1")
 	private String reqParamKey1;
 	
 	@Column(name = "req_param_key2")
@@ -33,7 +33,7 @@ public class ITagUser {
 	private String reqParamVal2;
 	
 	@Column(name = "req_param_val3")
-	private String reqParamVal3;
+	private String reqParamVal3;*/
 	
 	@Column(name = "req_param_key_val")
 	private String reqParamKeyVal;
@@ -54,7 +54,7 @@ public class ITagUser {
 		this.dataLayer = dataLayer;
 	}
 
-	public String getReqParamKey1() {
+	/*public String getReqParamKey1() {
 		return reqParamKey1;
 	}
 
@@ -100,7 +100,7 @@ public class ITagUser {
 
 	public void setReqParamVal3(String reqParamVal3) {
 		this.reqParamVal3 = reqParamVal3;
-	}
+	}*/
 
 	public String getReqParamKeyVal() {
 		return reqParamKeyVal;
