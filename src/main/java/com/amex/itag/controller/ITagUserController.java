@@ -20,16 +20,16 @@ import com.amex.itag.service.ITagUserService;
 @RequestMapping(value="/user")
 public class ITagUserController {
 
-	@Autowired
+	/*@Autowired
 	private ITagUserService iTagUserService;
 	
-	/*@Autowired
-	private ShopValidator shopValidator;*/
+	@Autowired
+	private ShopValidator shopValidator;
 	
-	/*@InitBinder
+	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(shopValidator);
-	}*/
+	}
 
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public ModelAndView newShopPage() {
@@ -100,5 +100,5 @@ public class ITagUserController {
 		
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}
+	}*/
 }
