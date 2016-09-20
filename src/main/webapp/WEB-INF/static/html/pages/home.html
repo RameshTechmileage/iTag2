@@ -108,10 +108,15 @@
                 <br/><br/>
                 <div class="form-group">
                     <label for="pageName" class="col-sm-4 control-label">PageName</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <input type="text" id="page_name" placeholder="Page Name" class="form-control"
-                        ng-model="digitalData.page.pageInfo.pageName" autofocus >
+                        ng-model="digitalData.page.pageInfo.pageName" autofocus ng-disabled="disable" >
+					</div>
+                     <div class="col-sm-1">
+                        <input type="checkbox" id="page_name" name="page_name" ng-model="disable" ng-click="disableHomePage(disable)"/>
                     </div>
+                    
+                    
                 </div> <!-- {{page.pageInofrmation.pageName}} -->
                 
                <div class="form-group">

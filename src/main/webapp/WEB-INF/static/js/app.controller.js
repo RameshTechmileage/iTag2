@@ -71,10 +71,12 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 //				alert("$scope.data = " + JSON.stringify($scope.data));
 //				$scope.data = response.data.country;
 //			});
-
     $scope.show = {
-    		intlinkimp : false,
+    		intlinkimp : false
     	     };
+    
+    $scope.disable = false; 
+    
 //	alert("$scope.show.Intlinkimp = " + $scope.show.Intlinkimp );
 	if (!$localStorage.pageInfo) {
 		$scope.pageInfo = {
@@ -127,6 +129,16 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	}else{
 		$scope.radioButtonShow = $localStorage.radioButtonShow;
 	}
+	
+	if(!$localStorage.disable){
+//		console.log("$localStorage.Intlinkimp false");
+	}else{
+
+		$scope.disable = $localStorage.disable;
+		
+	}
+	 
+	
 	 
 	$scope.validate = function() {
 		   if ($scope.show.intlinkimp == false) {
@@ -134,6 +146,12 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		   }
 	}
 	
+	$scope.disableHomePage = function(){
+//		$scope.digitalData.page.pageInfo = {
+//				pageName : "",
+//			}
+		$scope.digitalData.page.pageInfo.pageName = "";
+	}
 //	$scope.validateradioButton = function(){
 //		 if($scope.radioButtonShow == 'CA_Submit'){
 //			   delete $scope.digitalData.event.CA_Start;
@@ -247,6 +265,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 //		if($scope.show.Intlinkimp){alert("value is there");}else{alert("no value");}
 		$localStorage.radioButtonShow = $scope.radioButtonShow;
 		$localStorage.intlinkimp = $scope.show.intlinkimp;
+		$localStorage.disable = $scope.disable;
 		
 		console.log("$scope.radioButtonShow = " + $scope.radioButtonShow);
 		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
