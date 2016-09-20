@@ -118,10 +118,11 @@ public class ITagController {
 	//Update the Data Layer
 	
 	@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
-	public @ResponseBody void updateDataLayer(WebRequest wr,@RequestBody String reqBody) {
+	public @ResponseBody String updateDataLayer(WebRequest wr,@RequestBody String reqBody) {
 		if(logger.isDebugEnabled()){
 			logger.debug("getITagFirstKeyValData is started!");
 		}
+		String message = null;
 		String dataLayer;
 		String reqParamKey1;
 		String reqParamVal1;
@@ -139,6 +140,10 @@ public class ITagController {
 				dataLayer = iTagUserService.find(reqParamKeyVal);
 				if (null != dataLayer) {
 					iTagUserService.update(reqBody.toString(), reqParamKeyVal);
+					message = "success";
+				}else{
+					//new ParametersNotFound("Data Not Found");
+					message = "Data Not found";
 				}
 			}
 		} else if (params.size() == 2) {
@@ -152,6 +157,9 @@ public class ITagController {
 			dataLayer = iTagUserService.find(reqParamKeyVal);
 			if (null != dataLayer) {
 				iTagUserService.update(reqBody, reqParamKeyVal);
+				message = "success";
+			}else{
+				message = "Data Not found";
 			}
 		} else if (params.size() == 3) {
 			reqParamKey1 = ((String) params.keySet().toArray()[0]).toLowerCase();
@@ -165,8 +173,12 @@ public class ITagController {
 			dataLayer = iTagUserService.find(reqParamKeyVal);
 			if (null != dataLayer) {
 				iTagUserService.update(reqBody, reqParamKeyVal);
+				message = "success";
+			}else{
+				message = "Data Not found";
 			}
 		}
+		return message;
 	}
 
 	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
