@@ -3,165 +3,9 @@
           <div class="col-lg-6">
             <form class="form-horizontal" role="form">
                 <h2 class="form_style_h2">Preview Data</h2>
-              <!--   <div class="form-group">
-                    <label for="country" class="col-sm-3 control-label">Country Code</label>
-                    <div class="col-sm-9">
-                        <select id="country" class="form-control" ng-model="selectedData.country" ng-disabled="true" >
-                        	<option value="Please Select One">Please Select One</option>
-		                	<option value="USA">USA</option>
-		                	<option value="UK">UK</option>
-		                	<option value="AU">AU</option>
-                			<option value="IN">IN</option>
-                        </select>
-                    </div>
-                </div> /.form-group
                 
-                 <div class="form-group">
-                    <label for="country" class="col-sm-3 control-label">Business Unit</label>
-                    <div class="col-sm-9">
-                        <select id="country" class="form-control" ng-model="selectedData.business_unit" ng-disabled="true" >
-                        	<option value="Please Select One">Please Select One</option>
-							<option>Acquisition</option>
-							<option>Merchant</option>
-							<option>Travel</option>
-							<option>OPENForum</option>
-							<option>MR</option>
-                        </select>
-                    </div>
-                </div> /.form-group
-                
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Application Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName" class="form-control" 
-                        ng-model="selectedData.application_name" ng-disabled="true">
-                    </div>
-                </div>
-                
-                
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">L4 Hierarchy</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName"  class="form-control"
-                        ng-model="selectedData.l4_Hierarchy"ng-disabled="true" >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">L5 Hierarchy</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName" class="form-control"
-                        ng-model="selectedData.l5_Hierarchy" ng-disabled="true">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">L6 Hierarchy</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName"  class="form-control"
-                        ng-model="selectedData.l6_Hierarchy" ng-disabled="true">
-                    </div>
-                </div> -->
-                
-               <!--  <div class="form-group">
-                    <label for="pageName" class="col-sm-4 control-label">PageName</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="page_name" class="form-control"
-                        ng-model="selectedData.page.pageInformation.pageName"  ng-disabled="true" >
-                    </div>
-                </div> {{page.pageInofrmation.pageName}}
-                
-               <div class="form-group">
-                    <label for="country code" class="col-sm-4 control-label">Country</label>
-                    <div class="col-sm-8">
-                        <select id="country" class="form-control" ng-model="selectedData.page.pageInformation.country" ng-disabled="true">
-                        	<option value="Please Select One">Please Select One</option>
-		                	<option value="USA">USA</option>
-		                	<option value="UK">UK</option>
-		                	<option value="AU">AU</option>
-                			<option value=IN"">IN</option>
-                        </select>
-                    </div>
-                </div> /.form-group --><!-- {{page.pageInofrmation.country}}
-                
-               <div class="form-group">
-                    <label for="language" class="col-sm-4 control-label">Language</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="language" class="form-control"
-                        ng-model="selectedData.page.pageInformation.language" ng-disabled="true" >
-                    </div>
-                </div> {{page.pageInofmation.language}}
-                
-                <div class="form-group">
-                    <label for="currency" class="col-sm-4 control-label">Currency</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="currency" class="form-control"
-                        ng-model="selectedData.page.pageInformation.currency" ng-disabled="true" >
-                    </div>
-                </div> {{page.pageInofrmation.currency}}
-                
-                 <h3 class="form_style_h3">Category</h2>
-                <div class="form-group">
-                    <label for="businessUnit" class="col-sm-4 control-label">Business Unit</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="page_name" placeholder="Business Unit" class="form-control"
-                        ng-model="page.category.businessUnit" >
-                    </div>
-                    <div class="col-sm-8">
-                        <select id="country" class="form-control" ng-model="selectedData.page.category.businessUnit" ng-disabled="true">
-                        	<option value="Please Select One">Please Select One</option>
-							<option>Acquisition</option>
-							<option>Merchant</option>
-							<option>Travel</option>
-							<option>OPENForum</option>
-							<option>MR</option>
-                        </select>
-                    </div>
-                </div> {{page.category.businessUnit}}
-                
-                <div class="form-group">
-                    <label for="primaryCategory" class="col-sm-4 control-label">Primary Category</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="primaryCategory" class="form-control"
-                        ng-model="selectedData.page.category.primaryCategory" ng-disabled="true" >
-                    </div>
-                </div> {{page.category.primaryCategory}}
-                
-                <div class="form-group">
-                    <label for="subCategory1" class="col-sm-4 control-label">Sub Category 1</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="subCategory1" class="form-control"
-                        ng-model="selectedData.page.category.subCategory1" ng-disabled="true" >
-                    </div>
-                </div> {{page.category.subCategory1}}
-                
-               <div class="form-group">
-                    <label for="subCategory2" class="col-sm-4 control-label">Sub Category 2</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="subCategory2" class="form-control"
-                        ng-model="selectedData.page.category.subCategory2" ng-disabled="true" >
-                    </div>
-                </div> {{page.category.subCategory2}}
-                
-                <div class="form-group">
-                    <label for="subCategory3" class="col-sm-4 control-label">Sub Category 3</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="subCategory3" class="form-control"
-                        ng-model="selectedData.page.category.subCategory3" ng-disabled="true" >
-                    </div>
-                </div> {{page.category.subCategory3}}
-              
-              <h3 class="form_style_h3">Attributes</h2>
-              <div class="form-group">
-                    <label for="autoTrack" class="col-sm-4 control-label">Auto Track</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="autoTrack" class="form-control"
-                        ng-model="selectedData.page.attributes.autotrack" ng-disabled="true" >
-                    </div>
-                </div>{{page.attributes.autotrack}} -->
-                
-                             <form class="form-horizontal" role="form">
-               <!--  <h3 class="form_style_h3">Page Information</h2> -->
+            <form class="form-horizontal" role="form">
                	<div style="text-align:center;">
-               	<!-- 	<div style="text-align:center;"> -->
 	                <input type="checkbox" id="intlinkimp" name="intlinkimp" ng-model="intlinkimp" ng-disabled="true"/>&nbsp;&nbsp;&nbsp;Intlinkimp&nbsp;&nbsp;&nbsp;
 	              <!--   </div> -->
 	                <br/><br/>
@@ -173,7 +17,6 @@
        			<br/>
                 </div>
                 
-               <!--  {{digitalData}} -->
                 <br/><br/>
                 <div class="form-group">
                     <label for="pageName" class="col-sm-4 control-label">PageName</label>
@@ -181,7 +24,7 @@
                         <input type="text" id="page_name" class="form-control"
                         ng-model="selectedData.page.pageInfo.pageName" ng-disabled="true" >
                     </div>
-                </div> <!-- {{page.pageInofrmation.pageName}} -->
+                </div> 
                 
                <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">Country</label>
@@ -194,40 +37,23 @@
                 			<option value="IN">IN</option>
                         </select>
                     </div>
-                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div> <!-- /.form-group -->
                 
                <div class="form-group">
                     <label for="language" class="col-sm-4 control-label">Language</label>
                     <div class="col-sm-8">
-                        <!-- <input type="text" id="language"  class="form-control"
-                        ng-model="selectedData.page.pageInfo.language" ng-disabled="true" > -->
                  	<select id="language" class="form-control" ng-model="selectedData.page.pageInfo.language" ng-disabled="true">
-                        <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="en">en</option>
 		                	<option value="fr">fr</option>
 		                	<option value="es">es</option>
                    </select>
                     </div>
-                </div> <!-- {{page.pageInofmation.language}} -->
-                
-<!--                 <div class="form-group">
-                    <label for="currency" class="col-sm-4 control-label">Currency</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="currency" placeholder="Currency" class="form-control"
-                        ng-model="digitalData.page.pageInformation.currency" >
-                    </div>
-                </div> {{page.pageInofrmation.currency}} -->
-                <!-- 
-                 <h3 class="form_style_h3">Category</h3> -->
+                </div> 
+
                 <div class="form-group">
                     <label for="businessUnit" class="col-sm-4 control-label">Business Unit</label>
-<!--                     <div class="col-sm-9">
-                        <input type="text" id="page_name" placeholder="Business Unit" class="form-control"
-                        ng-model="page.category.businessUnit" >
-                    </div> -->
                     <div class="col-sm-8">
                         <select id="country" class="form-control" ng-model="selectedData.page.category.businessUnit" ng-disabled="true" >
-                        	<!-- <option value="Please Select One">Please Select One</option> -->
 							<option>Acquisition</option>
 							<option>Merchant</option>
 							<option>Travel</option>
@@ -235,7 +61,7 @@
 							<option>MR</option>
                         </select>
                     </div>
-                </div> <!-- {{page.category.businessUnit}} -->
+                </div> 
                 
                 <div class="form-group">
                     <label for="primaryCategory" class="col-sm-4 control-label">Primary Category</label>
@@ -243,7 +69,7 @@
                         <input type="text" id="primaryCategory"  class="form-control"
                         ng-model="selectedData.page.category.primaryCategory" ng-disabled="true" >
                     </div>
-                </div> <!-- {{page.category.primaryCategory}} -->
+                </div> 
                 
                <div class="form-group">
                     <label for="subCategory1" class="col-sm-4 control-label">Sub Category 1</label>
@@ -268,15 +94,6 @@
                         ng-model="selectedData.page.category.subCategory3" >
                     </div>
                 </div> {{page.category.subCategory3}} 
-              
-              <!-- <h3 class="form_style_h3">Attributes</h3> -->
-<!--               <div class="form-group">
-                    <label for="autoTrack" class="col-sm-4 control-label">Auto Track</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="autoTrack" placeholder="Auto Track" class="form-control"
-                        ng-model="digitalData.page.attributes.autotrack" >
-                    </div>
-                </div>{{page.attributes.autotrack}} -->
                 
                 <div class="form-group" ng-show="intlinkimp">
                     <label for="autoTrack" class="col-sm-4 control-label">Intlinkimp</label>
@@ -284,7 +101,7 @@
                         <input type="text" id="intlinkimp"  class="form-control"
                         ng-model="selectedData.page.attributes.intlinkimp" ng-disabled="true" ><!-- {{data.Intlinkimp}} -->
                     </div>
-                </div><!-- {{page.attributes.autotrack}} -->
+                </div>
                 
                  <div ng-show="radioButtonShow == 'CA_Start'">
            		<h3 class="form_style_h3">CA Start</h3> 
@@ -294,19 +111,18 @@
                         <input type="text" id="product_Name"  class="form-control"
                         ng-model="selectedDatas.event.productInfo.productName" ng-disabled="true" >
                     </div>
-                </div><!-- {{page.attributes.autotrack}} -->
+                </div>
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
                     <div class="col-sm-8">
                         <select id="country" class="form-control" ng-model="selectedDatas.event.productInfo.pmc" ng-disabled="true">
-                        <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="999">999</option>
 		                	<option value="888">888</option>
 		                	<option value="777">777</option>
                         </select>
                     </div>
-                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div>
                 </div>
                 
                 <div ng-show="radioButtonShow == 'CA_Financial'">
@@ -317,7 +133,7 @@
                         <input type="text" id="product_Name"  class="form-control"
                         ng-model="selectedDatas.event.productInfo.productName" ng-disabled="true" >
                     </div>
-                </div><!-- {{page.attributes.autotrack}} -->
+                </div>
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
@@ -329,7 +145,7 @@
 		                	<option value="777">777</option>
                         </select>
                     </div>
-                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div>
                 </div>
                 
                 
@@ -341,7 +157,7 @@
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="selectedDatas.event.productInfo.productName" ng-disabled="true" >
                     </div>
-                </div><!-- {{page.attributes.autotrack}} -->
+                </div>
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
@@ -353,7 +169,7 @@
 		                	<option value="777">777</option>
                         </select>
                     </div>
-                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div>
                 </div>
                 
               <div ng-show="radioButtonShow == 'CA_LearnMore'">
@@ -364,7 +180,7 @@
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="selectedDatas.event.productInfo.productName" ng-disabled="true" >
                     </div>
-                </div><!-- {{page.attributes.autotrack}} -->
+                </div>
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
@@ -376,16 +192,10 @@
 		                	<option value="777">777</option>
                         </select>
                     </div>
-                </div> <!-- /.form-group --><!-- {{page.pageInofrmation.country}} -->
+                </div> 
                 </div>
-                
-
             </form> 
             </div>
-<!--             <div class="col-lg-6" style="word-wrap: break-word;">
-            	  <h2 class="form_style_h2 ">Data Layer</h2>
-            	<pre>  {{jsonData | json}} </pre>
-            </div> -->
             
             <div class="col-lg-6" style="word-wrap: break-word;">
             	  <h2 class="form_style_h2 ">Data Layer</h2>
@@ -421,10 +231,6 @@
 						 <button type="submit"
 						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && deleteRP2()" ng-show="buttonMinus">-</button>
 					</div>
-					<!-- <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2" style="padding-left: 0px;padding-right: 0px;" >
-						 <button type="submit"
-						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && addRP2()" ng-show="!button2">-</button>
-					</div> -->
                 </div>
                 
                 <div class="form-group" ng-show="request_parameter2">
@@ -461,30 +267,14 @@
                           >
                     </div>
                 </div>
-<!--                 <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Request Parameter 2</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName" class="form-control"
-                        ng-model="selectedData.Request_Parameter2"  placeholder="Request Parameter 2">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Request Parameter 3</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="firstName"  class="form-control"
-                        ng-model="selectedData.Request_Parameter3" placeholder="Request Parameter 2">
-                    </div>
-                </div> -->
                 
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-2">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                       <!--  <button type="submit" class="btn btn-primary btn-block" ng-link="#/reviewInfo">Next</button> -->
                        <a href="#/home"><button type="submit"
 						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Back</button></a>
 					</div>
 					 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
-						  <!-- <a href="#/thankyou"> -->
 						 <button type="submit" ng-show="!button2"
 						class="btn btn-primary btn-block" ng-click="myform.Request_Parametervalue1.$valid && myform.Request_Parameterkey1.$valid && saveDetails(selectedDataRP)">Submit</button><!-- </a> -->
 						<button type="submit" ng-show="button2 && !button3"
@@ -501,181 +291,3 @@
             </form> <!-- /form -->
             </div>
         </div> <!-- ./container -->
-
-
-<!-- <div class="container" ng-controller="eventInfoController">
-	<form class="form-horizontal" role="form">
-		<h2 class="vertical-center">Review Info</h2>
-		<h2>Page Info</h2>
-		<div>{{selectedData | json}}</div>
-		<div>{{selectedData[1].states.country}}</div>
-		<div>{{selectedData[1].accountStatus}}</div>
-		<div class="form-group">
-			<label for="firstName" class="col-sm-3 control-label">Country Code</label>
-			<div class="col-sm-3">
-				<select id="country" class="form-control"
-					ng-model="selectedData[0].states.country">
-					<option ng-repeat="selectedData[0]" value="{{x.name}}">{{x.name}}</option>
-				</select>
-				<select class="form-control" ng-disabled="true"><option>{{selectedData.country}}</option></select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="email" class="col-sm-3 control-label">Business Unit</label>
-			<div class="col-sm-3">
-				<select id="language" class="form-control" ng-disabled="true">
-					<option>{{selectedData.business_unit}}</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="password" class="col-sm-3 control-label">Application Name</label>
-			<div class="col-sm-3">
-				<select id="country" class="form-control" ng-disabled="true">
-					<option>{{selectedData.application_name}}</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="pageName" class="col-sm-3 control-label">L4 Hierarchy</label>
-			<div class="col-sm-3">
-				<select id="country" class="form-control" ng-disabled="true">
-					<option>{{selectedData.l4_Hierarchy}}</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="businessCat" class="col-sm-3 control-label">L5 Hierarchy</label>
-			<div class="col-sm-3">
-				<select id="country" class="form-control" ng-disabled="true">
-					<option>{{selectedData.l5_Hierarchy}}</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="businessCat" class="col-sm-3 control-label">L6 Hierarchy</label>
-			<div class="col-sm-3">
-				<select id="country" class="form-control" ng-disabled="true">
-					<option>{{selectedData.l6_Hierarchy}}</option>
-				</select>
-			</div>
-		</div>
-		<h2>User Info</h2>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Access Level</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.accessLevel">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Account Status</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.accountStatus">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Account Tenure</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.accountTenure">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Industry Code</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.industryCode">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">SE Number</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.seNumber">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Meal Preference<span></span></label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedDataUserInfo.mealPreference">
-					</label>
-				</div>
-			</div>
-		</div>
-		<h2>Event Info</h2>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Event Action</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedData.eventAction">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Event Description</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedData.description">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Event Name</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedData.eventName">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-3">Event Type</label>
-			<div class="col-sm-9">
-				<div class="checkbox">
-					<label> <input type="checkbox" id="calorieCheckbox" ng-disabled="true"
-						ng-model="selectedData.eventType">
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-2 col-sm-offset-3">
-				<a href="#/home"><button type="submit"
-						class="btn btn-primary btn-block">Back</button></a>
-			</div>
-			<div class="col-sm-2">
-				<a href="#/review"><button type="submit"
-						class="btn btn-primary btn-block"
-						ng-click="saveDetails()">Submit</button></a>
-			</div>
-			<div class="col-sm-2">
-				<a href="#/dashboard"><button type="submit"
-						class="btn btn-primary btn-block">Dashboard</button></a>
-			</div>
-		</div>
-	</form>
-</div> -->
