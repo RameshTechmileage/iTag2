@@ -49,17 +49,15 @@ mainApp.controller('dashboardController', function($scope, $http,
 	// $scope.data );
 	// });
 	
-	   
 		  $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getAllDataLayer")
 		   .success(function(data, status, headers) {
-//			   alert("got the data");
 			   if(data){
 //				   alert("data = " + data);
 				   $scope.DataJson = data;
-				   $scope.DataS = data[1].dataLayer;
-				   var dataStructure = data[1].dataLayer;
-				   console.log("dataStructure = " + dataStructure);
-				   console.log(" $scope.DataJson = " + JSON.stringify($scope.DataJson));
+//				   $scope.DataS = data[1].dataLayer;
+//				   var dataStructure = data[1].dataLayer;
+//				   console.log("dataStructure = " + dataStructure);
+//				   console.log(" $scope.DataJson = " + JSON.stringify($scope.DataJson));
 			        var page_name_list = [];
 			        for (var i = 0; i < data.length; i++) {
 
@@ -71,7 +69,7 @@ mainApp.controller('dashboardController', function($scope, $http,
 			                });
 			            }
 			        $scope.page_name_l = page_name_list;
-			        alert("page_name_list = " + JSON.stringify(page_name_list));
+//			        alert("page_name_list = " + JSON.stringify(page_name_list));
 				}
 		  });
 		  
@@ -476,10 +474,10 @@ mainApp.controller('eventInfoController', function($scope, PageInfoService,
 });
 
 //Create Project Controller- Start
-mainApp.controller('dashboardController', function($scope, $http,
-		PageInfoService, $localStorage, $templateCache) {
-	
-});
+//mainApp.controller('dashboardController', function($scope, $http,
+//		PageInfoService, $localStorage, $templateCache) {
+//	
+//});
 
 
 	//Create Project Controller -End
