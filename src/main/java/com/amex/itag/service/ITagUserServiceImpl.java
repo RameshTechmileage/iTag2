@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.amex.itag.model.ITagUser;
+import com.amex.itag.model.Projects;
+import com.amex.itag.repository.ITagProjectsRepository;
 import com.amex.itag.repository.ITagRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class ITagUserServiceImpl implements ITagUserService{
 	
 	@Resource
 	private ITagRepository iTagRepository;
+	
+	@Resource
+	ITagProjectsRepository iTagProjectRepository;
 	
 	String dataLayer;
 
@@ -108,5 +113,26 @@ public class ITagUserServiceImpl implements ITagUserService{
 		return dataLayer;
 	}
 
+	@Override
+	public String findProject(String projectTitle) {
+		String projectName = iTagProjectRepository.find(projectTitle);
+		return projectName;
+	}
+
+	@Override
+	@Transactional
+	public Projects saveProject(Projects projects) {
+		if(logger.isDebugEnabled()){
+			logger.debug("create is executed!");
+		}
+		Projects project = projects;
+		return iTagProjectRepository.save(projects);
+	}
+	
+	@Override
+	@Transactional
+	public List<Projects> findAllProjects() {
+		return iTagProjectRepository.findAll();
+	}
 
 }

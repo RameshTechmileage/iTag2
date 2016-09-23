@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +19,13 @@ public class ITagUser {
 	@Column(name = "data_layer", length = 1024)
 	private String dataLayer;
 
+	@Column(name = "req_param_key_val")
+	private String reqParamKeyVal;
+	
+	/*@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Projects projects;*/
+	
 	/*@Column(name = "req_param_key1")
 	private String reqParamKey1;
 	
@@ -34,9 +43,6 @@ public class ITagUser {
 	
 	@Column(name = "req_param_val3")
 	private String reqParamVal3;*/
-	
-	@Column(name = "req_param_key_val")
-	private String reqParamKeyVal;
 
 	public Integer getId() {
 		return id;

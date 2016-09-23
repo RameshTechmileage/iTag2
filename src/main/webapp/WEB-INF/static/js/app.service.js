@@ -45,5 +45,21 @@ mainApp.service('PageInfoService', function($http) {
 	/*
 	 * return { getSelectedDetails : function () { return finalJson; } }
 	 */
+	this.saveProject = function(host, port, projectTitle, markets, businessUnit, application){
+		var projectName = "";
+		$http.post("http://" + host + ":" + port + "/" +"ITag2/saveITagProject", { 'projectTitle':projectTitle,'markets':markets,'businessUnit':businessUnit,'application':application})
+	    .success(function(data, status, headers, response) {
+	        alert("Project created");
+	        //projectName = response.data.projectTitle;
+	        $location.path('/dashboard');
+	        }).error(function(data, status) {
+	         alert("There is an error while adding data with duplicate Project name");
+	        });
+		return projectTitle;
+		console.log("projectTitle  = " + projectTitle);
+	}
 	
+	this.getProjectTitle = function(){
+		return projectTitle;
+	}
 });

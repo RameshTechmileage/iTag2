@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.amex.itag.model.ITagUser;
+import com.amex.itag.model.Projects;
 import com.amex.itag.service.ITagUserService;
 import com.amex.itag.service.ITagUserServiceImpl;
 import com.amex.itag.util.DuplicateParameters;
@@ -181,6 +182,29 @@ public class ITagController {
 		return message;
 	}
 
+	//Project Controller -start
+	
+	@RequestMapping(value = "/saveITagProject", method = RequestMethod.POST)
+	public @ResponseBody void saveITagProject(@RequestBody Projects iTagProject) {
+		if(logger.isDebugEnabled()){
+			logger.debug("saveITagData is executed!");
+		}
+		String projectTitle = iTagProject.getProjectTitle();
+		if(!(isProjectExist(projectTitle))){
+			iTagUserService.saveProject(iTagProject);
+		}else{
+			throw new DuplicateParameters();
+		}
+		
+	}
+	
+	@RequestMapping(value = "/getAllProjects", method = RequestMethod.GET, produces = "application/json")
+	public List<Projects> getITagProjects() {
+		return iTagUserService.findAllProjects();
+	}
+	
+	//Project Controller -start
+	
 	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
 	public String getITagDataLayer( WebRequest wr) {
 		if(logger.isDebugEnabled()){
@@ -294,6 +318,14 @@ public class ITagController {
 				}
 			}
 			return sortKeyVal;
+	}
+	
+	public boolean isProjectExist(String projectTitle){
+		String projectName = iTagUserService.findProject(projectTitle);
+			if(null != projectName){
+			return true;
+		}
+		return false;
 	}
 	/*
 	@RequestMapping(value = "/iTagData/getData", method = RequestMethod.GET, produces = "application/json")

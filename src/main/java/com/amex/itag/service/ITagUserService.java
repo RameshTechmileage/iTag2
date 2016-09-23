@@ -3,6 +3,7 @@ package com.amex.itag.service;
 import java.util.List;
 
 import com.amex.itag.model.ITagUser;
+import com.amex.itag.model.Projects;
 
 public interface ITagUserService {
 
@@ -34,6 +35,12 @@ public interface ITagUserService {
 	public String find(String reqParamKeyVal);
 	
 	public void update(String dataLayer, String reqParamKeyVal);
+	
+	public String findProject(String projectTitle);
+	
+	public Projects saveProject(Projects project);
+	
+	public List<Projects> findAllProjects();
 	
 
 }

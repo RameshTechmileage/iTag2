@@ -24,9 +24,15 @@ mainApp.config(function($routeProvider) {
 		}).when('/retrieve',{
 			templateUrl : 'static/html/pages/retrieve.html',
 				controller:'retrieveDLController'
-		})
+		}).when('/createProject',{
+			templateUrl : 'static/html/pages/createProject.html',
+			controller:'createProjectController'
+	}).when('/homePage',{
+		templateUrl : 'static/html/pages/homePage.html',
+		controller:'homePageController'
+})
 		.otherwise({
-			redirectTo: '/home'
+			redirectTo: '/homePage'
 		});
 });
 

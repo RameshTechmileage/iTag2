@@ -1,5 +1,7 @@
-mainApp.controller('dashboardController', function($scope, $http,
-		PageInfoService, $localStorage, $templateCache) {
+mainApp.controller('dashboardController', function($scope, $http, PageInfoService, $localStorage, $templateCache) {
+	
+	/*$scope.projectTitle = PageInfoService.getProjectTitle();
+	var xyz = "";*/
 	// $http.jsonp("https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero")
 	// $http.jsonp("http://192.168.0.50:8080/ITag2/iTagData?callback=JSON_CALLBACK&name=Super%20Hero")
 	// $http.jsonp("http://192.168.0.50:8080/ITag2/iTagData?callback=JSON_CALLBACK")
@@ -447,23 +449,24 @@ mainApp.controller('eventInfoController', function($scope, PageInfoService,
 	}
 });
 
-// function closeIt()
-// {
-// return "Any string value here forces a dialog box to \n" +
-// "appear before closing the window.";
-// }
-// window.onbeforeunload = closeIt;
+//Create Project Controller- Start
+mainApp.controller('dashboardController', function($scope, $http,
+		PageInfoService, $localStorage, $templateCache) {
+	
+});
 
+
+	//Create Project Controller -End
 window.onload = function() {
 	localStorage.clear();
 }
 
 mainApp.controller('thankyouController', function($scope, $http,
-		PageInfoService, $localStorage,$location) {
+		PageInfoService, $localStorage, $location) {
 });
 
 mainApp.controller('retrieveDLController', function($scope, $http,
-		PageInfoService, $localStorage,$location) {
+		PageInfoService, $localStorage, $location) {
 	
 	
 	$scope.addRP2 = function() {
@@ -601,7 +604,7 @@ mainApp.controller('retrieveDLController', function($scope, $http,
 
 
 mainApp.controller('reviewInfoController', function($scope, $http,
-		PageInfoService, $localStorage,$location) {
+		PageInfoService, $localStorage, $location) {
 	// console.log("eventInfoController on reviewInfoController = " +
 	// JSON.stringify($localStorage.message));
 	// $scope.selectedData = PageInfoService.getSelectedDetails();
@@ -812,4 +815,36 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 		$scope.selectedDataRP.Request_Parameter3.key = "";
 		$scope.selectedDataRP.Request_Parameter3.value = "";
 	}
+});
+
+//Create Project Controller
+
+mainApp.controller('createProjectController', function($scope, $http,
+		PageInfoService, $localStorage, $location) {
+	 $scope.createProject = function(){
+		// $scope.reqParamKey1 = $scope.selectedDataRP.Request_Parameter1.key;
+		 $scope.projectTitle = $scope.project.title;
+		 $scope.markets = $scope.project.markets;
+		 $scope.businessUnit = $scope.project.businesUnit;
+		 $scope.application = $scope.project.application;
+		 
+		// if($scope.reqParam != null){
+		 PageInfoService.saveProject($location.host(), $location.port(), $scope.projectTitle, $scope.markets, $scope.businessUnit, $scope.application);;
+			  /*  $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagProject", { 'projectTitle':$scope.projectTitle,'markets':$scope.markets,'businessUnit':$scope.businessUnit,'application':$scope.application})
+			    .success(function(data, status, headers, response) {
+			        alert("Project created");
+			        projectTitle = response.data.projectTitle;
+			        $location.path('/dashboard');
+			        }).error(function(data, status) {
+			         alert("There is an error while adding data with duplicate parameters");
+			        });*/
+			  // }
+	 }
+	
+});
+mainApp.controller('homePageController', function($scope, $http,
+		PageInfoService, $localStorage,$location) {
+	 var xyz = "";
+	 
+	 
 });
