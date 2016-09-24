@@ -21,17 +21,16 @@ mainApp.config(function($routeProvider) {
 		}).when('/thankyou', {
 			templateUrl: 'static/html/pages/thankyou.html',
 			controller: 'thankyouController'
-		}).when('/retrieve',{
+		}).when('/retrieve', {
 			templateUrl : 'static/html/pages/retrieve.html',
-				controller:'retrieveDLController'
-		}).when('/createProject',{
+			controller:'retrieveDLController'
+		}).when('/createProject', {
 			templateUrl : 'static/html/pages/createProject.html',
 			controller:'createProjectController'
-	}).when('/homePage',{
-		templateUrl : 'static/html/pages/homePage.html',
-		controller:'homePageController'
-})
-		.otherwise({
+		}).when('/homePage', {
+			templateUrl : 'static/html/pages/homePage.html',
+			controller:'homePageController'			
+		}).otherwise({
 			redirectTo: '/homePage'
 		});
 });

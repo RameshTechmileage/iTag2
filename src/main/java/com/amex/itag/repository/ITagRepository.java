@@ -1,5 +1,7 @@
 package com.amex.itag.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -40,5 +42,7 @@ public interface ITagRepository extends JpaRepository<ITagUser, Integer> {
 	@Query("UPDATE ITagUser i SET i.dataLayer=?1 WHERE lower(i.reqParamKeyVal) = ?2")
 	public void update(String dataLayer, String reqParamKeyVal);
 	
+	@Query("select i from ITagUser i where projectTitle = ?1")
+	public List<ITagUser> findAllDataLayer(String projectTitle);
 	
 	}

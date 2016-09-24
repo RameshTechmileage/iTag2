@@ -22,6 +22,9 @@ public class ITagUser {
 	@Column(name = "req_param_key_val")
 	private String reqParamKeyVal;
 	
+	@Column(name = "project_title")
+	private String projectTitle;
+	
 	/*@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Projects projects;*/
@@ -114,5 +117,13 @@ public class ITagUser {
 
 	public void setReqParamKeyVal(String reqParamKeyVal) {
 		this.reqParamKeyVal = reqParamKeyVal;
+	}
+	
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
 	}
 }

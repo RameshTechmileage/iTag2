@@ -203,6 +203,15 @@ public class ITagController {
 		return iTagUserService.findAllProjects();
 	}
 	
+	@RequestMapping(value = "/getProjectDLs/{projectTitle}", method = RequestMethod.GET, produces = "application/json")
+	public List<ITagUser> getProjDLs(@PathVariable("projectTitle") String projectTitle) {
+		if(null != projectTitle){
+		return iTagUserService.findAllDataLayer(projectTitle);
+		}else{
+			return null;
+		}
+	}
+	
 	//Project Controller -start
 	
 	/*@RequestMapping(value = "/getDataLayer", method = RequestMethod.GET, produces = "application/json")
