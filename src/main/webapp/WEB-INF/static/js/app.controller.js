@@ -554,12 +554,14 @@ mainApp.controller('dashboardController', function($scope, $http,
 		        for (var i = 0; i < data.length; i++) {
 		        	
 		        	var id = data[i].id;
+		        	var requestKeyVal = data[i].reqParamKeyVal;
 		        	var dataStructure = data[i].dataLayer;
 		        	var obj = JSON.parse(dataStructure);
 		        	var dataLayerName = obj.page.pageInfo.dataLayerName;
 		        	dataLayer_list.push({
 		                    "dataLayerName": dataLayerName,
-		                    "id" : id
+		                    "id" : id,
+		                    "requestKeyVal" : requestKeyVal
 		                });
 		            }
 		        $scope.page_data_layer = dataLayer_list;
