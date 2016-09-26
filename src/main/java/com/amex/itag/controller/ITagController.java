@@ -211,6 +211,14 @@ public class ITagController {
 			return null;
 		}
 	}
+	@RequestMapping(value = "/deleteDL/{id}", method = RequestMethod.DELETE, produces = "application/json")
+	public ITagUser delete(@PathVariable("id") Integer id) {
+		if(null != id){
+		return iTagUserService.delete(id);
+		}else{
+			return null;
+		}
+	}
 	
 	//Project Controller -start
 	

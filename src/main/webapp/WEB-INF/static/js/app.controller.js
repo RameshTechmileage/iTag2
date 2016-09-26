@@ -534,9 +534,9 @@ mainApp.controller('homePageController', function($scope, $http,
 			}
 	  });
 	
-	$scope.sendProjectName = function(){
-		$scope.projectTitle = $scope.project.projectTitle;
-		 PageInfoService.sendProjectName($scope.projectTitle);
+	$scope.sendProjectName = function(projectTitle){
+		//$scope.projectTitle = $scope.project.projectTitle;
+		 PageInfoService.sendProjectName(projectTitle);
 	}
 	 
 });
@@ -544,10 +544,41 @@ mainApp.controller('dashboardController', function($scope, $http,
 		PageInfoService, $localStorage,$location) {
 	$scope.projectTitle = PageInfoService.getProjectTitle();
 	$http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" + $scope.projectTitle)
-	   .success(function(data, status, headers, response) {
+	   .success(function(data, status, headers) {
 		   if(data){
+			  /* $scope.DataJson = data;
+			   var x ="";*/
+			   //$scope.js = response.data;
 			   $scope.DataJson = data;
+		        var dataLayer_list = [];
+		        for (var i = 0; i < data.length; i++) {
+		        	
+		        	var id = data[i].id;
+		        	var dataStructure = data[i].dataLayer;
+		        	var obj = JSON.parse(dataStructure);
+		        	var dataLayerName = obj.page.pageInfo.dataLayerName;
+		        	dataLayer_list.push({
+		                    "dataLayerName": dataLayerName,
+		                    "id" : id
+		                });
+		            }
+		        $scope.page_data_layer = dataLayer_list;
+			   
 			}
 	  });
+	
+	$scope.deleteDL = function(dataLayer){
+		//$scope.projectTitle = $scope.project.projectTitle;
+		$scope.id = dataLayer.id;
+		
+		$http.delete("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/deleteDL/" + $scope.id)
+		   .success(function(data, status, headers) {
+			   if(data){
+				   
+				}
+		  });
+		var x = "";
+		// PageInfoService.sendProjectName(projectTitle);
+	}
 	 
 });

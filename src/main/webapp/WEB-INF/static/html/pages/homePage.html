@@ -25,7 +25,7 @@
 							<tbody>
 							 	<tr ng-repeat="projects in Projects">
 									<td class="col-sm-8" style="background-color:lavender;height:34px;" ng-model="project.projectTitle">{{ projects.projectTitle }}</td>
-									<td class="col-sm-2" style="background-color:lavender;"><a href="#/dashboard"><button type="button" class="btn btn-primary" ng-click="sendProjectName(project)">Details</button></a></td>
+									<td class="col-sm-2" style="background-color:lavender;"><a href="#/dashboard"><button type="button" class="btn btn-primary" ng-click="sendProjectName(projects.projectTitle)">Details</button></a></td>
 									<td class="col-sm-2" style="background-color:lavender;"><a href="#/"><button type="button" class="btn btn-primary">Copy</button></a></td>
 								</tr>
 							</tbody>

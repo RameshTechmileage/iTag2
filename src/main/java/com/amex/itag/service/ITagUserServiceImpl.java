@@ -45,10 +45,10 @@ public class ITagUserServiceImpl implements ITagUserService{
 	@Override
 	@Transactional
 	public ITagUser delete(int id){
-		ITagUser deletedUser= iTagRepository.findOne(id);
+		ITagUser dataLayer= iTagRepository.findOne(id);
 		
-		iTagRepository.delete(deletedUser);
-		return deletedUser;
+		iTagRepository.delete(dataLayer);
+		return dataLayer;
 	}
 
 	@Override
