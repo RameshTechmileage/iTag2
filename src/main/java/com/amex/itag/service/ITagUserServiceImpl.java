@@ -139,5 +139,11 @@ public class ITagUserServiceImpl implements ITagUserService{
 	public List<ITagUser> findAllDataLayer(String projectName) {
 		return iTagRepository.findAllDataLayer(projectName);
 	}
+	
+	@Override
+    public List<Projects> findProjectByTitle(String projectName) {
+          return iTagProjectRepository.findByProjectTitle(projectName);
+    }
+
 
 }

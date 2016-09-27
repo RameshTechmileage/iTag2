@@ -538,11 +538,80 @@ mainApp.controller('homePageController', function($scope, $http,
 		//$scope.projectTitle = $scope.project.projectTitle;
 		 PageInfoService.sendProjectName(projectTitle);
 	}
+	//Copy
+	
+	$scope.copytheproject = function(projectTitle){
+        console.log(projectTitle);
+        var copiedProjectTitle;
+        var copiedProject;
+        $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectByTitle/"+projectTitle)
+                  .success(function(data, status, headers, response) {
+                     //projectName=  response.data.projectTitle;
+                        if(data){
+                               
+                               for(i=0;i<data.length;i++){
+                                     console.log("Get Project : "+data[i].projectTitle);
+                                     
+                               }
+                               copiedProject=data[0];
+                               copiedProjectTitle=copiedProject.projectTitle+"_copy";
+                               alert("copiedProjectTitle "+copiedProjectTitle);
+                               copiedProject.projectTitle=copiedProjectTitle;
+                               
+                               console.log("PT :"+copiedProject.projectTitle+"CON "+copiedProject.markets+" BU "+copiedProject.businessUnit+" APP "+copiedProject.application);
+                               
+                               var copiedDL="";
+                               var reqParamKeyVal="";
+                               var DLsuccess="";
+                               $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" +projectTitle)
+                               .success(function(dataLayerdata, status, headers, response) {
+                                     if(dataLayerdata){
+                                            
+                                                   console.log(dataLayerdata);
+                                                   PageInfoService.saveProject($location.host(),$location.port(),copiedProject.projectTitle,copiedProject.markets,copiedProject.businessUnit,copiedProject.application);
+                                            for(i=0;i<dataLayerdata.length;i++){
+                                                  console.log("Get DLs :"+dataLayerdata[i].dataLayer);
+                                                  copiedDL=dataLayerdata[i].dataLayer;
+                                                  reqParamKeyVal="";
+                                                  console.log("copiedDL : "+copiedDL+" reqparamKV :"+reqParamKeyVal);
+                                                  alert("copiedDL"+copiedDL+"reqParamKeyVal"+reqParamKeyVal+"copiedProjectTitle"+copiedProjectTitle);
+                                                  $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", { 'dataLayer':copiedDL,'reqParamKeyVal':reqParamKeyVal,'projectTitle':copiedProjectTitle})
+                                                  .success(function(data, status, headers, response) {
+                                                  alert("data added"+data);
+                                                  DLsuccess = true;
+                                                  }).error(function(data,status){
+                                                      
+                                                         alert("There is an error while adding DL data with duplicate parameters ");
+                                                         
+                                                  });
+                                            
+                                            } 
+                                            if(DLsuccess==true){
+                                                  $scope.Projects.push(copiedProjectTitle);
+                                                  PageInfoService.sendProjectName(copiedProjectTitle);
+                                                
+                                            }
+                                     
+                                            }
+                                     });
+                                     }
+                              //alert("Project Created");
+                  }).error(function(data,status){
+                     $location.path('/CreateProject');
+                     alert("There is an error while adding data  with duplicate Poject Name ");
+                     
+                     });
+                     
+                     
+  }
+
 	 
 });
 mainApp.controller('dashboardController', function($scope, $http,
 		PageInfoService, $localStorage,$location) {
 	$scope.projectTitle = PageInfoService.getProjectTitle();
+	
+	$scope.getDataLayers = function(){
 	$http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" + $scope.projectTitle)
 	   .success(function(data, status, headers) {
 		   if(data){
@@ -552,7 +621,6 @@ mainApp.controller('dashboardController', function($scope, $http,
 			   $scope.DataJson = data;
 		        var dataLayer_list = [];
 		        for (var i = 0; i < data.length; i++) {
-		        	
 		        	var id = data[i].id;
 		        	var requestKeyVal = data[i].reqParamKeyVal;
 		        	var dataStructure = data[i].dataLayer;
@@ -562,25 +630,27 @@ mainApp.controller('dashboardController', function($scope, $http,
 		                    "dataLayerName": dataLayerName,
 		                    "id" : id,
 		                    "requestKeyVal" : requestKeyVal
-		                });
+		                	});
 		            }
 		        $scope.page_data_layer = dataLayer_list;
 			   
 			}
 	  });
-	
+	}
 	$scope.deleteDL = function(dataLayer){
 		//$scope.projectTitle = $scope.project.projectTitle;
+		alert("Are you sure want to delete")
 		$scope.id = dataLayer.id;
 		
 		$http.delete("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/deleteDL/" + $scope.id)
 		   .success(function(data, status, headers) {
-			   if(data){
+			   $scope.getDataLayers();
+			  /* if(data){
 				   
-				}
+				}*/
 		  });
 		var x = "";
 		// PageInfoService.sendProjectName(projectTitle);
 	}
-	 
+	$scope.getDataLayers();
 });

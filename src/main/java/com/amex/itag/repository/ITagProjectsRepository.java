@@ -1,5 +1,7 @@
 package com.amex.itag.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,4 +12,10 @@ public interface ITagProjectsRepository extends JpaRepository<Projects, Integer>
 
 	@Query("select i.projectTitle from Projects i where i.projectTitle = ?1")
 	public String find(String projectTitle);
+	
+	//@Query("select i.projectTitle from Projects i where i.projectTitle = ?1")
+	
+    public List<Projects> findByProjectTitle(String projectTitle);
+
+
 }

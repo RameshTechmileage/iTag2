@@ -54,11 +54,15 @@ public class ITagController {
 		}
 		String keyValParam = sortKeyVal(iTagUser.getReqParamKeyVal()).toLowerCase();
 		iTagUser.setReqParamKeyVal(keyValParam);
+		if(!(keyValParam.equals(""))){
 		if(!(isDataExist(iTagUser))){
 			iTagUserService.create(iTagUser);
 		}else{
 			throw new DuplicateParameters();
 		}
+	}else{
+		iTagUserService.create(iTagUser);
+	}
 		
 	}
 
@@ -219,6 +223,18 @@ public class ITagController {
 			return null;
 		}
 	}
+	
+	//Copy
+	
+	@RequestMapping(value = "/getProjectByTitle/{projectTitle}", method = RequestMethod.GET, produces = "application/json")
+    public List<Projects> getProjByTitle(@PathVariable("projectTitle") String projectTitle) {
+    if(null != projectTitle){
+                 return iTagUserService.findProjectByTitle(projectTitle);
+          }else{
+                       return null;
+                 }
+          }
+
 	
 	//Project Controller -start
 	

@@ -44,5 +44,7 @@ public interface ITagUserService {
 	
 	public List<ITagUser> findAllDataLayer(String projectName);
 	
+	public List<Projects> findProjectByTitle(String projectName);
+	
 
 }
