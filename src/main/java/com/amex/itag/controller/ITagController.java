@@ -224,6 +224,14 @@ public class ITagController {
 		}
 	}
 	
+	@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ITagUser findById(@PathVariable("id") Integer id) {
+		if(null != id){
+		return iTagUserService.findById(id);
+		}else{
+			return null;
+		}
+	}
 	//Copy
 	
 	@RequestMapping(value = "/getProjectByTitle/{projectTitle}", method = RequestMethod.GET, produces = "application/json")
