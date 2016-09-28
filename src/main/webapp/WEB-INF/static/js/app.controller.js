@@ -463,6 +463,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			    $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", {'dataLayer':$scope.dataLayer,'reqParamKeyVal':$scope.reqParam,'projectTitle':$scope.projectTitle})
 			    .success(function(data, status, headers) {
 			        alert("Data added"+data);
+			        $localStorage.$reset();
 			        $location.path('/thankyou');
 			        }).error(function(data, status) {
 			         alert("There is an error while adding data with duplicate parameters");
@@ -608,7 +609,7 @@ mainApp.controller('homePageController', function($scope, $http,
 	 
 });
 mainApp.controller('dashboardController', function($scope, $http,
-		PageInfoService, $localStorage,$location) {
+		PageInfoService, $localStorage,$location, $rootScope) {
 	$scope.projectTitle = PageInfoService.getProjectTitle();
 	
 	$scope.getDataLayers = function(){
@@ -653,4 +654,15 @@ mainApp.controller('dashboardController', function($scope, $http,
 		// PageInfoService.sendProjectName(projectTitle);
 	}
 	$scope.getDataLayers();
+	
+});
+
+mainApp.run(function($rootScope, $location) {
+    $rootScope.location = $location;
+
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      if (!current && next.$$route.originalPath == '/dashboard') {
+        $location.path('/homePage');
+      }
+    });
 });
