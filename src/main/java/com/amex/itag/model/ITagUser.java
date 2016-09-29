@@ -25,6 +25,9 @@ public class ITagUser {
 	@Column(name = "project_title")
 	private String projectTitle;
 	
+	@Column(name = "datalayer_name")
+	private String dataLayerName;
+	
 	/*@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Projects projects;*/
@@ -125,5 +128,13 @@ public class ITagUser {
 
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
+	}
+	
+	public String getDataLayerName() {
+		return dataLayerName;
+	}
+
+	public void setDataLayerName(String dataLayerName) {
+		this.dataLayerName = dataLayerName;
 	}
 }

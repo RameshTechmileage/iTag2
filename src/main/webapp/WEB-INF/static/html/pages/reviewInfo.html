@@ -22,7 +22,7 @@
                     <label for="pageName" class="col-sm-4 control-label">Data Layer Name</label>
                     <div class="col-sm-8">
                         <input type="text" id="page_name" class="form-control"
-                        ng-model="selectedData.page.pageInfo.dataLayerName" ng-disabled="true">
+                        ng-model="dataLayerName" ng-disabled="true">
 					</div>
                     
                 </div>
@@ -271,8 +271,7 @@
                     </div>
                     <div class="col-sm-4">
                         <input type="text" id="Request_Parameter3_value"  class="form-control"
-                        ng-model="selectedDataRP.Request_Parameter3.value" placeholder="Value" ng-required="true" name="Request_Parametervalue3"
-                          >
+                        ng-model="selectedDataRP.Request_Parameter3.value" placeholder="Value" ng-required="true" name="Request_Parametervalue3">
                     </div>
                 </div>
                 
@@ -280,7 +279,7 @@
                     <div class="col-sm-9 col-sm-offset-2">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                        <a href="#/home"><button type="submit"
-						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo)">Back</button></a>
+						class="btn btn-primary btn-block" ng-click="savePageInfo(pageInfo,dataLayerName)">Back</button></a>
 					</div>
 					 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
 						 <button type="submit" ng-show="!button2"

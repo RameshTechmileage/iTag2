@@ -1,5 +1,6 @@
 mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		$localStorage) {
+	
 	$scope.ds = "";
 	
     $scope.show = {
@@ -100,8 +101,12 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	$scope.savePageInfo = function() {
 		PageInfoService.save($scope.pageInfo);
 		// console.log("PageInfoService = " + JSON.stringify($scope.pageInfo));
+		$localStorage.digitalData = $scope.digitalData;
+		$localStorage.digitalDatas = $scope.digitalDatas;
+		
 		$localStorage.pageInfo = $scope.pageInfo;
 		$localStorage.page = $scope.page;
+		$localStorage.dataLayerName = $scope.dataLayerName;
 	 	if($scope.radioButtonShow == 'CA_Submit'){
 //			   alert("$scope.radioButtonShow = " + $scope.radioButtonShow);
 //			   $scope.digitalData.event.eventInfo = { 
@@ -191,6 +196,12 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
 		
 	}
+	$scope.digitalData = $localStorage.digitalData;
+	$scope.digitalDatas = $localStorage.digitalDatas;
+	$scope.dataLayerName = $localStorage.dataLayerName;
+	/*$scope.validateradioButton = function() {
+		$scope.required = true;
+	}*/
 });
 mainApp.controller('userInfoController', function($scope, PageInfoService,
 		$localStorage) {
@@ -245,11 +256,11 @@ mainApp.controller('eventInfoController', function($scope, PageInfoService,
 	}
 });
 
-//Create Project Controller- Start
+/*//Create Project Controller- Start
 mainApp.controller('dashboardController', function($scope, $http,
 		PageInfoService, $localStorage, $templateCache) {
 	
-});
+});*/
 
 
 	//Create Project Controller -End
@@ -374,6 +385,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 	// $scope.selectedData = PageInfoService.getSelectedDetails();
 	$scope.selectedData = $localStorage.dataJSon;
 	$scope.selectedDatas = $localStorage.dataJSons;
+	$scope.dataLayerName = $localStorage.dataLayerName;
 	
 	$scope.jsonData = $localStorage.dataJSon;
 	$scope.intlinkimp = $localStorage.intlinkimp;
@@ -460,7 +472,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 			   }
 		   
 		   if($scope.reqParam != null){
-			    $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", {'dataLayer':$scope.dataLayer,'reqParamKeyVal':$scope.reqParam,'projectTitle':$scope.projectTitle})
+			    $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", {'dataLayer':$scope.dataLayer,'reqParamKeyVal':$scope.reqParam,'projectTitle':$scope.projectTitle,'dataLayerName':$scope.dataLayerName})
 			    .success(function(data, status, headers) {
 			        alert("Data added"+data);
 			        $localStorage.$reset();
@@ -609,7 +621,7 @@ mainApp.controller('homePageController', function($scope, $http,
 	 
 });
 mainApp.controller('dashboardController', function($scope, $http,
-		PageInfoService, $localStorage,$location, $rootScope) {
+		PageInfoService, $localStorage,$location) {
 	$scope.projectTitle = PageInfoService.getProjectTitle();
 	
 	$scope.getDataLayers = function(){
@@ -624,9 +636,10 @@ mainApp.controller('dashboardController', function($scope, $http,
 		        for (var i = 0; i < data.length; i++) {
 		        	var id = data[i].id;
 		        	var requestKeyVal = data[i].reqParamKeyVal;
-		        	var dataStructure = data[i].dataLayer;
+		        	/*var dataStructure = data[i].dataLayer;
 		        	var obj = JSON.parse(dataStructure);
-		        	var dataLayerName = obj.page.pageInfo.dataLayerName;
+		        	var dataLayerName = obj.page.pageInfo.dataLayerName;*/
+		        	var dataLayerName = data[i].dataLayerName;
 		        	dataLayer_list.push({
 		                    "dataLayerName": dataLayerName,
 		                    "id" : id,
@@ -650,7 +663,6 @@ mainApp.controller('dashboardController', function($scope, $http,
 				   
 				}*/
 		  });
-		var x = "";
 		// PageInfoService.sendProjectName(projectTitle);
 	}
 	$scope.getDataLayers();
