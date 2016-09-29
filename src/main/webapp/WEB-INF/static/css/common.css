@@ -32,3 +32,7 @@
 #save {
     display: none;   
 }
+
+.asterisk{
+	color:red; padding-top:8px;
+}
