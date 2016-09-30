@@ -1,5 +1,5 @@
 mainApp.controller('homeController', function($scope, $http, PageInfoService,
-		$localStorage) {
+		$localStorage,$location) {
 	
 	$scope.ds = "";
 	
@@ -196,12 +196,37 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 		console.log("$sceop.show.Intlinkimp = "+ $scope.show.intlinkimp);
 		
 	}
-	$scope.digitalData = $localStorage.digitalData;
-	$scope.digitalDatas = $localStorage.digitalDatas;
+	
+	
+	//For Pre populating Project Details
+	
 	$scope.dataLayerName = $localStorage.dataLayerName;
-	/*$scope.validateradioButton = function() {
-		$scope.required = true;
-	}*/
+	
+	if($scope.dataLayerName){
+		$scope.digitalData = $localStorage.digitalData;
+		$scope.digitalDatas = $localStorage.digitalDatas;
+		$scope.dataLayerName = $localStorage.dataLayerName;
+	}else{
+	
+		$scope.projectTitle = PageInfoService.getProjectTitle();
+	    $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectByTitle/"+$scope.projectTitle)
+	       .success(function(data, status, headers, response) {
+	    	  if(data){}
+	    	   $scope.country = data[0].markets;
+	    	   var businessUnit = data[0].businessUnit;
+	    	   var application = data[0].application;
+	    	   
+	    	   $scope.digitalData = {};
+	    	   $scope.digitalData.page = {};
+	    	   $scope.digitalData.page.pageInfo = {};
+	    	   $scope.digitalData.page.category = {};
+	    	   $scope.digitalData.page.pageInfo.country = data[0].markets;
+	    	   $scope.digitalData.page.category.businessUnit= data[0].businessUnit;
+	    	   $scope.digitalData.page.pageInfo.language = data[0].application;
+	        }).error(function(data,status){
+	         alert("There is an error while adding DL data with duplicate parameters ");
+	        });
+	}
 });
 mainApp.controller('userInfoController', function($scope, PageInfoService,
 		$localStorage) {
