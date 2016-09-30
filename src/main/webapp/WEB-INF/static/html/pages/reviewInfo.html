@@ -73,9 +73,17 @@
                 
                 <div class="form-group">
                     <label for="primaryCategory" class="col-sm-4 control-label">Primary Category</label>
-                    <div class="col-sm-8">
+                    <!-- <div class="col-sm-8">
                         <input type="text" id="primaryCategory"  class="form-control"
                         ng-model="selectedData.page.category.primaryCategory" ng-disabled="true" >
+                    </div> -->
+                   <div class="col-sm-8">
+                        <select id="primaryCategory" class="form-control" ng-model="selectedData.page.category.primaryCategory" ng-disabled="true" >
+							<option>application1</option>
+		                	<option>application2</option>
+		                	<option>application3</option>
+		                	<option>eApply</option>
+                        </select>
                     </div>
                 </div> 
                 

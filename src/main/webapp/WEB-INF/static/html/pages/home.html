@@ -90,11 +90,19 @@
                 
                 <div class="form-group">
                     <label for="primaryCategory" class="col-sm-4 control-label">Primary Category</label>
-                    <div class="col-sm-7">
+                    <!-- <div class="col-sm-7">
                         <input type="text" id="primaryCategory" placeholder="Primary Category" class="form-control"
                         ng-model="digitalData.page.category.primaryCategory" >
+                    </div> -->
+                    <div class="col-sm-7">
+                        <select id="primaryCategory" class="form-control" ng-model="digitalData.page.category.primaryCategory" >
+							<option>application1</option>
+		                	<option>application2</option>
+		                	<option>application3</option>
+		                	<option>eApply</option>
+                        </select>
                     </div>
-                </div> <!-- {{page.category.primaryCategory}} -->
+                </div> 
                 
               <div class="form-group">
                     <label for="subCategory1" class="col-sm-4 control-label">Sub Category 1</label>

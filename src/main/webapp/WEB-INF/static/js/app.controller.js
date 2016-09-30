@@ -222,7 +222,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService,
 	    	   $scope.digitalData.page.category = {};
 	    	   $scope.digitalData.page.pageInfo.country = data[0].markets;
 	    	   $scope.digitalData.page.category.businessUnit= data[0].businessUnit;
-	    	   $scope.digitalData.page.pageInfo.language = data[0].application;
+	    	   $scope.digitalData.page.category.primaryCategory = data[0].application;
 	        }).error(function(data,status){
 	         alert("There is an error while adding DL data with duplicate parameters ");
 	        });
