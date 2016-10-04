@@ -13,9 +13,8 @@ public interface ITagProjectsRepository extends JpaRepository<Projects, Integer>
 	@Query("select i.projectTitle from Projects i where i.projectTitle = ?1")
 	public String find(String projectTitle);
 	
-	//@Query("select i.projectTitle from Projects i where i.projectTitle = ?1")
-	
     public List<Projects> findByProjectTitle(String projectTitle);
 
+    public Projects findByProjectId(Integer findByProjectId);
 
 }

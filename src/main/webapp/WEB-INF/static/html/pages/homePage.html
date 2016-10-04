@@ -24,9 +24,10 @@
 							</thead>
 							<tbody>
 							 	<tr ng-repeat="projects in Projects">
-									<td class="col-sm-8" style="background-color:lavender;height:34px;" ng-model="project.projectTitle">{{ projects.projectTitle }}</td>
-									<td class="col-sm-2" style="background-color:lavender;"><a href="#/dashboard"><button type="button" class="btn btn-primary" ng-click="sendProjectName(projects.projectTitle)">Details</button></a></td>
-									<td class="col-sm-2" style="background-color:lavender;"><a href="#/"><button type="button" class="btn btn-primary" ng-click="copytheproject(projects.projectTitle)">Copy</button></a></td>
+							 	<td class="col-sm-4" style="background-color:lavender;height:34px;" ng-model="project.projectId">{{ projects.projectId }}</td>
+									<td class="col-sm-4" style="background-color:lavender;height:34px;" ng-model="project.projectTitle">{{ projects.projectTitle }}</td>
+									<td class="col-sm-2" style="background-color:lavender;"><a href="#/dashboard"><button type="button" class="btn btn-primary" ng-click="sendProjectId(projects.projectId)">Details</button></a></td>
+									<td class="col-sm-2" style="background-color:lavender;"><a href="#/"><button type="button" class="btn btn-primary" ng-click="copytheproject(projects.projectId)">Copy</button></a></td>
 								</tr>
 							</tbody>
 						</table>

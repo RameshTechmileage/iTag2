@@ -1,26 +1,28 @@
-mainApp.service('PageInfoService', function($http, $location) {
+mainApp.service('PageInfoService', function($http, $location, $timeout) {
 
 	var pageDetails = {};
 	var userDetails = {};
 	var eventDetails ={};
 	var test ={};
 	var finalJson = new Array();
-	// $scope.finalJson;// = new Array();
-	//For dashboard project name
 	var projectName = {};
+	var projectId = {};
 	
 	this.save = function(pageInfo) {
 		pageDetails = pageInfo;
 		console.log("pageDetails = " + JSON.stringify(pageDetails));
 	},
+	
 	this.saveUser = function(userInfo) {
 		userDetails = userInfo;
 		console.log("userDetails = " + JSON.stringify(userDetails));
 	},
+	
 	this.saveProjectName = function(userInfo) {
 		userDetails = userInfo;
 		console.log("userDetails = " + JSON.stringify(userDetails));
 	}
+	
 	this.saveEventInfo = function(eventInfo) {
 		// eventDetails = eventInfo;
 		finalJson.push(pageDetails);
@@ -28,41 +30,43 @@ mainApp.service('PageInfoService', function($http, $location) {
 		finalJson.push(eventInfo);
 		console.log("eventInfo = " + JSON.stringify(eventInfo));
 	}
+	
 	this.getSelectedDetails = function(){
 		return finalJson;
 		console.log("finalJson  = " + JSON.stringify(finalJson));
 	}
-	/*this.saveDetails = function(){
-		$http.post("http://localhost:8080/iTag/saveITagData",{finalJson})
-	   .success(function(data, status, headers) {
-		   alert("Data added");
-	    });
-		
-	}*/
-	/*
-	 * return { getSelectedDetails : function () { return finalJson; } }
-	 */
+	
 	this.saveProject = function(host, port, projectTitle, markets, businessUnit, application){
 		
 		$http.post("http://" + host + ":" + port + "/" +"ITag2/saveITagProject", { 'projectTitle':projectTitle,'markets':markets,'businessUnit':businessUnit,'application':application})
 	    .success(function(data, status, headers, response) {
-	    	  projectName = response.data.projectTitle;
-		      $location.path('/dashboard');
-	        alert("Project created");
+	    	  projectId = data.projectId;
+	    	  alert("Project created");
+	    	  $timeout(function () {
+	    		  $location.path('/dashboard');
+	    	  },100);
 	        }).error(function(data, status) {
 	         $location.path('/createProject');
 	         alert("There is an error while adding data with duplicate Project name");
 	        
 	        });
-		return projectTitle;
-		console.log("projectTitle  = " + projectTitle);
+		return projectId;
 	}
 	
 	this.getProjectTitle = function(){
 		return projectName;
 	}
+	
 	this.sendProjectName = function(projTitle){
 		projectName = projTitle;
+	}
+	
+	this.sendProjectId = function(projId){
+		projectId = projId;
+	}
+	
+	this.getProjectId = function(){
+		return projectId;
 	}
 	
 });
