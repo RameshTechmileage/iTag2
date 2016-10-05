@@ -115,5 +115,19 @@ public class ITagUserServiceImpl implements ITagUserService {
 	public Projects findProjectById(Integer projectId) {
 		return iTagProjectRepository.findByProjectId(projectId);
 	}
+	
+	@Override
+    @Transactional
+    public void update(String dataLayer,String dataLayerName, String reqParamKeyVal,int id){
+          ITagUser updatedUser = iTagRepository.findOne(id);
+          updatedUser.setDataLayer(dataLayer);
+          updatedUser.setReqParamKeyVal(reqParamKeyVal);
+          updatedUser.setDataLayerName(dataLayerName);
+    }
+
+	 @Override
+     public List<ITagUser> findDLBySpecficRequestParam(Integer projectId, Integer id) {
+           return iTagRepository.findDLBySpecficRequestParam(projectId,id);
+	 }
 
 }

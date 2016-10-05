@@ -21,7 +21,11 @@ mainApp.config(function($routeProvider) {
 		}).when('/thankyou', {
 			templateUrl: 'static/html/pages/thankyou.html',
 			controller: 'thankyouController'
-		}).when('/retrieve', {
+		}).when('/reviewInfo/:title/:datalayer', {
+            templateUrl: 'static/html/pages/reviewInfo.html',
+            controller: 'reviewInfoController'
+		})  
+		.when('/retrieve', {
 			templateUrl : 'static/html/pages/retrieve.html',
 			controller:'retrieveDLController'
 		}).when('/createProject', {
@@ -30,18 +34,10 @@ mainApp.config(function($routeProvider) {
 		}).when('/homePage', {
 			templateUrl : 'static/html/pages/homePage.html',
 			controller:'homePageController'			
+		}).when('/copyProject', {
+			templateUrl : 'static/html/pages/copyProject.html',
+			controller:'copyProjectController'			
 		}).otherwise({
 			redirectTo: '/homePage'
 		});
 });
-
-/*mainApp.controller('StudentController', function($scope, $http) {
-	$scope.message = "Click on the hyper link to view the students list.";
-	$http.get("https://whispering-woodland-9020.herokuapp.com/getAllBooks")
-    .then(function(response) {
-      $scope.data = response.data;
-    });
-
-	
-});
-*/

@@ -41,8 +41,8 @@ mainApp.service('PageInfoService', function($http, $location, $timeout) {
 		$http.post("http://" + host + ":" + port + "/" +"ITag2/saveITagProject", { 'projectTitle':projectTitle,'markets':markets,'businessUnit':businessUnit,'application':application})
 	    .success(function(data, status, headers, response) {
 	    	  projectId = data.projectId;
-	    	  alert("Project created");
 	    	  $timeout(function () {
+	    		  alert("Project created");
 	    		  $location.path('/dashboard');
 	    	  },100);
 	        }).error(function(data, status) {

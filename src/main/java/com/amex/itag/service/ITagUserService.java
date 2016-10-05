@@ -35,4 +35,7 @@ public interface ITagUserService {
 
 	public Projects findProjectById(Integer findProjectById);
 
+    public void update(String dataLayer,String dataLayerName, String reqParamKeyVal,int id);
+    
+    public List<ITagUser> findDLBySpecficRequestParam(Integer projectId, Integer id); 
 }

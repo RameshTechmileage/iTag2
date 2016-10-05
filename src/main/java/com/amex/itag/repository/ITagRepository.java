@@ -29,4 +29,11 @@ public interface ITagRepository extends JpaRepository<ITagUser, Integer> {
 	@Query("select i from ITagUser i where projectId = ?1")
 	public List<ITagUser> findDataLayers(Integer projectId);
 	
-	}
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE ITagUser i SET i.dataLayer=?1, i.dataLayerName=?2, i.reqParamKeyVal=?3 WHERE lower(i.id) = ?4")
+    public void update(String dataLayer,String dataLayerName, String reqParamKeyVal,int id);
+    
+    @Query("select i from ITagUser i where projectId = ?1 AND i.id = ?2 "  )
+    public List<ITagUser> findDLBySpecficRequestParam(int projectId,int id);
+	
+}

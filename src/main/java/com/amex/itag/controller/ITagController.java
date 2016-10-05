@@ -104,7 +104,7 @@ public class ITagController {
 
 	// Update the Data Layer
 
-	@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
 	public @ResponseBody String updateDataLayer(WebRequest wr, @RequestBody String reqBody) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getITagFirstKeyValData is started!");
@@ -164,7 +164,7 @@ public class ITagController {
 			}
 		}
 		return message;
-	}
+	}*/
 
 	// Project Controller -start
 
@@ -237,6 +237,34 @@ public class ITagController {
 	public Projects getProjById(@PathVariable("projectId") Integer projectId) {
 		if (null != projectId) {
 			return iTagUserService.findProjectById(projectId);
+		} else {
+			return null;
+		}
+	}
+	
+    @RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
+    public @ResponseBody void updateDataLayer(@RequestBody ITagUser iTagUser) {
+          if(logger.isDebugEnabled()){
+                 logger.debug("getITagFirstKeyValData is started!");
+          }
+          String message = null;
+          if (null!=iTagUser.getProjectId()) {
+                 iTagUserService.update(iTagUser.getDataLayer(), iTagUser.getDataLayerName(), iTagUser.getReqParamKeyVal(), iTagUser.getId());
+          }
+          else
+          {
+                 throw new DuplicateParameters();
+
+          }
+    }
+    
+	// This Controller for get specfic project specific datalayers by
+	// ProjectTitle.
+	@RequestMapping(value = "/getProjectSpecficDLs/{projectId}/{id}", method = RequestMethod.GET, produces = "application/json")
+	public List<ITagUser> getProjSpecficDLs(@PathVariable("projectId") Integer projectId,
+			@PathVariable("id") Integer id) {
+		if (null != projectId & null != id) {
+			return iTagUserService.findDLBySpecficRequestParam(projectId, id);
 		} else {
 			return null;
 		}

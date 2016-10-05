@@ -220,9 +220,9 @@ window.onload = function() {
 	localStorage.clear();
 }
 
-/*mainApp.controller('thankyouController', function($scope, $http,
+mainApp.controller('thankyouController', function($scope, $http,
 		PageInfoService, $localStorage, $location) {
-});*/
+});
 
 mainApp.controller('retrieveDLController', function($scope, $http,
 		PageInfoService, $localStorage, $location) {
@@ -288,7 +288,90 @@ mainApp.controller('retrieveDLController', function($scope, $http,
 });
 
 mainApp.controller('reviewInfoController', function($scope, $http,
-		PageInfoService, $localStorage, $location) {
+		PageInfoService, $localStorage, $location, $sessionStorage) {
+	//
+	
+	$scope.dissabledVal=true;
+    $scope.disabledReqParam=false;
+    document.getElementById('Request_Parameter1_key').disabled = false;
+    document.getElementById('Request_Parameter1_value').disabled = false;
+
+    if($location.$$url.split('/')[2] != undefined){
+          $scope.dissabledVal=false;
+          $scope.disabledReqParam=true;
+           document.getElementById('Request_Parameter1_key').disabled = false;
+           document.getElementById('Request_Parameter1_value').disabled = false;
+
+          $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectSpecficDLs/"+$location.$$url.split('/')[2]+"/+"+$location.$$url.split('/')[3])
+                 .success(function(data, status, headers, response) {
+                       if(data){
+
+                              console.log(data);
+                              $scope.DataJson = data[0];
+                              console.log( $scope.DataJson);
+                              if(JSON.parse(data[0].dataLayer).event != undefined){
+                              var radioValue=JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).eventInfo.eventAction;
+                              
+                              if(radioValue=='start'){
+                              $scope.radioButtonShow = 'CA_Start';
+                              }else if(radioValue=='financialInfo'){
+                              $scope.radioButtonShow = 'CA_Financial';
+                              }else if(radioValue=='LearnMore'){
+                              $scope.radioButtonShow = 'CA_LearnMore';
+                              }
+                              else if(radioValue=='submit'){
+                              $scope.radioButtonShow = 'CA_Submit';
+                              }
+                              
+              
+                          var pmc=JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).productInfo).substring(1, JSON.stringify(JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).productInfo).length-1)).pmc;
+                          var productName=JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).productInfo).substring(1, JSON.stringify(JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).productInfo).length-1)).productName;
+                              $scope.selectedData =JSON.parse(data[0].dataLayer);
+                              $scope.selectedDatas =JSON.parse(data[0].dataLayer);
+                              $scope.selectedDatas.event=JSON.parse(data[0].dataLayer).event;
+                           $scope.selectedDatas.event.productInfo=JSON.parse(JSON.stringify(JSON.parse(data[0].dataLayer).event).substring(1, JSON.stringify(JSON.parse(data[0].dataLayer).event).length-1)).productInfo;
+                              $scope.selectedDatas.event.productInfo.pmc=pmc;
+                              $scope.selectedDatas.event.productInfo.productName=productName;
+                       
+                              
+                          }
+                                    $scope.selectedData =JSON.parse(data[0].dataLayer);
+                       
+                              $scope.dataLayerName=data[0].dataLayerName;
+                              if(data[0].reqParamKeyVal.split('=')[0] == undefined||data[0].reqParamKeyVal.split('=')[1]==undefined){
+                                     document.getElementById('Request_Parameter1_key').disabled = false;
+                                     document.getElementById('Request_Parameter1_value').disabled = false;
+
+                              }
+                              data[0].reqParamKeyVal=data[0].reqParamKeyVal.split('&').join('=');
+                              $scope.selectedDataRP= {};
+                              $scope.selectedDataRP.Request_Parameter1= {};
+                              $scope.selectedDataRP.Request_Parameter1.key= data[0].reqParamKeyVal.split('=')[0]
+                              $scope.selectedDataRP.Request_Parameter1.value= data[0].reqParamKeyVal.split('=')[1]
+                              $scope.selectedDataRP.Request_Parameter2= {};
+                              $scope.selectedDataRP.Request_Parameter2.key= data[0].reqParamKeyVal.split('=')[2]
+                              $scope.selectedDataRP.Request_Parameter2.value= data[0].reqParamKeyVal.split('=')[3]
+                              $scope.selectedDataRP.Request_Parameter3= {};
+                              $scope.selectedDataRP.Request_Parameter3.key= data[0].reqParamKeyVal.split('=')[4]
+                              $scope.selectedDataRP.Request_Parameter3.value= data[0].reqParamKeyVal.split('=')[5]
+
+
+                              $scope.jsonData =JSON.parse(data[0].dataLayer);
+
+                              if ($scope.selectedDataRP.Request_Parameter2.key !== undefined)
+                              {
+                                    $scope.addRP2();
+                              }
+                              if ($scope.selectedDataRP.Request_Parameter3.key !== undefined)
+                              {
+                                    $scope.addRP3();
+                              }
+
+                       }
+                 });
+
+    }
+	//
 	$scope.selectedData = $localStorage.dataJSon;
 	$scope.selectedDatas = $localStorage.dataJSons;
 	$scope.dataLayerName = $localStorage.dataLayerName;
@@ -335,7 +418,95 @@ mainApp.controller('reviewInfoController', function($scope, $http,
         }
 	   var selectedDataa = PageInfoService.getSelectedDetails();//totalJson:$scope.
 	   $scope.projectId = PageInfoService.getProjectId();
-	  
+	   
+	   //$scope.projectTitle = PageInfoService.getProjectTitle();
+       if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
+
+              $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1+"&"+$scope.reqParamKey2+"="+$scope.reqParamVal2+"&"+$scope.reqParamKey3+"="+$scope.reqParamVal3;
+       }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null){
+              $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1+"&"+$scope.reqParamKey2+"="+$scope.reqParamVal2;
+       }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null){
+              $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1;
+       }
+	   //
+	    if($location.$$url.split('/')[2] != undefined){
+	        if($scope.radioButtonShow == 'CA_Submit'){
+	                     $scope.selectedData.event = [{
+	                           eventInfo : {
+	                                  eventType: "cardApplication",
+	                                  eventAction: "submit"
+	                           },
+	                           productInfo: [{
+	                                  productName: $scope.selectedDatas.event.productInfo.productName,
+	                                  pmc: $scope.selectedDatas.event.productInfo.pmc
+	                           }]
+	                     }];
+
+	              }
+	              if($scope.radioButtonShow == 'CA_Start'){
+
+	                     $scope.selectedData.event = [{
+	                           eventInfo : {
+	                                  eventType: "cardApplication",
+	                                  eventAction: "start"
+	                           },
+	                           productInfo: [{
+	                                  productName: $scope.selectedDatas.event.productInfo.productName,
+	                                  pmc: $scope.selectedDatas.event.productInfo.pmc
+	                           }]
+	                     }];
+	              }
+	              if($scope.radioButtonShow == 'CA_Financial'){
+
+	                     $scope.selectedData.event = [{
+	                           eventInfo : {
+	                                  eventType: "cardApplication",
+	                                  eventAction: "financialInfo"
+	                           },
+	                           productInfo: [{
+	                                  productName: $scope.selectedDatas.event.productInfo.productName,
+	                                  pmc: $scope.selectedDatas.event.productInfo.pmc
+	                           }]
+	                     }];
+	              }
+
+	              if($scope.radioButtonShow == 'CA_LearnMore'){
+
+	                     $scope.selectedData.event = [{
+	                           eventInfo : {
+	                                  eventType: "cardApplication",
+	                                  eventAction: "LearnMore"
+	                           },
+	                           productInfo: [{
+	                                  productName: $scope.selectedDatas.event.productInfo.productName,
+	                                  pmc: $scope.selectedDatas.event.productInfo.pmc
+	                           }]
+	                     }];
+	              }
+
+                 $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/updateDataLayer", {'dataLayer':JSON.stringify($scope.selectedData),'reqParamKeyVal':$scope.reqParam,'id':$location.$$url.split('/')[3],'dataLayerName':$scope.dataLayerName,'projectId':$location.$$url.split('/')[2]})
+                       .success(function(data, status, headers) {
+                              $sessionStorage.reqParams=$scope.reqParam;
+                              $localStorage.$reset();
+                              $location.path('/thankyou');
+                       }).error(function(data, status) {
+                       alert("There is an error while adding data with duplicate parameters");
+                 });
+	          }else{
+                     $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", {'dataLayer':$scope.dataLayer,'reqParamKeyVal':$scope.reqParam,'projectId':$scope.projectId,'dataLayerName':$scope.dataLayerName})
+                           .success(function(data, status, headers) {
+                                  $sessionStorage.reqParams=$scope.reqParam;
+                                  $localStorage.$reset();
+                                  $location.path('/thankyou');
+                           }).error(function(data, status) {
+                           alert("There is an error while adding data with duplicate parameters");
+                     });
+              }
+
+	       // }
+	   
+	   //
+	 /* 
 	   if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null && $scope.reqParamKey3 != null && $scope.reqParamVal3 != null ){
 		   $scope.reqParam = $scope.reqParamKey1+"="+$scope.reqParamVal1+"&"+$scope.reqParamKey2+"="+$scope.reqParamVal2+"&"+$scope.reqParamKey3+"="+$scope.reqParamVal3;
 		   }else if($scope.reqParamKey1 != null && $scope.reqParamVal1 != null && $scope.reqParamKey2 != null && $scope.reqParamVal2 != null){
@@ -353,7 +524,7 @@ mainApp.controller('reviewInfoController', function($scope, $http,
 		        }).error(function(data, status) {
 		         alert("There is an error while adding data with duplicate parameters");
 		        });
-		   }
+		   }*/
 	}
 	$scope.addRP2 = function() {
 		$scope.request_parameter2 = true;
@@ -424,7 +595,7 @@ mainApp.controller('homePageController', function($scope, $http,
 	}
 	//Copy
 	
-	$scope.copytheproject = function(projectId){
+	/*$scope.copytheproject = function(projectId){
         console.log(projectId);
         var copiedProjectTitle;
         var copiedProject;
@@ -444,7 +615,9 @@ mainApp.controller('homePageController', function($scope, $http,
                var copiedDL="";
                var reqParamKeyVal="";
                var DLsuccess="";
-               PageInfoService.saveProject($location.host(),$location.port(),$scope.projectTitle,$scope.markets,$scope.businessUnit,$scope.application);
+             //  $timeout(function () {
+            	   PageInfoService.saveProject($location.host(),$location.port(),$scope.projectTitle,$scope.markets,$scope.businessUnit,$scope.application);
+              // },50);
                console.log( "$timeout 1" );
                $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" +projectId)
                    .success(function(dataLayerdata, status, headers, response) {
@@ -478,7 +651,8 @@ mainApp.controller('homePageController', function($scope, $http,
          $location.path('/CreateProject');
          alert("There is an error while adding data  with duplicate Poject Name ");
       });
-  }
+  }*/
+	
 });
 mainApp.controller('dashboardController', function($scope, $http,
 		PageInfoService, $localStorage,$location) {
@@ -523,7 +697,74 @@ mainApp.controller('dashboardController', function($scope, $http,
 	}
 	$scope.getProjectTitle();
 	
+	//Edit start
+	
+//Edit End
+	
 });
+
+
+//Copy Project -- Start
+mainApp.controller('copyProjectController', function($scope, $http,
+		PageInfoService, $localStorage,$location) {
+$scope.copyProject = function(){
+	$scope.projectId = PageInfoService.getProjectId();
+	$scope.copiedProjectTitle = $scope.project.title;
+	// var copiedProjectTitle;
+     //var copiedProject;
+     $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectById/"+$scope.projectId)
+       .success(function(data, status, headers, response) {
+          //projectName=  response.data.projectTitle;
+         if(data){
+            copiedProject=data;
+           // copiedProjectTitle=copiedProject.projectTitle+"_copy";
+           // copiedProject.projectTitle=copiedProjectTitle;
+            
+           // $scope.projectTitle = copiedProjectTitle;
+            $scope.markets = copiedProject.markets;
+            $scope.businessUnit = copiedProject.businessUnit;
+            $scope.application = copiedProject.application;
+            var copiedDL="";
+            var reqParamKeyVal="";
+            var DLsuccess="";
+         	   PageInfoService.saveProject($location.host(),$location.port(),$scope.copiedProjectTitle,$scope.markets,$scope.businessUnit,$scope.application);
+         	   
+            $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" +$scope.projectId)
+                .success(function(dataLayerdata, status, headers, response) {
+                      if(dataLayerdata){
+                     	   $scope.projectId = PageInfoService.getProjectId();
+                             for(i=0;i<dataLayerdata.length;i++){
+                                   console.log("Get DLs :"+dataLayerdata[i].dataLayer);
+                                   copiedDL=dataLayerdata[i].dataLayer;
+                                   reqParamKeyVal="";
+                                   $scope.dataLayerName = dataLayerdata[i].dataLayerName;
+                                   console.log("copiedDL : "+copiedDL+" reqparamKV :"+reqParamKeyVal);
+                                   $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", { 'dataLayer':copiedDL,'reqParamKeyVal':reqParamKeyVal,'projectId':$scope.projectId,'dataLayerName':$scope.dataLayerName})
+                                   .success(function(data, status, headers, response) {
+                                   //alert("data added"+data);
+                                   DLsuccess = true;
+                                   return data;
+                                   }).error(function(data,status){
+                                        alert("There is an error while adding DL data with duplicate parameters ");
+                                   });
+                             } 
+                             if(DLsuccess==true){
+                                   $scope.Projects.push(copiedProjectTitle);
+                                   PageInfoService.sendProjectId($scope.projectId);
+                                 //  PageInfoService.sendProjectName(copiedProjectTitle);
+                                   alert("data added"+data);
+                             }
+                      
+                        }
+               });
+         }
+   }).error(function(data,status){
+      $location.path('/homePage');
+      alert("There is an error while adding data  with duplicate Poject Name ");
+   });
+}
+});
+//End
 
 mainApp.run(function($rootScope, $location) {
     $rootScope.location = $location;
