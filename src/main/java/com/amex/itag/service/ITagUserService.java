@@ -38,4 +38,6 @@ public interface ITagUserService {
     public void update(String dataLayer,String dataLayerName, String reqParamKeyVal,int id);
     
     public List<ITagUser> findDLBySpecficRequestParam(Integer projectId, Integer id); 
+    
+    public void deleteAll();
 }

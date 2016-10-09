@@ -175,7 +175,8 @@ public class ITagController {
 		}
 		String projectTitle = iTagProject.getProjectTitle();
 		if (null != projectTitle) {
-			return iTagUserService.saveProject(iTagProject);
+			Projects targetProject= iTagUserService.saveProject(iTagProject);
+			return targetProject;
 		} /*
 			 * else{ return new DuplicateParameters(); }
 			 */
@@ -270,6 +271,18 @@ public class ITagController {
 		}
 	}
 
+	@RequestMapping(value = "/deleteAllProjects", method = RequestMethod.POST)
+	public  @ResponseBody String deleteAll(WebRequest wr) {
+			iTagUserService.deleteAll();
+			return "Success";
+	}
+	/*
+	@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
+	public @ResponseBody String updateDataLayer(WebRequest wr, @RequestBody String reqBody) {
+		
+	}*/
+
+	
 	public boolean isDataExist(ITagUser iTagUser) {
 		String reqParamKeyVal = iTagUser.getReqParamKeyVal();
 		String dataLayer = iTagUserService.find(reqParamKeyVal);

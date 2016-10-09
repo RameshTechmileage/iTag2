@@ -69,4 +69,12 @@ public class Projects {
 		this.application = application;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "projectId: " + projectId + " projectTitle: " + projectTitle + " markets: " + markets + " businessUnit: " + businessUnit 
+				+ " application: " + application;
+	}
+
+	
 }

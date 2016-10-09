@@ -706,63 +706,140 @@ mainApp.controller('dashboardController', function($scope, $http,
 
 //Copy Project -- Start
 mainApp.controller('copyProjectController', function($scope, $http,
-		PageInfoService, $localStorage,$location) {
-$scope.copyProject = function(){
-	$scope.projectId = PageInfoService.getProjectId();
-	$scope.copiedProjectTitle = $scope.project.title;
-	// var copiedProjectTitle;
-     //var copiedProject;
-     $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectById/"+$scope.projectId)
-       .success(function(data, status, headers, response) {
-          //projectName=  response.data.projectTitle;
-         if(data){
-            copiedProject=data;
-           // copiedProjectTitle=copiedProject.projectTitle+"_copy";
-           // copiedProject.projectTitle=copiedProjectTitle;
-            
-           // $scope.projectTitle = copiedProjectTitle;
-            $scope.markets = copiedProject.markets;
-            $scope.businessUnit = copiedProject.businessUnit;
-            $scope.application = copiedProject.application;
-            var copiedDL="";
-            var reqParamKeyVal="";
-            var DLsuccess="";
-         	   PageInfoService.saveProject($location.host(),$location.port(),$scope.copiedProjectTitle,$scope.markets,$scope.businessUnit,$scope.application);
-         	   
-            $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" +$scope.projectId)
-                .success(function(dataLayerdata, status, headers, response) {
-                      if(dataLayerdata){
-                     	   $scope.projectId = PageInfoService.getProjectId();
-                             for(i=0;i<dataLayerdata.length;i++){
-                                   console.log("Get DLs :"+dataLayerdata[i].dataLayer);
-                                   copiedDL=dataLayerdata[i].dataLayer;
-                                   reqParamKeyVal="";
-                                   $scope.dataLayerName = dataLayerdata[i].dataLayerName;
-                                   console.log("copiedDL : "+copiedDL+" reqparamKV :"+reqParamKeyVal);
-                                   $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", { 'dataLayer':copiedDL,'reqParamKeyVal':reqParamKeyVal,'projectId':$scope.projectId,'dataLayerName':$scope.dataLayerName})
-                                   .success(function(data, status, headers, response) {
-                                   //alert("data added"+data);
-                                   DLsuccess = true;
-                                   return data;
-                                   }).error(function(data,status){
-                                        alert("There is an error while adding DL data with duplicate parameters ");
-                                   });
-                             } 
-                             if(DLsuccess==true){
-                                   $scope.Projects.push(copiedProjectTitle);
-                                   PageInfoService.sendProjectId($scope.projectId);
-                                 //  PageInfoService.sendProjectName(copiedProjectTitle);
-                                   alert("data added"+data);
-                             }
-                      
-                        }
-               });
-         }
-   }).error(function(data,status){
-      $location.path('/homePage');
-      alert("There is an error while adding data  with duplicate Poject Name ");
-   });
-}
+		PageInfoService, $localStorage,$location, $q) {
+	/*$scope.copyProject = function(){
+		$scope.projectId = PageInfoService.getProjectId();
+		$scope.copiedProjectTitle = $scope.project.title;
+		// var copiedProjectTitle;
+	     var copiedProject;
+	     $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectById/"+$scope.projectId)
+	       .success(function(data, status, headers, response) {
+	          //projectName=  response.data.projectTitle;
+	         if(data){
+	            copiedProject=data;
+	           // copiedProjectTitle=copiedProject.projectTitle+"_copy";
+	           // copiedProject.projectTitle=copiedProjectTitle;
+	            
+	           // $scope.projectTitle = copiedProjectTitle;
+	            $scope.markets = copiedProject.markets;
+	            $scope.businessUnit = copiedProject.businessUnit;
+	            $scope.application = copiedProject.application;
+	            var copiedDL="";
+	            var reqParamKeyVal="";
+	            var DLsuccess="";
+	         	var copiedProjectId = PageInfoService.saveProject($location.host(),$location.port(),$scope.copiedProjectTitle,$scope.markets,$scope.businessUnit,$scope.application);
+	         	console.log("copiedProjectId:" +copiedProjectId);
+	            $http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getProjectDLs/" +$scope.projectId)
+	                .success(function(dataLayerdata, status, headers, response) {
+	                      if(dataLayerdata){
+	                     	   $scope.projectId = //PageInfoService.getProjectId();
+	                     		  copiedProjectId;
+	                     	   console.log($scope.projectId);
+	                             for(i=0;i<dataLayerdata.length;i++){
+	                                   console.log("Get DLs :"+dataLayerdata[i].dataLayer);
+	                                   copiedDL=dataLayerdata[i].dataLayer;
+	                                   reqParamKeyVal="";
+	                                   $scope.dataLayerName = dataLayerdata[i].dataLayerName;
+	                                   console.log("copiedDL : "+copiedDL+" reqparamKV :"+reqParamKeyVal);
+	                                   $http.post("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/saveITagData", { 'dataLayer':copiedDL,'reqParamKeyVal':reqParamKeyVal,'projectId':$scope.projectId,'dataLayerName':$scope.dataLayerName})
+	                                   .success(function(data, status, headers, response) {
+	                                   //alert("data added"+data);
+	                                   DLsuccess = true;
+	                                   return data;
+	                                   }).error(function(data,status){
+	                                        alert("There is an error while adding DL data with duplicate parameters ");
+	                                   });
+	                             } 
+	                             if(DLsuccess==true){
+	                                   $scope.Projects.push(copiedProjectTitle);
+	                                   PageInfoService.sendProjectId($scope.projectId);
+	                                 //  PageInfoService.sendProjectName(copiedProjectTitle);
+	                                   alert("data added"+data);
+	                             }
+	                      
+	                        }
+	               });
+	         }
+	   }).error(function(data,status){
+	      $location.path('/homePage');
+	      alert("There is an error while adding data  with duplicate Poject Name ");
+	   });
+	}*/
+	$scope.copyProject = function(){
+		$scope.projectId = PageInfoService.getProjectId();
+		$scope.copiedProjectTitle = $scope.project.title;
+		
+		var copiedProject;
+	    
+		PageInfoService.retrieveProjectById($location.host(),$location.port(),$scope.projectId)
+	    .then(
+	      function(retrieveresult) {
+	        // promise was fullfilled (regardless of outcome)
+	        // checks for information will be peformed here
+	    	  console.log("Retrieve Project details by id succeeded for: id=" + $scope.projectId);
+	    	  console.log(retrieveresult);
+	    	  
+	    	  if(retrieveresult){
+		            copiedProject=retrieveresult;
+
+		            $scope.markets = copiedProject.markets;
+		            $scope.businessUnit = copiedProject.businessUnit;
+		            $scope.application = copiedProject.application;
+		            var copiedDL="";
+		            var reqParamKeyVal="";
+		            var DLsuccess="";
+		         	
+		            PageInfoService.copyProject($location.host(),$location.port(),
+		            								$scope.copiedProjectTitle,$scope.markets,$scope.businessUnit,$scope.application)
+					.then(
+					      function(copyresult) {
+					        // promise was fullfilled (regardless of outcome)
+					        // checks for information will be peformed here
+					    	  console.log("Copy Project Post succeeded for: projectTitle=" + $scope.copiedProjectTitle);
+					    	  
+					    	  var copiedProjectId = PageInfoService.getDeferredProjectId();
+					    	  console.log("copiedProjectId:" +copiedProjectId);
+					    	  
+					    	  console.log("Copying DLs from " + $scope.projectId + " to " + copiedProjectId);
+					    	  
+					    	  PageInfoService.copyProjectDLs($location.host(), $location.port(), $scope.projectId, copiedProjectId)
+					    	  .then(
+								      function(copyDLresult) {
+								        // promise was fullfilled (regardless of outcome)
+								        // checks for information will be peformed here
+								    	  console.log("Copy Project DataLayers Post succeeded for: projectTitle=" + $scope.copiedProjectTitle);
+
+								    	 // if(DLsuccess==true){
+							                    // $scope.Projects.push(copiedProjectTitle);
+							                     PageInfoService.sendProjectId(copiedProjectId);
+							                   
+							                     alert("data added");
+							                     $location.path('/dashboard');
+							             //   }
+								      },
+								      function(copyDLerror) {
+								        // handle errors here
+								        console.log(copyerror.statusText);
+								        $location.path('/homePage');
+								      }
+								    );
+					      },
+					      function(copyerror) {
+					        // handle errors here
+					        console.log(copyerror.statusText);
+					        $location.path('/homePage');
+					      }
+					    );
+	    	  }
+	      },
+	      function(retrieveerror) {
+	        // handle errors here
+	    	console.log("Retrieve Project details by id failed/errored for: id=" + $scope.projectId);
+	        console.log(retrieveerror.statusText);
+	        $location.path('/homePage');
+	      }
+	    );
+	}
 });
 //End
 

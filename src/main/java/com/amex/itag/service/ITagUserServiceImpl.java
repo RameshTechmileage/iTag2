@@ -82,7 +82,9 @@ public class ITagUserServiceImpl implements ITagUserService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("create is executed!");
 		}
-		return iTagProjectRepository.save(projects);
+		Projects savedProj = iTagProjectRepository.save(projects);
+		logger.debug(savedProj.toString());
+		return savedProj;
 	}
 
 	@Override
@@ -129,5 +131,11 @@ public class ITagUserServiceImpl implements ITagUserService {
      public List<ITagUser> findDLBySpecficRequestParam(Integer projectId, Integer id) {
            return iTagRepository.findDLBySpecficRequestParam(projectId,id);
 	 }
+
+	@Override
+	public void deleteAll() {
+		iTagRepository.deleteAll();
+		iTagProjectRepository.deleteAll();
+	}
 
 }
