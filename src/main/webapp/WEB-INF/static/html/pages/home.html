@@ -24,7 +24,7 @@
                 <br/><br/>
                 <div class="form-group">
                     <label for="pageName" class="col-sm-4 control-label">Data Layer Name</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="page_name" placeholder="Data Layer Name" class="form-control"
                         ng-model="dataLayerName">
 					</div>
@@ -32,20 +32,24 @@
                 </div>
                 <div class="form-group">
                     <label for="pageName" class="col-sm-4 control-label">PageName</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="page_name" placeholder="Page Name" class="form-control"
                         ng-model="digitalData.page.pageInfo.pageName" autofocus ng-disabled="disable" >
 					</div>
                      <div class="col-sm-1">
                         <input type="checkbox" id="page_name" name="page_name" ng-model="disable" ng-click="disableHomePage(disable)"/>
                     </div>
+						<div class="ctooltip col-sm-1">
+							<span class="glyphicon glyphicon-question-sign"></span>
+  							<span class="tooltiptext">Tooltip text</span>
+						</div>
                     
                     
                 </div> <!-- {{page.pageInofrmation.pageName}} -->
                 
                <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">Country</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalData.page.pageInfo.country" >
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="US">US</option>
@@ -58,7 +62,7 @@
                 
                <div class="form-group">
                     <label for="language" class="col-sm-4 control-label">Language</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                  <!--        <input type="text" id="language" placeholder="Language" class="form-control"
                         ng-model="digitalData.page.pageInfo.language" > -->
                    <select id="language" class="form-control" ng-model="digitalData.page.pageInfo.language" >
@@ -76,7 +80,7 @@
                         <input type="text" id="page_name" placeholder="Business Unit" class="form-control"
                         ng-model="page.category.businessUnit" >
                     </div> -->
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalData.page.category.businessUnit" >
                         	<!-- <option value="Please Select One">Please Select One</option> -->
 							<option>Acquisition</option>
@@ -94,7 +98,7 @@
                         <input type="text" id="primaryCategory" placeholder="Primary Category" class="form-control"
                         ng-model="digitalData.page.category.primaryCategory" >
                     </div> -->
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="primaryCategory" class="form-control" ng-model="digitalData.page.category.primaryCategory" >
 							<option>application1</option>
 		                	<option>application2</option>
@@ -106,7 +110,7 @@
                 
               <div class="form-group">
                     <label for="subCategory1" class="col-sm-4 control-label">Sub Category 1</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="subCategory1" placeholder="Sub Categoty 1" class="form-control"
                         ng-model="digitalData.page.category.subCategory1" >
                     </div>
@@ -114,7 +118,7 @@
                 
                <div class="form-group">
                     <label for="subCategory2" class="col-sm-4 control-label">Sub Category 2</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="subCategory2" placeholder="Sub Categoty 2" class="form-control"
                         ng-model="digitalData.page.category.subCategory2" >
                     </div>
@@ -122,7 +126,7 @@
                 
                 <div class="form-group">
                     <label for="subCategory3" class="col-sm-4 control-label">Sub Category 3</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="subCategory3" placeholder="Sub Categoty 3" class="form-control"
                         ng-model="digitalData.page.category.subCategory3" >
                     </div>
@@ -139,7 +143,7 @@
                 
                 <div class="form-group" ng-show="show.intlinkimp">
                     <label for="autoTrack" class="col-sm-4 control-label">Intlinkimp</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="intlinkimp" placeholder="intlinkimp" class="form-control"
                         ng-model="digitalData.page.attributes.intlinkimp" ng-disabled="disable_Intlinkimp" ><!-- {{data.Intlinkimp}} -->
                     </div>
@@ -152,7 +156,7 @@
            		<h3 class="form_style_h3">CA Start</h3> 
                 <div class="form-group" >
                     <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="digitalDatas.event.productInfo.productName" >
                     </div>
@@ -161,7 +165,7 @@
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalDatas.event.productInfo.pmc" >
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="999">999</option>
@@ -177,7 +181,7 @@
            		<h3 class="form_style_h3">CA Financial</h3> 
                 <div class="form-group" >
                     <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="digitalDatas.event.productInfo.productName" >
                     </div>
@@ -186,7 +190,7 @@
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalDatas.event.productInfo.pmc" >
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="999">999</option>
@@ -203,7 +207,7 @@
            		<h3 class="form_style_h3">CA Submit</h3> 
                 <div class="form-group" >
                     <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="digitalDatas.event.productInfo.productName" required />
                     </div>
@@ -212,7 +216,7 @@
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalDatas.event.productInfo.pmc" required>
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="999">999</option>
@@ -228,7 +232,7 @@
            		<h3 class="form_style_h3">CA Learn More</h3> 
                 <div class="form-group" >
                     <label for="autoTrack" class="col-sm-4 control-label">Product Name</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <input type="text" id="product_Name" placeholder="Product Name" class="form-control"
                         ng-model="digitalDatas.event.productInfo.productName" >
                     </div>
@@ -237,7 +241,7 @@
                 
                   <div class="form-group">
                     <label for="country code" class="col-sm-4 control-label">pmc</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-6">
                         <select id="country" class="form-control" ng-model="digitalDatas.event.productInfo.pmc" >
                         <!-- 	<option value="Please Select One">Please Select One</option> -->
 		                	<option value="999">999</option>
