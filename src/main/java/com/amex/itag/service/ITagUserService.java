@@ -40,4 +40,6 @@ public interface ITagUserService {
     public List<ITagUser> findDLBySpecficRequestParam(Integer projectId, Integer id); 
     
     public void deleteAll();
+    
+    public void deleteProject(Integer findProjectById);
 }

@@ -138,4 +138,10 @@ public class ITagUserServiceImpl implements ITagUserService {
 		iTagProjectRepository.deleteAll();
 	}
 
+	@Override
+	public void deleteProject(Integer projectId) {
+		iTagRepository.deleteDLByProjectId(projectId);
+		iTagProjectRepository.deleteProjectByProjectId(projectId);
+	}
+
 }

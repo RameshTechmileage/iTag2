@@ -161,6 +161,7 @@ mainApp.controller('homeController', function($scope, $http, PageInfoService, $l
 	         alert("There is an error while adding DL data with duplicate parameters ");
 	        });
 	}
+	
 });
 mainApp.controller('userInfoController', function($scope, PageInfoService,
 		$localStorage) {
@@ -577,8 +578,7 @@ mainApp.controller('createProjectController', function($scope, $http,
 mainApp.controller('homePageController', function($scope, $http,
 		PageInfoService, $localStorage,$location,$timeout) {
 	
-	//$scope.projectTitle = PageInfoService.getProjectTitle();
-	//$scope.projectId = PageInfoService.getProjectId();
+	$scope.getProjects = function(){
 	 $localStorage.$reset();
 	$http.get("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/getAllProjects/")
 	   .success(function(data, status, headers, response) {
@@ -586,13 +586,23 @@ mainApp.controller('homePageController', function($scope, $http,
 			   $scope.Projects = data;
 			}
 	  });
-	
+	}
 	$scope.sendProjectName = function(projectTitle){
 		 PageInfoService.sendProjectName(projectTitle);
 	}
 	$scope.sendProjectId = function(projectId){
 		 PageInfoService.sendProjectId(projectId);
 	}
+	$scope.deleteproject = function(projId){
+	
+		alert("Are you sure want to delete")
+		$scope.projectId = projId;
+		$http.delete("http://" + $location.host() + ":" + $location.port() + "/" +"ITag2/deleteProject/" + $scope.projectId)
+		   .success(function(data, status, headers) {
+			   $scope.getProjects();
+		  });
+	}
+	$scope.getProjects();
 	//Copy
 	
 	/*$scope.copytheproject = function(projectId){

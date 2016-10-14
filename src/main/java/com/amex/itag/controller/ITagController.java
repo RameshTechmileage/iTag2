@@ -276,12 +276,13 @@ public class ITagController {
 			iTagUserService.deleteAll();
 			return "Success";
 	}
-	/*
-	@RequestMapping(value = "/updateDataLayer", method = RequestMethod.POST)
-	public @ResponseBody String updateDataLayer(WebRequest wr, @RequestBody String reqBody) {
-		
-	}*/
-
+	
+	@RequestMapping(value = "/deleteProject/{projectId}", method = RequestMethod.DELETE, produces = "application/json")
+	public void deleteProject(@PathVariable("projectId") Integer projectId) {
+		if (null != projectId) {
+			iTagUserService.deleteProject(projectId);
+		}
+	}
 	
 	public boolean isDataExist(ITagUser iTagUser) {
 		String reqParamKeyVal = iTagUser.getReqParamKeyVal();

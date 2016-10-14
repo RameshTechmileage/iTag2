@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.amex.itag.model.ITagUser;
 
@@ -35,5 +36,10 @@ public interface ITagRepository extends JpaRepository<ITagUser, Integer> {
     
     @Query("select i from ITagUser i where projectId = ?1 AND i.id = ?2 "  )
     public List<ITagUser> findDLBySpecficRequestParam(int projectId,int id);
-	
+    
+    @Modifying
+    @Transactional
+    @Query("delete from ITagUser i where i.projectId = ?1")
+    public void deleteDLByProjectId(Integer projectId);
+    
 }
